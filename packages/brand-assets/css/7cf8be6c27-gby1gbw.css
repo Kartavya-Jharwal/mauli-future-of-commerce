@@ -1,0 +1,38 @@
+/*
+ * The Typekit service used to deliver this font or fonts for use on websites
+ * is provided by Adobe and is subject to these Terms of Use
+ * http://www.adobe.com/products/eulas/tou_typekit. For font license
+ * information, see the list below.
+ *
+ * gotham:
+ *   - http://typekit.com/eulas/0000000000000000775aa930
+ * ltc-caslon-pro:
+ *   - http://typekit.com/eulas/00000000000000007735b211
+ *   - http://typekit.com/eulas/00000000000000007735b218
+ *
+ * © 2009-2026 Adobe Systems Incorporated. All Rights Reserved.
+ */
+/*{"last_published":"2025-09-24 07:13:05 UTC"}*/
+
+@import url("https://p.typekit.net/p.css?s=1&k=gby1gbw&ht=tk&f=28200.28211.60004&a=8846861&app=typekit&e=css");
+
+@font-face {
+font-family:"ltc-caslon-pro";
+src:url("https://use.typekit.net/af/a5aa77/00000000000000007735b211/31/l?subset_id=2&fvd=i4&v=3") format("woff2"),url("https://use.typekit.net/af/a5aa77/00000000000000007735b211/31/d?subset_id=2&fvd=i4&v=3") format("woff"),url("https://use.typekit.net/af/a5aa77/00000000000000007735b211/31/a?subset_id=2&fvd=i4&v=3") format("opentype");
+font-display:auto;font-style:italic;font-weight:400;font-stretch:normal;
+}
+
+@font-face {
+font-family:"ltc-caslon-pro";
+src:url("https://use.typekit.net/af/a0c06e/00000000000000007735b218/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("woff2"),url("https://use.typekit.net/af/a0c06e/00000000000000007735b218/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("woff"),url("https://use.typekit.net/af/a0c06e/00000000000000007735b218/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("opentype");
+font-display:auto;font-style:normal;font-weight:400;font-stretch:normal;
+}
+
+@font-face {
+font-family:"gotham";
+src:url("https://use.typekit.net/af/e0cede/0000000000000000775aa930/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("woff2"),url("https://use.typekit.net/af/e0cede/0000000000000000775aa930/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("woff"),url("https://use.typekit.net/af/e0cede/0000000000000000775aa930/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("opentype");
+font-display:auto;font-style:normal;font-weight:400;font-stretch:normal;
+}
+
+.tk-ltc-caslon-pro { font-family: "ltc-caslon-pro",serif; }
+.tk-gotham { font-family: "gotham",sans-serif; }

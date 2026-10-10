@@ -41,6 +41,8 @@ Use four editorial spreads or rows, each with an observation, why it matters and
 
 The ICP material should show jobs, triggers and constraints, with explicit hypothesis labels. Avoid turning speculative personas into portraits of real customers.
 
+Organise it into the three confirmed umbrellas: cultural reconnection; spa-to-home ritual continuation; and premium concern-led care, containing both consumer and luxury B2B variants. Show the consumer and partner purchase journeys separately within that last umbrella. Cultural gifting is an occasion, and practical routine building sits within ritual continuation.
+
 ## Prototyping and showcase
 
 Tell the story of the design decisions with annotated artefacts once they exist. Reserve the large showcase stage for the thread/chord experience. A static explanatory figure or video fallback should provide the same core understanding as the live demo. Label stage, version and what is simulated.

@@ -1,0 +1,188 @@
+{
+  "summary": [
+    [
+      "24-month decision view",
+      "Without",
+      "With",
+      "Incremental"
+    ],
+    [
+      "Net sales",
+      691832.3652525913,
+      744568.5655270164,
+      52736.20027442509
+    ],
+    [
+      "Contribution before acquisition",
+      384590.5861616542,
+      414604.5073313136,
+      30013.921169659414
+    ],
+    [
+      "Operating contribution before setup",
+      192590.5861616543,
+      192904.50733131368,
+      313.92116965938476
+    ],
+    [
+      "One-off setup",
+      0,
+      5400,
+      5400
+    ],
+    [
+      "Operating contribution after setup",
+      192590.5861616543,
+      187504.50733131368,
+      -5086.078830340615
+    ],
+    [
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      "Incremental operating cash, 24 months",
+      -5958.7367481773645,
+      null,
+      "Pre-tax operating cash proxy; no terminal value."
+    ],
+    [
+      "Peak incremental funding required",
+      9237.372353938776,
+      null,
+      "Largest cumulative cash deficit, starting at zero."
+    ],
+    [
+      "NPV of incremental cash",
+      -6258.765293949392,
+      null,
+      null
+    ],
+    [
+      "First non-negative cumulative month",
+      "Not reached",
+      null,
+      "First crossing; later reversals remain visible in cash chart."
+    ],
+    [
+      "Pilot investment, excluding working capital",
+      35100,
+      null,
+      null
+    ],
+    [
+      "Cash ROI = net incremental cash / investment",
+      -0.16976457972015283,
+      null,
+      "Not ROAS; denominator includes setup and all pilot running costs."
+    ],
+    [
+      "No-benefit funding downside",
+      35100,
+      null,
+      "Same spend, all commercial benefits removed."
+    ],
+    [
+      "Monthly break-even benefit at month 24",
+      1350,
+      null,
+      "Recurring incremental costs to cover before setup recovery."
+    ],
+    [
+      "Month 24 contribution benefit",
+      1818.2226905982243,
+      null,
+      null
+    ]
+  ],
+  "checks": [
+    [
+      "Net-sales bridge",
+      -1.2369127944111824e-10,
+      "Expected 0"
+    ],
+    [
+      "Contribution less spending bridge",
+      0,
+      "Expected 0"
+    ],
+    [
+      "Cash versus profit and funding",
+      2.4556356947869062e-11,
+      "Expected 0"
+    ],
+    [
+      "D2C orders = first + repeat",
+      4.547473508864641e-13,
+      "Expected 0"
+    ],
+    [
+      "End receivables are uncollected B2B",
+      336,
+      "Balance retained; no terminal release"
+    ],
+    [
+      "End cost funding reserve",
+      536.6579178367242,
+      "Balance retained; no terminal release"
+    ]
+  ],
+  "sensitivity": [
+    [
+      -5958.7367481773645,
+      0,
+      0.5,
+      1,
+      1.5,
+      2
+    ],
+    [
+      0.5,
+      -17550,
+      -3167.6739110082062,
+      11591.263251822633,
+      26733.77864264288,
+      42266.901080797965
+    ],
+    [
+      0.75,
+      -26325,
+      -11942.673911008209,
+      2816.2632518226346,
+      17958.77864264288,
+      33491.901080797965
+    ],
+    [
+      1,
+      -35100,
+      -20717.67391100821,
+      -5958.7367481773645,
+      9183.77864264288,
+      24716.901080797965
+    ],
+    [
+      1.25,
+      -43875,
+      -29492.673911008216,
+      -14733.736748177364,
+      408.7786426428784,
+      15941.901080797968
+    ],
+    [
+      1.5,
+      -52650,
+      -38267.67391100821,
+      -23508.73674817736,
+      -8366.22135735712,
+      7166.901080797969
+    ]
+  ]
+}

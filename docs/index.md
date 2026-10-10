@@ -17,11 +17,15 @@ Updated 10 October 2026. Source files and research are the shared working record
 
 ## Public showcase
 
+[Observed brandbook](brand/brandbook.md), [design tokens](../packages/brand-assets/tokens.json) and [asset manifest](../packages/brand-assets/asset-manifest.json) support the visual handoff. The audit distinguishes rendered homepage evidence from linked-page source analysis and records incomplete coverage.
+
 [Site scope](website/site-scope.md) defines the in-progress launch, section sequence, download availability and team placeholders. [Editorial outline](website/content-outline.md) develops the page copy. [Motion integration](website/motion-integration.md) reserves the separately produced splash and body stroke. The editable [content manifest](../apps/project-site/content/project.json) is the visual-build handoff; a hosted website has not been created yet.
 
 ## Working models
 
 [Customer economics workbook](../models/customer-economics/mauli-customer-economics.xlsx) provides editable actuals tracking, CAC, matured contribution LTV, matched cohort LTV:CAC, ritual measures and discovery tracking. [Usage guide](metrics/workbook-guide.md) explains source grain, the initial 60-row table capacity and validation limits. Client actuals are deliberately blank.
+
+[Financial scenarios workbook](../models/financial-scenarios/mauli-financial-scenarios.xlsx) compares 24 months with and without the recommendations, including costs, cash, funding and sensitivity. [Model guide](finance/model-guide.md) explains the fictional demonstration inputs, blank client-input mode and calibration requirements.
 
 ## Evidence and decisions
 

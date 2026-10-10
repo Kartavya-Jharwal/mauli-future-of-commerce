@@ -1,0 +1,386 @@
+{
+  "baseline": [
+    [
+      "Eligible non-customer sessions / month",
+      10000,
+      "#,##0;(#,##0);\"-\"",
+      "Acquisition visits excluding existing customers; deduplicate audience."
+    ],
+    [
+      "Monthly session growth",
+      0,
+      "0.0%;(0.0%);\"-\"",
+      "Flat demo; replace with agreed seasonality/growth."
+    ],
+    [
+      "New-buyer conversion",
+      0.02,
+      "0.0%;(0.0%);\"-\"",
+      "First buyers / eligible non-customer sessions, not all site sessions."
+    ],
+    [
+      "Opening active prior-buyer pool",
+      1000,
+      "#,##0;(#,##0);\"-\"",
+      "Unique prior buyers eligible to order, not all historic customers."
+    ],
+    [
+      "Monthly repeat orders / active buyer",
+      0.04,
+      "0.0%;(0.0%);\"-\"",
+      "Order frequency; not 90-day repeat probability."
+    ],
+    [
+      "Monthly active-pool attrition",
+      0.02,
+      "0.0%;(0.0%);\"-\"",
+      "Simplified active-pool decay; validate with cohorts."
+    ],
+    [
+      "D2C basket after discounts, before refunds",
+      80,
+      "\"£\"#,##0;(\"£\"#,##0);\"-\"",
+      "Ex-VAT merchandise only. Same new and repeat basket assumption."
+    ],
+    [
+      "Merchandise refund fraction",
+      0.04,
+      "0.0%;(0.0%);\"-\"",
+      "Applied to merchandise revenue; orders are not deleted."
+    ],
+    [
+      "Product cost / gross merchandise",
+      0.3,
+      "0.0%;(0.0%);\"-\"",
+      "COGS on ordered merchandise; conservative no refund stock recovery."
+    ],
+    [
+      "Fulfilment / order",
+      5,
+      "\"£\"#,##0;(\"£\"#,##0);\"-\"",
+      "Packaging + pick/pack + delivery; shipping income excluded."
+    ],
+    [
+      "Payment + commission / gross merchandise",
+      0.03,
+      "0.0%;(0.0%);\"-\"",
+      "Fees assumed unrecovered on refunds."
+    ],
+    [
+      "Variable service / order",
+      1,
+      "\"£\"#,##0;(\"£\"#,##0);\"-\"",
+      "Human support etc; excludes optional incremental voice."
+    ],
+    [
+      "Baseline monthly acquisition spend",
+      2000,
+      "\"£\"#,##0;(\"£\"#,##0);\"-\"",
+      "Recognised once below contribution. Includes relevant acquisition costs."
+    ],
+    [
+      "Baseline fixed monthly operating costs",
+      6000,
+      "\"£\"#,##0;(\"£\"#,##0);\"-\"",
+      "Scope estimate, not enterprise audited overhead."
+    ],
+    [
+      "Baseline B2B monthly net sales",
+      5000,
+      "\"£\"#,##0;(\"£\"#,##0);\"-\"",
+      "Sell-in only, ex-VAT after returns/discounts. No retailer sell-through."
+    ],
+    [
+      "B2B contribution margin",
+      0.45,
+      "0.0%;(0.0%);\"-\"",
+      "After products, fulfilment, commission and variable service."
+    ],
+    [
+      "B2B collection delay, whole months",
+      1,
+      "#,##0;(#,##0);\"-\"",
+      "0 to 6 months; opening legacy AR assumed steady-state."
+    ],
+    [
+      "Cost funding buffer, months",
+      0.5,
+      "0.0",
+      "D2C incremental COGS + all B2B incremental variable costs. Cash reserve proxy, not inventory valuation."
+    ],
+    [
+      "Annual discount rate",
+      0.12,
+      "0.0%;(0.0%);\"-\"",
+      "Illustrative hurdle rate; no WACC claim."
+    ]
+  ],
+  "defs": [
+    [
+      "Launch month",
+      [
+        5,
+        3,
+        2
+      ],
+      "#,##0;(#,##0);\"-\"",
+      "First month in 1–24. Beyond 24 = no launch in horizon.",
+      "launch"
+    ],
+    [
+      "Ramp months to maximum adoption",
+      [
+        6,
+        4,
+        3
+      ],
+      "#,##0;(#,##0);\"-\"",
+      "At least one month; linear ramp from launch.",
+      "ramp"
+    ],
+    [
+      "Maximum eligible adoption",
+      [
+        0.35,
+        0.6,
+        0.8
+      ],
+      "0.0%;(0.0%);\"-\"",
+      "Fraction reached at saturation, not all visitors.",
+      "adopt"
+    ],
+    [
+      "Traffic relative lift at full adoption",
+      [
+        0,
+        0.06,
+        0.12
+      ],
+      "0.0%;(0.0%);\"-\"",
+      "Incremental eligible sessions; no causal prediction.",
+      "traffic"
+    ],
+    [
+      "Conversion relative lift at full adoption",
+      [
+        -0.03,
+        0.08,
+        0.15
+      ],
+      "0.0%;(0.0%);\"-\"",
+      "A 10% lift on 2% = 2.2%, not 12%.",
+      "cvr"
+    ],
+    [
+      "Repeat frequency increase, percentage points",
+      [
+        0,
+        0.005,
+        0.01
+      ],
+      "0.0%;(0.0%);\"-\"",
+      "Additive monthly order frequency increment.",
+      "repeat"
+    ],
+    [
+      "Basket relative lift",
+      [
+        0,
+        0.02,
+        0.04
+      ],
+      "0.0%;(0.0%);\"-\"",
+      "No compulsory bundle assumption.",
+      "aov"
+    ],
+    [
+      "Cannibalisation / non-incrementality",
+      [
+        0.35,
+        0.2,
+        0.1
+      ],
+      "0.0%;(0.0%);\"-\"",
+      "Reduces all benefit channels including partner sales.",
+      "cannib"
+    ],
+    [
+      "One-off design / research",
+      [
+        2000,
+        1600,
+        1200
+      ],
+      "\"£\"#,##0;(\"£\"#,##0);\"-\"",
+      "Illustrative cash cost; include internal time at opportunity cost.",
+      "design"
+    ],
+    [
+      "One-off Shopify / tracking integration",
+      [
+        3000,
+        2000,
+        1500
+      ],
+      "\"£\"#,##0;(\"£\"#,##0);\"-\"",
+      "Existing store enhancement only. Validate agency quote.",
+      "integration"
+    ],
+    [
+      "One-off educational content",
+      [
+        1600,
+        1200,
+        900
+      ],
+      "\"£\"#,##0;(\"£\"#,##0);\"-\"",
+      "Production, rights and review.",
+      "content"
+    ],
+    [
+      "One-off training / QA",
+      [
+        900,
+        600,
+        400
+      ],
+      "\"£\"#,##0;(\"£\"#,##0);\"-\"",
+      "Accessibility, wellness content review and training.",
+      "training"
+    ],
+    [
+      "Monthly tools / apps",
+      [
+        150,
+        100,
+        80
+      ],
+      "\"£\"#,##0;(\"£\"#,##0);\"-\"",
+      "Starts at launch; no vendor price claim.",
+      "tools"
+    ],
+    [
+      "Monthly support / analyst labour",
+      [
+        500,
+        350,
+        250
+      ],
+      "\"£\"#,##0;(\"£\"#,##0);\"-\"",
+      "Starts at launch; include opportunity cost.",
+      "support"
+    ],
+    [
+      "Monthly ongoing content",
+      [
+        400,
+        300,
+        250
+      ],
+      "\"£\"#,##0;(\"£\"#,##0);\"-\"",
+      "Starts at launch.",
+      "ongoing"
+    ],
+    [
+      "Monthly incremental paid marketing",
+      [
+        800,
+        600,
+        500
+      ],
+      "\"£\"#,##0;(\"£\"#,##0);\"-\"",
+      "Starts at launch; do not also include this in CAC cost.",
+      "media"
+    ],
+    [
+      "Voice enabled: 0 No / 1 Yes",
+      [
+        0,
+        0,
+        0
+      ],
+      "#,##0;(#,##0);\"-\"",
+      "Optional; no API integration or vendor commitment.",
+      "voice"
+    ],
+    [
+      "Voice sessions / reached visitor",
+      [
+        0.1,
+        0.1,
+        0.1
+      ],
+      "0.0%;(0.0%);\"-\"",
+      "Only relevant when enabled.",
+      "voiceuse"
+    ],
+    [
+      "Voice cost / session",
+      [
+        0.6,
+        0.4,
+        0.3
+      ],
+      "\"£\"#,##0;(\"£\"#,##0);\"-\"",
+      "All-in assumed vendor + oversight unit cost.",
+      "voicecost"
+    ],
+    [
+      "Incremental partner accounts at saturation",
+      [
+        0,
+        2,
+        4
+      ],
+      "#,##0;(#,##0);\"-\"",
+      "Distinct new partner-equivalent accounts; optional.",
+      "partners"
+    ],
+    [
+      "Monthly orders / incremental partner",
+      [
+        1,
+        1,
+        1
+      ],
+      "#,##0;(#,##0);\"-\"",
+      "Wholesale sell-in only.",
+      "partnerorders"
+    ],
+    [
+      "Net wholesale basket",
+      [
+        250,
+        350,
+        400
+      ],
+      "\"£\"#,##0;(\"£\"#,##0);\"-\"",
+      "After discount/refund, ex-VAT.",
+      "partneraov"
+    ]
+  ],
+  "rows": {
+    "launch": 35,
+    "ramp": 40,
+    "adopt": 45,
+    "traffic": 50,
+    "cvr": 55,
+    "repeat": 60,
+    "aov": 65,
+    "cannib": 70,
+    "design": 75,
+    "integration": 80,
+    "content": 85,
+    "training": 90,
+    "tools": 95,
+    "support": 100,
+    "ongoing": 105,
+    "media": 110,
+    "voice": 115,
+    "voiceuse": 120,
+    "voicecost": 125,
+    "partners": 130,
+    "partnerorders": 135,
+    "partneraov": 140
+  }
+}

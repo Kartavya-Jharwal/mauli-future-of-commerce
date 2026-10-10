@@ -1,0 +1,197 @@
+[
+  {
+    "family": "\"adobe-caslon-pro\"",
+    "weight": "400",
+    "style": "normal",
+    "urls": [
+      "https://use.typekit.net/af/c9b150/00000000000000007735d880/31/l?subset_id=2&fvd=n4&v=3",
+      "https://use.typekit.net/af/c9b150/00000000000000007735d880/31/d?subset_id=2&fvd=n4&v=3",
+      "https://use.typekit.net/af/c9b150/00000000000000007735d880/31/a?subset_id=2&fvd=n4&v=3"
+    ],
+    "stylesheet": "packages/brand-assets/css/6cfb02e5aa-bji1tmk.css",
+    "usage": "Declared; only homepage Gotham / LTC Caslon computed styles verified",
+    "license": "Adobe EULA references preserved in original stylesheet; project entitlement unverified"
+  },
+  {
+    "family": "\"adobe-caslon-pro\"",
+    "weight": "400",
+    "style": "italic",
+    "urls": [
+      "https://use.typekit.net/af/7aefe0/00000000000000007735d883/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "https://use.typekit.net/af/7aefe0/00000000000000007735d883/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3",
+      "https://use.typekit.net/af/7aefe0/00000000000000007735d883/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3"
+    ],
+    "stylesheet": "packages/brand-assets/css/6cfb02e5aa-bji1tmk.css",
+    "usage": "Declared; only homepage Gotham / LTC Caslon computed styles verified",
+    "license": "Adobe EULA references preserved in original stylesheet; project entitlement unverified"
+  },
+  {
+    "family": "\"adobe-caslon-pro\"",
+    "weight": "700",
+    "style": "normal",
+    "urls": [
+      "https://use.typekit.net/af/815b2a/00000000000000007735d887/31/l?subset_id=2&fvd=n7&v=3",
+      "https://use.typekit.net/af/815b2a/00000000000000007735d887/31/d?subset_id=2&fvd=n7&v=3",
+      "https://use.typekit.net/af/815b2a/00000000000000007735d887/31/a?subset_id=2&fvd=n7&v=3"
+    ],
+    "stylesheet": "packages/brand-assets/css/6cfb02e5aa-bji1tmk.css",
+    "usage": "Declared; only homepage Gotham / LTC Caslon computed styles verified",
+    "license": "Adobe EULA references preserved in original stylesheet; project entitlement unverified"
+  },
+  {
+    "family": "\"adobe-caslon-pro\"",
+    "weight": "700",
+    "style": "italic",
+    "urls": [
+      "https://use.typekit.net/af/4fb060/00000000000000007735d889/31/l?subset_id=2&fvd=i7&v=3",
+      "https://use.typekit.net/af/4fb060/00000000000000007735d889/31/d?subset_id=2&fvd=i7&v=3",
+      "https://use.typekit.net/af/4fb060/00000000000000007735d889/31/a?subset_id=2&fvd=i7&v=3"
+    ],
+    "stylesheet": "packages/brand-assets/css/6cfb02e5aa-bji1tmk.css",
+    "usage": "Declared; only homepage Gotham / LTC Caslon computed styles verified",
+    "license": "Adobe EULA references preserved in original stylesheet; project entitlement unverified"
+  },
+  {
+    "family": "\"adobe-caslon-pro\"",
+    "weight": "600",
+    "style": "normal",
+    "urls": [
+      "https://use.typekit.net/af/17c760/00000000000000007735d892/31/l?subset_id=2&fvd=n6&v=3",
+      "https://use.typekit.net/af/17c760/00000000000000007735d892/31/d?subset_id=2&fvd=n6&v=3",
+      "https://use.typekit.net/af/17c760/00000000000000007735d892/31/a?subset_id=2&fvd=n6&v=3"
+    ],
+    "stylesheet": "packages/brand-assets/css/6cfb02e5aa-bji1tmk.css",
+    "usage": "Declared; only homepage Gotham / LTC Caslon computed styles verified",
+    "license": "Adobe EULA references preserved in original stylesheet; project entitlement unverified"
+  },
+  {
+    "family": "\"adobe-caslon-pro\"",
+    "weight": "600",
+    "style": "italic",
+    "urls": [
+      "https://use.typekit.net/af/6aa2b9/00000000000000007735d89a/31/l?subset_id=2&fvd=i6&v=3",
+      "https://use.typekit.net/af/6aa2b9/00000000000000007735d89a/31/d?subset_id=2&fvd=i6&v=3",
+      "https://use.typekit.net/af/6aa2b9/00000000000000007735d89a/31/a?subset_id=2&fvd=i6&v=3"
+    ],
+    "stylesheet": "packages/brand-assets/css/6cfb02e5aa-bji1tmk.css",
+    "usage": "Declared; only homepage Gotham / LTC Caslon computed styles verified",
+    "license": "Adobe EULA references preserved in original stylesheet; project entitlement unverified"
+  },
+  {
+    "family": "\"gotham\"",
+    "weight": "500",
+    "style": "normal",
+    "urls": [
+      "https://use.typekit.net/af/4f91c5/0000000000000000775aa92f/31/l?subset_id=2&fvd=n5&v=3",
+      "https://use.typekit.net/af/4f91c5/0000000000000000775aa92f/31/d?subset_id=2&fvd=n5&v=3",
+      "https://use.typekit.net/af/4f91c5/0000000000000000775aa92f/31/a?subset_id=2&fvd=n5&v=3"
+    ],
+    "stylesheet": "packages/brand-assets/css/6cfb02e5aa-bji1tmk.css",
+    "usage": "Declared; only homepage Gotham / LTC Caslon computed styles verified",
+    "license": "Adobe EULA references preserved in original stylesheet; project entitlement unverified"
+  },
+  {
+    "family": "\"gotham\"",
+    "weight": "400",
+    "style": "normal",
+    "urls": [
+      "https://use.typekit.net/af/e0cede/0000000000000000775aa930/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "https://use.typekit.net/af/e0cede/0000000000000000775aa930/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "https://use.typekit.net/af/e0cede/0000000000000000775aa930/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3"
+    ],
+    "stylesheet": "packages/brand-assets/css/6cfb02e5aa-bji1tmk.css",
+    "usage": "Declared; only homepage Gotham / LTC Caslon computed styles verified",
+    "license": "Adobe EULA references preserved in original stylesheet; project entitlement unverified"
+  },
+  {
+    "family": "\"gotham\"",
+    "weight": "700",
+    "style": "normal",
+    "urls": [
+      "https://use.typekit.net/af/aaa6a3/0000000000000000775aa938/31/l?subset_id=2&fvd=n7&v=3",
+      "https://use.typekit.net/af/aaa6a3/0000000000000000775aa938/31/d?subset_id=2&fvd=n7&v=3",
+      "https://use.typekit.net/af/aaa6a3/0000000000000000775aa938/31/a?subset_id=2&fvd=n7&v=3"
+    ],
+    "stylesheet": "packages/brand-assets/css/6cfb02e5aa-bji1tmk.css",
+    "usage": "Declared; only homepage Gotham / LTC Caslon computed styles verified",
+    "license": "Adobe EULA references preserved in original stylesheet; project entitlement unverified"
+  },
+  {
+    "family": "\"ltc-caslon-pro\"",
+    "weight": "400",
+    "style": "italic",
+    "urls": [
+      "https://use.typekit.net/af/a5aa77/00000000000000007735b211/31/l?subset_id=2&fvd=i4&v=3",
+      "https://use.typekit.net/af/a5aa77/00000000000000007735b211/31/d?subset_id=2&fvd=i4&v=3",
+      "https://use.typekit.net/af/a5aa77/00000000000000007735b211/31/a?subset_id=2&fvd=i4&v=3"
+    ],
+    "stylesheet": "packages/brand-assets/css/7cf8be6c27-gby1gbw.css",
+    "usage": "Declared; only homepage Gotham / LTC Caslon computed styles verified",
+    "license": "Adobe EULA references preserved in original stylesheet; project entitlement unverified"
+  },
+  {
+    "family": "\"ltc-caslon-pro\"",
+    "weight": "400",
+    "style": "normal",
+    "urls": [
+      "https://use.typekit.net/af/a0c06e/00000000000000007735b218/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "https://use.typekit.net/af/a0c06e/00000000000000007735b218/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "https://use.typekit.net/af/a0c06e/00000000000000007735b218/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3"
+    ],
+    "stylesheet": "packages/brand-assets/css/7cf8be6c27-gby1gbw.css",
+    "usage": "Declared; only homepage Gotham / LTC Caslon computed styles verified",
+    "license": "Adobe EULA references preserved in original stylesheet; project entitlement unverified"
+  },
+  {
+    "family": "\"gotham\"",
+    "weight": "400",
+    "style": "normal",
+    "urls": [
+      "https://use.typekit.net/af/e0cede/0000000000000000775aa930/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "https://use.typekit.net/af/e0cede/0000000000000000775aa930/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "https://use.typekit.net/af/e0cede/0000000000000000775aa930/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3"
+    ],
+    "stylesheet": "packages/brand-assets/css/7cf8be6c27-gby1gbw.css",
+    "usage": "Declared; only homepage Gotham / LTC Caslon computed styles verified",
+    "license": "Adobe EULA references preserved in original stylesheet; project entitlement unverified"
+  },
+  {
+    "family": "\"ltc-caslon-pro\"",
+    "weight": "400",
+    "style": "italic",
+    "urls": [
+      "https://use.typekit.net/af/a5aa77/00000000000000007735b211/31/l?subset_id=2&fvd=i4&v=3",
+      "https://use.typekit.net/af/a5aa77/00000000000000007735b211/31/d?subset_id=2&fvd=i4&v=3",
+      "https://use.typekit.net/af/a5aa77/00000000000000007735b211/31/a?subset_id=2&fvd=i4&v=3"
+    ],
+    "stylesheet": "packages/brand-assets/css/typekit.css",
+    "usage": "Declared; only homepage Gotham / LTC Caslon computed styles verified",
+    "license": "Adobe EULA references preserved in original stylesheet; project entitlement unverified"
+  },
+  {
+    "family": "\"ltc-caslon-pro\"",
+    "weight": "400",
+    "style": "normal",
+    "urls": [
+      "https://use.typekit.net/af/a0c06e/00000000000000007735b218/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "https://use.typekit.net/af/a0c06e/00000000000000007735b218/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "https://use.typekit.net/af/a0c06e/00000000000000007735b218/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3"
+    ],
+    "stylesheet": "packages/brand-assets/css/typekit.css",
+    "usage": "Declared; only homepage Gotham / LTC Caslon computed styles verified",
+    "license": "Adobe EULA references preserved in original stylesheet; project entitlement unverified"
+  },
+  {
+    "family": "\"gotham\"",
+    "weight": "400",
+    "style": "normal",
+    "urls": [
+      "https://use.typekit.net/af/e0cede/0000000000000000775aa930/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "https://use.typekit.net/af/e0cede/0000000000000000775aa930/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "https://use.typekit.net/af/e0cede/0000000000000000775aa930/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3"
+    ],
+    "stylesheet": "packages/brand-assets/css/typekit.css",
+    "usage": "Declared; only homepage Gotham / LTC Caslon computed styles verified",
+    "license": "Adobe EULA references preserved in original stylesheet; project entitlement unverified"
+  }
+]

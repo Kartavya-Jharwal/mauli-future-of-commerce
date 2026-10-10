@@ -1,0 +1,202 @@
+{
+  "testedAt": "2026-10-10",
+  "engine": "Artifact Tool; independent JavaScript fixture oracle",
+  "nativeExcelTested": false,
+  "tests": [
+    {
+      "label": "Scenario 1: cash",
+      "actual": -45873.080673327146,
+      "expected": -45873.080673327146,
+      "pass": true
+    },
+    {
+      "label": "Scenario 1: funding",
+      "actual": 45873.080673327146,
+      "expected": 45873.080673327146,
+      "pass": true
+    },
+    {
+      "label": "Scenario 1: NPV",
+      "actual": -40782.80150760554,
+      "expected": -40782.801507605545,
+      "pass": true
+    },
+    {
+      "label": "Scenario 1: sales",
+      "actual": 689457.30679062,
+      "expected": 689457.30679062,
+      "pass": true
+    },
+    {
+      "label": "Scenario 2: cash",
+      "actual": -5958.7367481773645,
+      "expected": -5958.736748177369,
+      "pass": true
+    },
+    {
+      "label": "Scenario 2: funding",
+      "actual": 9237.372353938776,
+      "expected": 9237.372353938768,
+      "pass": true
+    },
+    {
+      "label": "Scenario 2: NPV",
+      "actual": -6258.765293949392,
+      "expected": -6258.765293949398,
+      "pass": true
+    },
+    {
+      "label": "Scenario 2: sales",
+      "actual": 744568.5655270164,
+      "expected": 744568.5655270164,
+      "pass": true
+    },
+    {
+      "label": "Scenario 3: cash",
+      "actual": 69434.74903906527,
+      "expected": 69434.74903906521,
+      "pass": true
+    },
+    {
+      "label": "Scenario 3: funding",
+      "actual": 4781.768485273603,
+      "expected": 4781.768485273602,
+      "pass": true
+    },
+    {
+      "label": "Scenario 3: NPV",
+      "actual": 59593.66231520749,
+      "expected": 59593.66231520746,
+      "pass": true
+    },
+    {
+      "label": "Scenario 3: sales",
+      "actual": 869829.8339252742,
+      "expected": 869829.8339252741,
+      "pass": true
+    },
+    {
+      "label": "No benefit: cash equals negative pilot spend",
+      "actual": -35100,
+      "expected": -35100,
+      "pass": true
+    },
+    {
+      "label": "Zero cost and benefit: cash delta zero",
+      "actual": 0,
+      "expected": 0,
+      "pass": true
+    },
+    {
+      "label": "Zero sessions and opening buyer pool",
+      "actual": -32428.79999999999,
+      "expected": -32428.79999999999,
+      "pass": true
+    },
+    {
+      "label": "100% refunds",
+      "actual": -51806.937022602586,
+      "expected": -51806.93702260257,
+      "pass": true
+    },
+    {
+      "label": "Immediate B2B collections",
+      "actual": -5622.7367481773645,
+      "expected": -5622.736748177371,
+      "pass": true
+    },
+    {
+      "label": "Six-month B2B collections",
+      "actual": -7638.736748177367,
+      "expected": -7638.736748177369,
+      "pass": true
+    },
+    {
+      "label": "Blank client actuals produce Not supplied",
+      "pass": true
+    },
+    {
+      "label": "Blank unselected case does not block selected case",
+      "actual": -5958.7367481773645,
+      "expected": -5958.736748177369,
+      "pass": true
+    },
+    {
+      "label": "Blank selected scenario exposes missing input",
+      "pass": true
+    },
+    {
+      "label": "Refund above 100% blocked",
+      "pass": true
+    },
+    {
+      "label": "Month-one launch pays full setup once",
+      "actual": -5723.303265195392,
+      "expected": -5723.303265195379,
+      "pass": true
+    },
+    {
+      "label": "Optional voice enabled",
+      "actual": -11016.112748177371,
+      "expected": -11016.11274817737,
+      "pass": true
+    },
+    {
+      "label": "No-benefit voice downside uses baseline demand",
+      "actual": 40020,
+      "expected": 40020,
+      "pass": true
+    },
+    {
+      "label": "Blank demo baseline produces Not supplied",
+      "pass": true
+    },
+    {
+      "label": "Native sensitivity base",
+      "actual": -5958.7367481773645,
+      "expected": -5958.736748177369,
+      "pass": true
+    },
+    {
+      "label": "Native sensitivity no benefit",
+      "actual": -35100,
+      "expected": -35100,
+      "pass": true
+    }
+  ],
+  "illustrativeCases": [
+    {
+      "case": "Low",
+      "cum": -45873.080673327146,
+      "peak": 45873.080673327146,
+      "npv": -40782.801507605545,
+      "investment": 44500,
+      "sales0": 691832.3652525912,
+      "sales1": 689457.30679062,
+      "benefits": -1373.0806733271493,
+      "payback": null
+    },
+    {
+      "case": "Base",
+      "cum": -5958.736748177369,
+      "peak": 9237.372353938768,
+      "npv": -6258.765293949398,
+      "investment": 35100,
+      "sales0": 691832.3652525912,
+      "sales1": 744568.5655270164,
+      "benefits": 30013.921169659352,
+      "payback": null
+    },
+    {
+      "case": "High",
+      "cum": 69434.74903906521,
+      "peak": 4781.768485273602,
+      "npv": 59593.66231520746,
+      "investment": 28840,
+      "sales0": 691832.3652525912,
+      "sales1": 869829.8339252741,
+      "benefits": 101156.17357680152,
+      "payback": 6
+    }
+  ]
+}
