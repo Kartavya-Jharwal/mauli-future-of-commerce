@@ -19,7 +19,7 @@ Updated 10 October 2026. Source files and research are the shared working record
 
 [Observed brandbook](brand/brandbook.md), [design tokens](../packages/brand-assets/tokens.json) and [asset manifest](../packages/brand-assets/asset-manifest.json) support the visual handoff. The audit distinguishes rendered homepage evidence from linked-page source analysis and records incomplete coverage.
 
-[Site scope](website/site-scope.md) defines the in-progress launch, section sequence, download availability and team placeholders. [Editorial outline](website/content-outline.md) develops the page copy. [Motion integration](website/motion-integration.md) reserves the separately produced splash and body stroke. The editable [content manifest](../apps/project-site/content/project.json) is the visual-build handoff; a hosted website has not been created yet.
+[Site scope](website/site-scope.md) defines the in-progress launch, section sequence, download availability and team placeholders. [Editorial outline](website/content-outline.md) develops the page copy. [Motion integration](website/motion-integration.md) reserves the separately produced splash and body stroke. The [website implementation](../apps/project-site/README.md) describes the static build and GitHub Pages publishing. The [content manifest](../apps/project-site/content/project.json) records delivery states and the configured public URL.
 
 ## Working models
 

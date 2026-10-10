@@ -11,40 +11,162 @@
     "professor": "Nikhil Soi",
     "attributionBasis": "Project owner and supplied coursework materials",
     "repositoryUrl": "https://github.com/Kartavya-Jharwal/mauli-future-of-commerce",
-    "siteUrl": null
+    "siteUrl": "https://kartavya.tech/mauli-future-of-commerce/"
   },
   "motion": {
-    "splash": {"status": "awaiting_asset", "entry": null, "poster": null, "skipLabel": "Enter the case study"},
-    "bodyStroke": {"status": "awaiting_asset", "entry": null},
+    "splash": {
+      "status": "awaiting_asset",
+      "entry": null,
+      "poster": null,
+      "skipLabel": "Enter the case study"
+    },
+    "bodyStroke": {
+      "status": "awaiting_asset",
+      "entry": null
+    },
     "respectReducedMotion": true,
     "bypassSplashForDeepLinks": true
   },
   "sections": [
-    {"id": "top", "title": "The project", "state": "draft"},
-    {"id": "downloads", "title": "Read the work", "state": "available"},
-    {"id": "problem", "title": "The problem", "state": "draft", "source": "docs/brief/updated-project-brief.md"},
-    {"id": "process", "title": "Our process", "state": "draft"},
-    {"id": "insights", "title": "Marketing insights", "state": "draft", "sources": ["docs/research/channels-and-funnels.md", "docs/research/stp-and-icps.md", "docs/metrics/measurement-plan.md"]},
-    {"id": "prototyping", "title": "Prototyping", "state": "draft", "source": "docs/mvp/experience-and-feasibility.md"},
-    {"id": "showcase", "title": "Final showcase", "state": "forthcoming", "demoUrl": null},
-    {"id": "recommendations", "title": "Recommendations", "state": "draft", "source": "docs/strategy/execution-roadmap.md"},
-    {"id": "feedback", "title": "Client and professor feedback", "state": "awaiting_feedback", "items": []},
-    {"id": "outcomes", "title": "What's next", "state": "draft", "grade": null},
-    {"id": "team", "title": "The team", "state": "draft"}
+    {
+      "id": "top",
+      "title": "The project",
+      "state": "draft"
+    },
+    {
+      "id": "downloads",
+      "title": "Read the work",
+      "state": "available"
+    },
+    {
+      "id": "problem",
+      "title": "The problem",
+      "state": "draft",
+      "source": "docs/brief/updated-project-brief.md"
+    },
+    {
+      "id": "process",
+      "title": "Our process",
+      "state": "draft"
+    },
+    {
+      "id": "insights",
+      "title": "Marketing insights",
+      "state": "draft",
+      "sources": [
+        "docs/research/channels-and-funnels.md",
+        "docs/research/stp-and-icps.md",
+        "docs/metrics/measurement-plan.md"
+      ]
+    },
+    {
+      "id": "prototyping",
+      "title": "Prototyping",
+      "state": "draft",
+      "source": "docs/mvp/experience-and-feasibility.md"
+    },
+    {
+      "id": "showcase",
+      "title": "Final showcase",
+      "state": "forthcoming",
+      "demoUrl": null
+    },
+    {
+      "id": "recommendations",
+      "title": "Recommendations",
+      "state": "draft",
+      "source": "docs/strategy/execution-roadmap.md"
+    },
+    {
+      "id": "feedback",
+      "title": "Client and professor feedback",
+      "state": "awaiting_feedback",
+      "items": []
+    },
+    {
+      "id": "outcomes",
+      "title": "What's next",
+      "state": "draft",
+      "grade": null
+    },
+    {
+      "id": "team",
+      "title": "The team",
+      "state": "draft"
+    }
   ],
   "downloads": [
-    {"id": "presentation", "label": "Presentation deck", "state": "forthcoming", "sourcePath": null, "publicUrl": null, "format": "PDF", "version": null},
-    {"id": "report", "label": "Project report", "state": "forthcoming", "sourcePath": null, "publicUrl": null, "format": "PDF", "version": null},
-    {"id": "client-brief", "label": "Client briefing", "state": "available", "sourcePath": "Mauli Rituals - Client Challenge Brief.pdf", "publicUrl": null, "format": "PDF", "version": "Supplied classroom brief, 12 September 2026"}
+    {
+      "id": "presentation",
+      "label": "Presentation deck",
+      "state": "forthcoming",
+      "sourcePath": null,
+      "publicUrl": null,
+      "format": "PDF",
+      "version": null
+    },
+    {
+      "id": "report",
+      "label": "Project report",
+      "state": "forthcoming",
+      "sourcePath": null,
+      "publicUrl": null,
+      "format": "PDF",
+      "version": null
+    },
+    {
+      "id": "client-brief",
+      "label": "Client briefing",
+      "state": "available",
+      "sourcePath": "Mauli Rituals - Client Challenge Brief.pdf",
+      "publicUrl": "downloads/client-brief.pdf",
+      "format": "PDF",
+      "version": "Supplied classroom brief, 12 September 2026"
+    }
   ],
   "team": [
-    {"id": "member-1", "name": "Team member 01", "role": null, "linkedinUrl": null},
-    {"id": "member-2", "name": "Team member 02", "role": null, "linkedinUrl": null},
-    {"id": "member-3", "name": "Team member 03", "role": null, "linkedinUrl": null},
-    {"id": "member-4", "name": "Team member 04", "role": null, "linkedinUrl": null},
-    {"id": "member-5", "name": "Team member 05", "role": null, "linkedinUrl": null},
-    {"id": "member-6", "name": "Team member 06", "role": null, "linkedinUrl": null},
-    {"id": "member-7", "name": "Team member 07", "role": null, "linkedinUrl": null}
+    {
+      "id": "member-1",
+      "name": "Team member 01",
+      "role": null,
+      "linkedinUrl": null
+    },
+    {
+      "id": "member-2",
+      "name": "Team member 02",
+      "role": null,
+      "linkedinUrl": null
+    },
+    {
+      "id": "member-3",
+      "name": "Team member 03",
+      "role": null,
+      "linkedinUrl": null
+    },
+    {
+      "id": "member-4",
+      "name": "Team member 04",
+      "role": null,
+      "linkedinUrl": null
+    },
+    {
+      "id": "member-5",
+      "name": "Team member 05",
+      "role": null,
+      "linkedinUrl": null
+    },
+    {
+      "id": "member-6",
+      "name": "Team member 06",
+      "role": null,
+      "linkedinUrl": null
+    },
+    {
+      "id": "member-7",
+      "name": "Team member 07",
+      "role": null,
+      "linkedinUrl": null
+    }
   ],
   "footer": {
     "projectAttribution": "Independent pro bono student advisory work developed for the Future of Commerce course at Hult International Business School.",
