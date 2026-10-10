@@ -1,0 +1,2 @@
+# Preserve supplied originals and their hash inventory byte-for-byte across clones.
+* -text

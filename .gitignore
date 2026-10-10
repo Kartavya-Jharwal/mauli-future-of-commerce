@@ -1,0 +1,41 @@
+# Credentials and local configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+credentials.json
+service-account*.json
+.aws/
+.ssh/
+.codex/
+.agents/
+
+# Dependencies, generated output and caches
+node_modules/
+.next/
+.nuxt/
+dist/
+build/
+coverage/
+.cache/
+.turbo/
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.log
+*.tsbuildinfo
+
+# Editor and operating system files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+Desktop.ini
+~$*
+
+# Supplied source documents are intentionally tracked: the owner authorized
+# publication of internal client/course/team inputs. Preserve original names.
