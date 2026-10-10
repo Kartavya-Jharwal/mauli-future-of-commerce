@@ -3,6 +3,8 @@
 ## Owner authorization
 The project owner explicitly instructed the team to keep the supplied internal files in the public repository. This covers the existing client, course, team and personal input documents. Preserve their original filenames and distinguish supplied material from independently verified research.
 
+On 10 October 2026 the owner withdrew the personal student strategy brief because of flawed design choices. Remove it from the active tree and source archive; use the updated working brief in `docs/brief/` instead. The initial Git commit retains historical provenance; no history rewrite was requested. Preserve all other originals.
+
 ## Attribution and rights
 This is an independent student advisory repository. It does not imply Mauli Rituals or Hult endorsement. Publication authorization from the project owner is not a transfer of third-party copyright. Client logos, imagery, course slides, documents and other third-party content retain their respective rights. No blanket open-source license is applied to these assets.
 

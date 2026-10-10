@@ -14,6 +14,16 @@ for item in inventory:
     if not source.is_file() or hashlib.sha256(source.read_bytes()).hexdigest() != item['sha256']:
         errors.append(f"Original differs: {item['path']}")
     if not (ROOT/item['extraction']).is_file(): errors.append(f"Missing extraction: {item['extraction']}")
+    else:
+        derivative = (ROOT/item['extraction']).read_text(encoding='utf-8-sig')
+        if item['sha256'] not in derivative: errors.append(f"Missing derivative provenance: {item['extraction']}")
+        if 'data:image/' in derivative: errors.append(f"Embedded image payload in Markdown: {item['extraction']}")
+        if item.get('locator') in ('page', 'slide'):
+            count = len(re.findall(r'^## '+item['locator'].title()+r' \d+$', derivative, re.M))
+            if count != item['units']: errors.append(f"Locator coverage mismatch: {item['extraction']}")
+        if item.get('duplicate_of'):
+            canonical = next((x for x in inventory if x['source_id'] == item['duplicate_of']), None)
+            if not canonical or canonical['sha256'] != item['sha256']: errors.append(f"Invalid duplicate evidence: {item['path']}")
 csv_count = 0
 for path in (ROOT/'docs').rglob('*.csv'):
     with path.open(encoding='utf-8-sig',newline='') as f:

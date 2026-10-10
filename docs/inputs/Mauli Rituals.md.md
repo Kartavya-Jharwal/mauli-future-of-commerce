@@ -1,3 +1,16 @@
+# Mauli Rituals.md
+
+- Source ID: `LOCAL-12`
+- Evidence ID: `LOCAL-12`
+- Original: [supplied file](../../Mauli%20Rituals.md)
+- SHA-256: `cc56f3edf1d4bd458dfcd2d09c43a96d3cc102c7665da2bd1978b53acd49c630`
+- Provenance: supplied input; assertions are not independently verified.
+- Conversion date: 2026-10-10
+- Coverage: 1 document(s).
+- Limitations: Markdown retained; embedded image payloads omitted. Images remain in original.
+
+---
+
 **Brief**
 
 Mauli Rituals is a heritage-driven, premium wellness brand whose equity rests on story, sensory experience, and values, exactly the kind of brand most exposed as discovery and evaluation shift toward AI-personalised, voice, and social/live commerce channels, and exactly the kind that can lead if it gets the strategy right.
@@ -585,16 +598,16 @@ Example: [https\://canva.link/agsbuymxtdemd6i](https://canva.link/agsbuymxtdemd6
 Ecrubox custom shopify app builder  
 Restructure the website focused in AIO to be found for web search and AI questions. Because we can increase the actual ranking on google
 
-![][image1]![][image2]
+[Embedded image image1 in original][Embedded image image2 in original]
 
 Custom prompt tuning for brand voice embodied in blogs
 
 Could connect agents and llm.txt and robots.txt and JSON-LD schemas and in depth AEO
 
 When I did the quiz, they suggested these products. However, when I went to the basket, one of the products was out of stock.   
-![][image3]
+[Embedded image image3 in original]
 
-![][image4]  
+[Embedded image image4 in original]  
    
 \_\_\_\_\_\_\_\_
 
@@ -617,7 +630,7 @@ Brand protection for all three: Mauli’s team approves the story, the formulas 
 
 **LATER (step by step, after the first three)**  
 Add videos and GIFs of real people using the products on product pages and quiz results.   
-![][image5]  
+[Embedded image image5 in original]  
 Reuse content from the brand ambassadors.  
 Move the quiz to the main website ([maulirituals.com](http://maulirituals.com)) instead of [mauli.ecrubox.com](http://mauli.ecrubox.com).  
 Show star ratings and awards on the quiz result page.  
@@ -1388,15 +1401,3 @@ Shopify. (n.d.). Requirements and considerations for using B2B. [https\://help.s
 SKINTRUTH. (n.d.). Subscription. [https\://www\.skintruth.co.uk/pages/subscription](https://www.skintruth.co.uk/pages/subscription)
 
 Wholesale Suite. (n.d.). WooCommerce Subscriptions integration. [https\://wholesalesuiteplugin.com/integrations/woocommerce-subscriptions-integration/](https://wholesalesuiteplugin.com/integrations/woocommerce-subscriptions-integration/)
-
- 
-
-[image1]: <[embedded image omitted from text extraction]>
-
-[image2]: <[embedded image omitted from text extraction]>
-
-[image3]: <[embedded image omitted from text extraction]>
-
-[image4]: <[embedded image omitted from text extraction]>
-
-[image5]: <[embedded image omitted from text extraction]>

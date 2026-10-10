@@ -15,11 +15,14 @@ The project owner leads metrics, AI and the technical MVP. Proposed concepts inc
 | Original files at the repository root | Supplied client, course, team and personal inputs, preserved under their original filenames |
 | `docs/governance/` | Scope, workstreams and publication rules |
 | `docs/templates/` | Reusable research, source, experiment and decision records |
-| `docs/inputs/` | Searchable extracts and a hashed inventory of all 17 supplied files |
+| `docs/inputs/` | Markdown conversions and a hashed inventory of 16 retained supplied files |
+| `docs/brief/` | Updated working brief and decision record replacing the withdrawn personal draft |
 | `docs/research/` | Channel/funnel research, STP/ICPs, sources and research backlog |
 | `docs/metrics/` | Measurement definitions, metric vault, event taxonomy and dashboard specification |
 | `docs/strategy/` | Execution roadmap and coursework pitch structure |
 | `docs/mvp/` | Thread, chord diagram and recommendation experience brief |
+| `docs/website/` | Public case-study scope and integration contract for the separate motion work |
+| `apps/project-site/` | Website content manifest, including pending downloads and team placeholders |
 | `apps/` | Coursework prototypes and demonstrations |
 | `packages/` | Shared prototype code and reusable assets |
 
@@ -31,7 +34,7 @@ Use [the master index](docs/index.md) to navigate the research and metrics. Run 
 
 ## GitHub publication
 
-Git is initialized locally on `main`. Public publication was requested, including the supplied internal documents. GitHub creation is blocked by an invalid saved GitHub CLI credential; no remote URL exists yet. After restoring GitHub authentication, create the repository with `gh repo create mauli-future-of-commerce --public --source . --remote origin --push` from this folder. This command publishes the committed files to the authenticated account. No credentials should be added to this repository.
+The public repository is [Kartavya-Jharwal/mauli-future-of-commerce](https://github.com/Kartavya-Jharwal/mauli-future-of-commerce), published on 10 October 2026. The local `main` branch tracks `origin/main`. Supplied internal inputs are included under the project owner's authorization. No credentials should be added to this repository.
 
 ## Evidence discipline
 

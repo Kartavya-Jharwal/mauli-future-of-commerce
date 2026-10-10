@@ -1,4 +1,18 @@
+# Senses_in_AI_World_Deck.pdf
+
+- Source ID: `LOCAL-16`
+- Evidence ID: `LOCAL-16`
+- Original: [supplied file](../../Senses_in_AI_World_Deck.pdf)
+- SHA-256: `d17738531c2873e42cb29efb8fd6d9a099cf0fcc946fc410753ed04618bbaaa4`
+- Provenance: supplied input; assertions are not independently verified.
+- Conversion date: 2026-10-10
+- Coverage: 27 page(s).
+- Limitations: PDF text layer only. Reading order, diagrams, charts and visual tables require original inspection. No OCR.
+
+---
+
 ## Page 1
+
 Sensing the Future
 How AI-era marketing teams use sight, sound, scent, touch, taste and the new sense of 
 context  to build memory, preference and loyalty.
@@ -17,11 +31,13 @@ Context
 Mind, memory, AI cognition
 
 ## Page 2
+
 Which sound created the strongest emotion? Why?
 If your brand had to pick ONE sound to own, what would it erase or replace in your customers' day?
 How could AI generate a personalised sonic signature for each customer segment?
 
 ## Page 3
+
 The behavioural case
 Why sensory marketing wins the consumer
 Senses are the shortest route from stimulus to emotion to memory and purchase decisions are made there first.
@@ -45,6 +61,7 @@ branding (Lindstrom, Brand Sense,
 paraphrased from Krishna (2012), Journal of Consumer Psychology
 
 ## Page 4
+
 Framework
 The sensory consumer-behaviourloop
 Classical perception theory, now instrumented: AI touches every stage.
@@ -74,6 +91,7 @@ and fed back into
 stimulus design
 
 ## Page 5
+
 Dinnie Dunn’s Model of Sensory Processing
 Experiential Customer
 The Predictable/Loyal Consumer
@@ -82,9 +100,11 @@ The Habitual Consumer
 
 
 ## Page 6
-[No extractable text]
+
+[No extractable text; inspect original.]
 
 ## Page 7
+
 Sense 1 of 5 · Vision
 The shelf that watches back
 In market now
@@ -108,6 +128,7 @@ Ask the room: when does personalised visual merchandising become surveillance?
 
 
 ## Page 8
+
 Sense 1 of 5 · Vision
 Vision 2030 from display to dialogue
 Generative packaging at scale
@@ -122,9 +143,11 @@ Memory hook: People retain ~65% of visual information after three days vs ~10% o
 
 
 ## Page 9
-[No extractable text]
+
+[No extractable text; inspect original.]
 
 ## Page 10
+
 Sense 2 of 5 · Hearing
 The three-second brand real-world cases
 In market now
@@ -147,6 +170,7 @@ the promotion when you walk past the shelf.
 
 
 ## Page 11
+
 Sense 2 of 5 · Hearing
 Hearing 2030 from background to brand voice
 AI-composed brand music
@@ -162,9 +186,11 @@ campaign image."
 Jackson & Jankovich, Sonic Branding (2019)
 
 ## Page 12
-[No extractable text]
+
+[No extractable text; inspect original.]
 
 ## Page 13
+
 Sense 3 of 5 · Smell
 The most memory-linked, least digitised sense real cases
 In market now
@@ -189,6 +215,7 @@ for immersive retail and training.
 that changes by aisle, hour, or even shopper profile.
 
 ## Page 14
+
 Sense 3 of 5 · Smell
 Smell 2030 from ambience to data layer
 Scent-as-code
@@ -203,9 +230,11 @@ Memory hook: Herz (2004) showed smell is the sense most directly wired to emotio
 That tension is the opportunity.
 
 ## Page 15
-[No extractable text]
+
+[No extractable text; inspect original.]
 
 ## Page 16
+
 Sense 4 of 5 · Touch
 Closing the haptic gap real-world cases
 In market now
@@ -228,6 +257,7 @@ change texture on cue.
 commerce's biggest sensory deficit.
 
 ## Page 17
+
 Sense 4 of 5 · Touch
 Touch 2030 from surface to signal
 Packaging as interface
@@ -242,9 +272,11 @@ Memory hook: Peck & Childers (2003) found touch before purchase increases percei
 'endowment effect' begins at the fingertip.
 
 ## Page 18
-[No extractable text]
+
+[No extractable text; inspect original.]
 
 ## Page 19
+
 Sense 5 of 5 · Taste
 The AI flavourlab real-world cases
 In market now
@@ -270,6 +302,7 @@ remote tasting demos.
 social conversation as much as palate.
 
 ## Page 20
+
 Sense 5 of 5 · Taste
 Taste 2030 from recipe to resonance
 Emotion-first flavour
@@ -282,9 +315,11 @@ Memory hook: Taste is inseparable from context the same wine scores higher when 
 al.). Context is the hidden ingredient.
 
 ## Page 21
-[No extractable text]
+
+[No extractable text; inspect original.]
 
 ## Page 22
+
 The sixth frontier · Mind & context
 The sense AI made real-world cases
 In market now
@@ -310,6 +345,7 @@ lab to live environment.
 
 
 ## Page 23
+
 The sixth frontier · Mind & context
 Context 2030 from segment to individual
 The segment of one, physical
@@ -324,6 +360,7 @@ accordingly.
 paraphrased from industry commentary on contextual intelligence
 
 ## Page 24
+
 Case study
 Apple a sensory ecosystem, not just a product
 Apple does not rely on one sense. It orchestrates all five plus context into a single, coherent memory structure.
@@ -353,6 +390,7 @@ globally, built on sensory consistency as
 much as engineering.
 
 ## Page 25
+
 Inside a real marketing team
 The sensory experience design loop
 1 · Data
@@ -388,6 +426,7 @@ Lush
 media plan proof a sensory code can replace advertising spend.
 
 ## Page 26
+
 Interactive · class activity
 The sensory explorer
 A rapid-fire 'now vs next' for each sense. Split the room into teams, assign one sense per team, and have them pitch the 
@@ -413,6 +452,7 @@ layouts re-optimised hourly by AI.
 Memory hook: people retain ~65% of visual information after 3 days vs ~10% of text (HubSpot).
 
 ## Page 27
+
 Wrap-up
 Key takeaways & references
 Takeaways

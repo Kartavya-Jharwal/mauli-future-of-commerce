@@ -1,3 +1,16 @@
+# agentic_ai_integration_prd.md
+
+- Source ID: `LOCAL-02`
+- Evidence ID: `LOCAL-02`
+- Original: [supplied file](../../agentic_ai_integration_prd.md)
+- SHA-256: `e55a80c589fbccac523cf242bfd10523463d79b633955aeabe8add7d16db0e2a`
+- Provenance: supplied input; assertions are not independently verified.
+- Conversion date: 2026-10-10
+- Coverage: 1 document(s).
+- Limitations: Markdown retained; embedded image payloads omitted. Images remain in original.
+
+---
+
 # Product Requirements Document (PRD)
 
 **Product:** The Celestial Resonator (Hybrid Agentic & System 1 Decision Model Architecture)  

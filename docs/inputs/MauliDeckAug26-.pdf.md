@@ -1,8 +1,23 @@
+# MauliDeckAug26-.pdf
+
+- Source ID: `LOCAL-15`
+- Evidence ID: `LOCAL-15`
+- Original: [supplied file](../../MauliDeckAug26-.pdf)
+- SHA-256: `24f305c349b56cf500b5ac71270152aec1e964b708a74eb8e6791cf5f2a4b9d8`
+- Provenance: supplied input; assertions are not independently verified.
+- Conversion date: 2026-10-10
+- Coverage: 42 page(s).
+- Limitations: PDF text layer only. Reading order, diagrams, charts and visual tables require original inspection. No OCR.
+
+---
+
 ## Page 1
+
 THE ART OF WELLBEING 
 ANCIENT WISDOM + HIGH PERFORMANCE RESULTS + SENSORIAL RITUALS 
 
 ## Page 2
+
 The world's appetite for preventative wellbeing, authentic
 brands and meaningful rituals has never been greater.
 Mauli Rituals stands at the intersection of these powerful
@@ -21,6 +36,7 @@ IntroductionRetailer Deck
 Mauli Rituals
 
 ## Page 3
+
 (मौली)
 (MORE-LEE) NOUN
 A sacred red thread known as ‘mauli’
@@ -37,6 +53,7 @@ MeaningRetailer Deck
 Mauli Rituals
 
 ## Page 4
+
 A sacred red thread known as ‘mauli’
 forms an integral part of Ayurvedic
 blessing rituals, invoking goodwill and
@@ -62,6 +79,7 @@ Retailer Deck
 Mauli Rituals
 
 ## Page 5
+
 “In Mauli, we honor our daughters’ wishes and rich
 ancestorial heritage by distilling the beauty of
 Ayurveda into meaningful products for mindful living.
@@ -82,6 +100,7 @@ Mauli Rituals
 AYURVEDIC HERITAGE + SOUTH ASIAN FOUNDERS  
 
 ## Page 6
+
 The world is changing.
 Consumers are no longer simply buying beauty products.
 They are investing in longevity, resilience and preventative wellbeing.
@@ -99,6 +118,7 @@ these principles.   Today, the market is finally catching up.
 WHY NOW?
 
 ## Page 7
+
 The global wellness economy reached a
 record $6.8 trillion in 2024 and is 
 forecast to reach  almost $10 trillion by
@@ -129,6 +149,7 @@ leading luxury wellness brands, having built exceptional trust,
 authenticity, loyalty top tier partnerships
 
 ## Page 8
+
 Retailer Deck
 ALINA - CO-FOUNDER GALILU RETAIL
 KEY PARTNERS
@@ -143,6 +164,7 @@ the personal touch can be seen and felt in every new creation of the
 brand.  We hope for many more years of fruitful collobration”
 
 ## Page 9
+
 Key Custom er Psychographics:
 Experimental traditionalists who enjoy exploring cultures
 and art. 
@@ -161,6 +183,7 @@ PartnersRetailer Deck
 Mauli Rituals
 
 ## Page 10
+
 “ M a u l i  i s  a  g i f t  o f  p e a c e  p r e c i o u s  t i m e
 o u t  &  o n e  I  s h a r e  w i t h  m y  f r i e n d s ”
 L A U R A  B A I L E Y  |  M O D E L  &  P H O T O G R A P H E R
@@ -191,6 +214,7 @@ Collaborators by choice - unpaid endorsementsRetailer Deck
 Mauli Rituals
 
 ## Page 11
+
 Collaborators by choice - unpaid endorsementsRetailer Deck
 Mauli Rituals
 “ M y  M a u l i  h a s  b r o u g h t  m e  l o t s  o f  l u c k
@@ -222,6 +246,7 @@ o f  m y  l i f e ! ”
 R U T H  C R I L L Y  |  M O D E L  &  I N F L U E N C E R
 
 ## Page 12
+
 Collaborators by choice - unpaid endorsementsRetailer Deck
 Mauli Rituals
 “ m y  s e c o n d  b o t t l e  o f  t h e  h a i r  o i l ”
@@ -251,20 +276,24 @@ C A R O L I N E  H E I R O N S  |  I N F U L E N C E R
 L I S A  E L D R I D E  |  M A K E U P  A R T I S T
 
 ## Page 13
+
 Recent PressRetailer Deck
 Mauli Rituals
 
 ## Page 14
+
 Recent PressRetailer Deck
 Mauli Rituals
 
 
 ## Page 15
+
 Recent PressRetailer Deck
 Mauli Rituals
 
 
 ## Page 16
+
 Recent Press Retailer Deck
 Mauli Rituals
 “ I f  y o u ’ r e  c o n c e r n e d  a b o u t  y o u r
@@ -278,11 +307,13 @@ r e c o v e r y  t o o . ”
 
 
 ## Page 17
+
 Recent Press Retailer Deck
 Mauli Rituals
 
 
 ## Page 18
+
 “These daily rituals will give you a fix.”
 “The best hair oil for every hair type.”
 “Ideal ally to harmonise your mind,
@@ -301,6 +332,7 @@ In The PressRetailer Deck
 Mauli Rituals
 
 ## Page 19
+
 “Bathing in exquisite scented water, detoxing delicate skin with active rich clays, nourishing
 the scalp with potent herbs, and enveloping the body with deliciously seductive oils are rituals
 that go beyond beautifying and strengthening.  These daily acts of devotion signal respect for
@@ -311,6 +343,7 @@ THE COLLECTION
 Skin + Hair + Body + Sleep + Home
 
 ## Page 20
+
 Potent Plant SynergiesRetailer Deck
 Mauli Rituals
 R E J U V E N A T E  T H E  P H Y S I C A L
@@ -322,6 +355,7 @@ Aromatherapists, and British chemists using a a multi-layered
 blend of 4 synergistic plant types. 
 
 ## Page 21
+
 Mauli Rituals
 AttributesRetailer Deck
 The Global Wellness Economy Hits a Record $6.8 Trillion and Is
@@ -342,6 +376,7 @@ Concentrated plant extracts to repair the
 skin and strengthen the mind.
 
 ## Page 22
+
 Mauli Rituals
 SkincareRetailer Deck
 SKINCARE 
@@ -357,6 +392,7 @@ Our Skin Harmony Cream launched in
 26' and has fast become a top seller.  
 
 ## Page 23
+
 S i z e s :
 2 0 g
 3 0 m l
@@ -387,6 +423,7 @@ R e s t o r e
 SUPREME SKIN CARE 
 
 ## Page 24
+
 Mauli Rituals
 HaircareRetailer Deck
 HAIRCARE
@@ -404,6 +441,7 @@ TheGrow Strong Collection is available
 in Salonand Sap sizes.
 
 ## Page 25
+
 Grow Strong Brow Oil
 £ 3 5 . 0 0
 H y d r a t e
@@ -429,6 +467,7 @@ N o u r i s h
 GROW STRONG HAIR CARE
 
 ## Page 26
+
 Mauli Rituals
 BodycareRetailer Deck
 BODYCARE
@@ -446,6 +485,7 @@ bottles have just been updated and are well-
 priced, year round sellers. 
 
 ## Page 27
+
 £ 3 2 . 0 0
 C l e a n s e
 2 5 0 m l
@@ -477,6 +517,7 @@ S i z e s :
 THE SACRED BODYCARE SET
 
 ## Page 28
+
 1 3 0 m l
 S i z e s :
 Surrender Body Oil
@@ -500,6 +541,7 @@ V a t a
 
 
 ## Page 29
+
 Mauli Rituals
 BodycareRetailer Deck
 SLEEP WELL
@@ -517,6 +559,7 @@ bottles have just been updated and are well-
 priced, year round sellers. 
 
 ## Page 30
+
 Sleep Dharma Himalayan Salts
 £34
 D e t o x
@@ -542,6 +585,7 @@ C a l m
 THE SLEEP WELL SET
 
 ## Page 31
+
 Mauli Rituals
 BodycareRetailer Deck
 KANSA TOOLS
@@ -558,6 +602,7 @@ drive increased site traffic.
 The five tools work on whole boday healing. 
 
 ## Page 32
+
 The Skealer Lymph Tool
 £ 2 6 . 0 0
 D e f i n e
@@ -581,6 +626,7 @@ D e t o x i f y
 KANSA ARTISAN TOOLS
 
 ## Page 33
+
 Retailer Deck
 Mauli Rituals
 Sundaram & Silence Essential Oil Candle
@@ -607,6 +653,7 @@ they have all said the same ! Stunning fragrance .”
 Jane H.
 
 ## Page 34
+
 Natural (soon leaping bunny certified)
 Smooths + hydrates + softens + plumps dry lips 
 Multi-tasking glow-enhancing lip and cheek balm 
@@ -620,6 +667,7 @@ ROSE + SHEA BUTTER + SQUALANE + AMLA +
 CASTOR OIL + VITAMIN E + SANDALWOOD + 
 
 ## Page 35
+
 NEW LAUNCH - NOVEMBER 2026
 BOTANICAL AROMA RESET REMEDIES
 £24 | GIFT SET £64
@@ -630,12 +678,14 @@ Perfect for gifting season
 Ideal handbag essentials 
 
 ## Page 36
+
 Retailer Deck
 Mauli Rituals
 Awards
 A SELECTION OF OUR 74 AWARD WINS
 
 ## Page 37
+
 SPA WELLNESS & LONGEVITY RITUALS 
 “It’s almost to put it into words but my treatment was 
 SO incredible – deeply relaxing, very indulgent, and
@@ -644,6 +694,7 @@ an incredible treatment program you offer, like a proper
 Indian ritual and beautifully refined.”  Martha Ward
 
 ## Page 38
+
 We created the handwash for the iconic eatery, Dishoom.
 Within its first year of launch, it won Gold at the Natural
 Health & Beauty Awards. 
@@ -661,6 +712,7 @@ miraculous results.”
 - Women’s Health
 
 ## Page 39
+
 Healing Salts
 Pillow Mist
 Bath & Shower Oil
@@ -680,6 +732,7 @@ Mauli Rituals
 AMENETIES
 
 ## Page 40
+
 + Bespoke co-branding
 + Thoughtful solutions
 + Cost-effective added value
@@ -694,6 +747,7 @@ Mauli Rituals
 CORPORATE GIFTING
 
 ## Page 41
+
 How Will We Support You?
 Dedicated Account Support
 Promotional Event Activations 
@@ -712,6 +766,7 @@ Mauli Rituals
 Support
 
 ## Page 42
+
 Sales: Adam@maulirituals.com
 Marketing: Erin@maulirituals.com
 Orders: Zehra@maulrituals.com

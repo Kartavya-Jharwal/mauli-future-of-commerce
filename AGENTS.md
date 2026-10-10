@@ -2,7 +2,7 @@
 
 ## Scope and boundaries
 - This is independent student advisory work for Mauli Rituals within Future of Commerce coursework, not an official client implementation.
-- Preserve supplied root files and their filenames. Do not overwrite, silently revise or delete source material.
+- Preserve retained supplied root files and their filenames. The owner explicitly withdrew the personal student strategy brief on 10 October 2026; it and its active derivative are removed and replaced by `docs/brief/updated-project-brief.md`. Do not reintroduce its design assumptions as requirements. Other originals must not be silently revised or deleted.
 - The owner authorized the supplied internal inputs for publication in this public repository. Keep passwords, tokens, customer personal data and machine-specific credentials out of Git.
 - Do not claim client or institution endorsement. Do not license third-party assets on their behalf.
 - Prefer incremental Shopify and marketing recommendations. Technical prototypes must support coursework, not expand into an unrequested production rebuild.

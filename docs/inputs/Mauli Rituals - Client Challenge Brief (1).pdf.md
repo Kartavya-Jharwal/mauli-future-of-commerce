@@ -1,4 +1,18 @@
+# Mauli Rituals - Client Challenge Brief (1).pdf
+
+- Source ID: `LOCAL-09`
+- Evidence ID: `LOCAL-09`
+- Original: [supplied file](../../Mauli%20Rituals%20-%20Client%20Challenge%20Brief%20%281%29.pdf)
+- SHA-256: `23856ce17bf9878e138c73ffe0bb231346630de7584a06e3224fc4f7794e1794`
+- Provenance: supplied input; assertions are not independently verified.
+- Conversion date: 2026-10-10
+- Coverage: 11 page(s).
+- Limitations: PDF text layer only. Reading order, diagrams, charts and visual tables require original inspection. No OCR.
+
+---
+
 ## Page 1
+
 Mauli Rituals — Client Challenge Brief
 1
 Mauli Rituals — Client Challenge Brief
@@ -10,6 +24,7 @@ Sources: 42-minute client Q&A with founder Anita Kaushal (video) + Mauli Retaile
 Prepared 12 September 2026
 
 ## Page 2
+
 Mauli Rituals — Client Challenge Brief
 2
 Contents
@@ -29,6 +44,7 @@ Right-click the contents and choose "Update Field" to refresh page numbers.
 13. Sources & Reconciliation Notes.......................................................................................................10
 
 ## Page 3
+
 Mauli Rituals — Client Challenge Brief
 3
 1. Executive Snapshot
@@ -66,6 +82,7 @@ cites 75 on the call; hero Grow Strong Hair Oil has 10–11 awards
 Channel mix D2C 61%; remainder across spa, retail, and amenities / hospitality
 
 ## Page 4
+
 Mauli Rituals — Client Challenge Brief
 4
 Dimension Detail
@@ -99,6 +116,7 @@ in longevity, resilience and preventative wellbeing"; demand for sleep and nervo
 health solutions is growing globally.
 
 ## Page 5
+
 Mauli Rituals — Client Challenge Brief
 5
 • Deck's "Why Now" list: preventative wellbeing becoming mainstream · luxury hospitality 
@@ -134,6 +152,7 @@ Sleep Dharma range £34–48 Himalayan salts, calm balm, bath & shower oil,
 pillow mist — sleep & nervous-system health is a 
 
 ## Page 6
+
 Mauli Rituals — Client Challenge Brief
 6
 Hero SKU / range Price Why it matters
@@ -175,6 +194,7 @@ the face ("it makes the brand too vulnerable") — the brand needs a way to carr
 the founder at the forefront.
 
 ## Page 7
+
 Mauli Rituals — Client Challenge Brief
 7
 7. Business Model Reality
@@ -214,6 +234,7 @@ behind it that would help you create something personalized… that may help wit
 would see it, that's for you to tell us."
 
 ## Page 8
+
 Mauli Rituals — Client Challenge Brief
 8
 3. Limited resources — where to execute? "If we have limited resource, then where's the best place 
@@ -270,6 +291,7 @@ ROI" beyond open rates
 Discount-exit Sale-conditioned revenue, Predictive replenishment, membership / 
 
 ## Page 9
+
 Mauli Rituals — Client Challenge Brief
 9
 Opportunity space Maps to client tension Example tech / emerging-tech angle
@@ -312,6 +334,7 @@ New vs existing 46% / 54% Retention-led model
 Newsletter open rate 77% Powered by genuine added value, not 
 
 ## Page 10
+
 Mauli Rituals — Client Challenge Brief
 10
 Metric Value Note
@@ -348,6 +371,7 @@ Deck" (Aug 2026, 42 pp) supplied by the client — market data, psychographics, 
 pricing details.
 
 ## Page 11
+
 Mauli Rituals — Client Challenge Brief
 11
 • Discrepancy watch-outs (good critical-thinking material for students): award count 74 (deck) vs 

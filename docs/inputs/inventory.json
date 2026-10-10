@@ -1,155 +1,210 @@
 [
   {
     "source_id": "LOCAL-01",
+    "evidence_id": "LOCAL-01",
+    "duplicate_of": null,
     "path": "AEO_GEO_DeepDive_FutureOfCommerce.pptx",
     "sha256": "7adb258664ae26b23e5a1d338338d6903526a3d08fcfd8a2676e87f75cb5daa9",
     "bytes": 1398391,
-    "extraction": "docs/inputs/AEO_GEO_DeepDive_FutureOfCommerce.pptx.txt",
+    "extraction": "docs/inputs/AEO_GEO_DeepDive_FutureOfCommerce.pptx.md",
+    "units": 18,
+    "locator": "slide",
     "status": "supplied source; factual claims require provenance verification",
-    "extraction_limitations": "text only; images, layout, slide notes and charts may require visual inspection"
+    "extraction_limitations": "Shape text and available speaker notes. Images, charts, animation, visual order and layout require originals."
   },
   {
     "source_id": "LOCAL-02",
+    "evidence_id": "LOCAL-02",
+    "duplicate_of": null,
     "path": "agentic_ai_integration_prd.md",
     "sha256": "e55a80c589fbccac523cf242bfd10523463d79b633955aeabe8add7d16db0e2a",
     "bytes": 14305,
-    "extraction": "docs/inputs/agentic_ai_integration_prd.md.txt",
+    "extraction": "docs/inputs/agentic_ai_integration_prd.md.md",
+    "units": 1,
+    "locator": "document",
     "status": "supplied source; factual claims require provenance verification",
-    "extraction_limitations": "text only; images, layout, slide notes and charts may require visual inspection"
+    "extraction_limitations": "Markdown retained; embedded image payloads omitted. Images remain in original."
   },
   {
     "source_id": "LOCAL-03",
+    "evidence_id": "LOCAL-03",
+    "duplicate_of": null,
     "path": "Client Deck - Mauli Rituals.html",
     "sha256": "2d9e84c4118b62fbf899e915096d1c0a45d5f7f5fc3926c2cf17af2e1d7bc358",
     "bytes": 818,
-    "extraction": "docs/inputs/Client Deck - Mauli Rituals.html.txt",
+    "extraction": "docs/inputs/Client Deck - Mauli Rituals.html.md",
+    "units": 1,
+    "locator": "document",
     "status": "supplied source; factual claims require provenance verification",
-    "extraction_limitations": "text only; images, layout, slide notes and charts may require visual inspection"
+    "extraction_limitations": "HTML converted with headings, lists, links and tables. Styling and images require original."
   },
   {
     "source_id": "LOCAL-04",
+    "evidence_id": "LOCAL-04",
+    "duplicate_of": null,
     "path": "Full Client Challenge Brief as per the Session and the Deck received.html",
     "sha256": "2bec71dcad320fe1e33e2ef9af39f32b62ba40df3dbbae916af5e7694aae1ffc",
     "bytes": 1212,
-    "extraction": "docs/inputs/Full Client Challenge Brief as per the Session and the Deck received.html.txt",
+    "extraction": "docs/inputs/Full Client Challenge Brief as per the Session and the Deck received.html.md",
+    "units": 1,
+    "locator": "document",
     "status": "supplied source; factual claims require provenance verification",
-    "extraction_limitations": "text only; images, layout, slide notes and charts may require visual inspection"
+    "extraction_limitations": "HTML converted with headings, lists, links and tables. Styling and images require original."
   },
   {
     "source_id": "LOCAL-05",
+    "evidence_id": "LOCAL-05",
+    "duplicate_of": null,
     "path": "Future of Commerce — Week 1_ Course Launch & Evolution of Digital Commerce.pptx",
     "sha256": "f0f63002a7bae383e8fa5a02896bec5e08eb8f014fbfcac17d4301bce24ce38b",
     "bytes": 3846099,
-    "extraction": "docs/inputs/Future of Commerce — Week 1_ Course Launch & Evolution of Digital Commerce.pptx.txt",
+    "extraction": "docs/inputs/Future of Commerce — Week 1_ Course Launch & Evolution of Digital Commerce.pptx.md",
+    "units": 44,
+    "locator": "slide",
     "status": "supplied source; factual claims require provenance verification",
-    "extraction_limitations": "text only; images, layout, slide notes and charts may require visual inspection"
+    "extraction_limitations": "Shape text and available speaker notes. Images, charts, animation, visual order and layout require originals."
   },
   {
     "source_id": "LOCAL-06",
+    "evidence_id": "LOCAL-06",
+    "duplicate_of": null,
     "path": "Future of Commerce — Week 2_ Consumer Behaviour & AI-Personalised Shopping.pptx",
     "sha256": "d00c300575af5434c30404247c86ba2fc24bbafd4193bc9a037c4183cbe5909b",
     "bytes": 3731368,
-    "extraction": "docs/inputs/Future of Commerce — Week 2_ Consumer Behaviour & AI-Personalised Shopping.pptx.txt",
+    "extraction": "docs/inputs/Future of Commerce — Week 2_ Consumer Behaviour & AI-Personalised Shopping.pptx.md",
+    "units": 44,
+    "locator": "slide",
     "status": "supplied source; factual claims require provenance verification",
-    "extraction_limitations": "text only; images, layout, slide notes and charts may require visual inspection"
+    "extraction_limitations": "Shape text and available speaker notes. Images, charts, animation, visual order and layout require originals."
   },
   {
     "source_id": "LOCAL-07",
+    "evidence_id": "LOCAL-07",
+    "duplicate_of": null,
     "path": "Live Client Meet-up and Discussion - Mauli Rituals.html",
     "sha256": "fcc5fd88f67d6b8987f33d3a2d498f26bed404cd88292195b45a8956d1aa0bb6",
     "bytes": 921,
-    "extraction": "docs/inputs/Live Client Meet-up and Discussion - Mauli Rituals.html.txt",
+    "extraction": "docs/inputs/Live Client Meet-up and Discussion - Mauli Rituals.html.md",
+    "units": 1,
+    "locator": "document",
     "status": "supplied source; factual claims require provenance verification",
-    "extraction_limitations": "text only; images, layout, slide notes and charts may require visual inspection"
+    "extraction_limitations": "HTML converted with headings, lists, links and tables. Styling and images require original."
   },
   {
     "source_id": "LOCAL-08",
+    "evidence_id": "LOCAL-08",
+    "duplicate_of": null,
     "path": "Live Client Strategic Proposal- Mauli Rituals.md",
     "sha256": "8608921b3af7a252ab2cb50d4f06011bd63f2d7c1035d329957c817e7361b801",
     "bytes": 8913,
-    "extraction": "docs/inputs/Live Client Strategic Proposal- Mauli Rituals.md.txt",
+    "extraction": "docs/inputs/Live Client Strategic Proposal- Mauli Rituals.md.md",
+    "units": 1,
+    "locator": "document",
     "status": "supplied source; factual claims require provenance verification",
-    "extraction_limitations": "text only; images, layout, slide notes and charts may require visual inspection"
+    "extraction_limitations": "HTML converted with headings, lists, links and tables. Styling and images require original."
   },
   {
     "source_id": "LOCAL-09",
+    "evidence_id": "LOCAL-09",
+    "duplicate_of": null,
     "path": "Mauli Rituals - Client Challenge Brief (1).pdf",
     "sha256": "23856ce17bf9878e138c73ffe0bb231346630de7584a06e3224fc4f7794e1794",
     "bytes": 200638,
-    "extraction": "docs/inputs/Mauli Rituals - Client Challenge Brief (1).pdf.txt",
+    "extraction": "docs/inputs/Mauli Rituals - Client Challenge Brief (1).pdf.md",
+    "units": 11,
+    "locator": "page",
     "status": "supplied source; factual claims require provenance verification",
-    "extraction_limitations": "text only; images, layout, slide notes and charts may require visual inspection"
+    "extraction_limitations": "PDF text layer only. Reading order, diagrams, charts and visual tables require original inspection. No OCR."
   },
   {
     "source_id": "LOCAL-10",
+    "evidence_id": "LOCAL-09",
+    "duplicate_of": "LOCAL-09",
     "path": "Mauli Rituals - Client Challenge Brief.pdf",
     "sha256": "23856ce17bf9878e138c73ffe0bb231346630de7584a06e3224fc4f7794e1794",
     "bytes": 200638,
-    "extraction": "docs/inputs/Mauli Rituals - Client Challenge Brief.pdf.txt",
+    "extraction": "docs/inputs/Mauli Rituals - Client Challenge Brief.pdf.md",
+    "units": 11,
+    "locator": "page",
     "status": "supplied source; factual claims require provenance verification",
-    "extraction_limitations": "text only; images, layout, slide notes and charts may require visual inspection"
+    "extraction_limitations": "PDF text layer only. Reading order, diagrams, charts and visual tables require original inspection. No OCR."
   },
   {
     "source_id": "LOCAL-11",
+    "evidence_id": "LOCAL-11",
+    "duplicate_of": null,
     "path": "Mauli Rituals — Client Challenge Discussion.pptx",
     "sha256": "453be4afdc6d1531ecdf60be8da6d8d2d6d167f47ec19c67de527cbe1d18442d",
     "bytes": 1295680,
-    "extraction": "docs/inputs/Mauli Rituals — Client Challenge Discussion.pptx.txt",
+    "extraction": "docs/inputs/Mauli Rituals — Client Challenge Discussion.pptx.md",
+    "units": 15,
+    "locator": "slide",
     "status": "supplied source; factual claims require provenance verification",
-    "extraction_limitations": "text only; images, layout, slide notes and charts may require visual inspection"
+    "extraction_limitations": "Shape text and available speaker notes. Images, charts, animation, visual order and layout require originals."
   },
   {
     "source_id": "LOCAL-12",
+    "evidence_id": "LOCAL-12",
+    "duplicate_of": null,
     "path": "Mauli Rituals.md",
     "sha256": "cc56f3edf1d4bd458dfcd2d09c43a96d3cc102c7665da2bd1978b53acd49c630",
     "bytes": 253294,
-    "extraction": "docs/inputs/Mauli Rituals.md.txt",
+    "extraction": "docs/inputs/Mauli Rituals.md.md",
+    "units": 1,
+    "locator": "document",
     "status": "supplied source; factual claims require provenance verification",
-    "extraction_limitations": "text only; images, layout, slide notes and charts may require visual inspection"
-  },
-  {
-    "source_id": "LOCAL-13",
-    "path": "mauli-rituals-strategy-brief personal student written.md",
-    "sha256": "c89500533ba0e919d0242515279d416d9d873fef2ea97bf5f8c1ad6ecb70b86d",
-    "bytes": 28832,
-    "extraction": "docs/inputs/mauli-rituals-strategy-brief personal student written.md.txt",
-    "status": "supplied source; factual claims require provenance verification",
-    "extraction_limitations": "text only; images, layout, slide notes and charts may require visual inspection"
+    "extraction_limitations": "Markdown retained; embedded image payloads omitted. Images remain in original."
   },
   {
     "source_id": "LOCAL-14",
+    "evidence_id": "LOCAL-14",
+    "duplicate_of": null,
     "path": "Mauli_Draw_Game_Slides (1).pptx",
     "sha256": "8c6a9d32533e7b4d423f871715477eb18487da6bdea433ec41072237ec4136d2",
     "bytes": 65803,
-    "extraction": "docs/inputs/Mauli_Draw_Game_Slides (1).pptx.txt",
+    "extraction": "docs/inputs/Mauli_Draw_Game_Slides (1).pptx.md",
+    "units": 19,
+    "locator": "slide",
     "status": "supplied source; factual claims require provenance verification",
-    "extraction_limitations": "text only; images, layout, slide notes and charts may require visual inspection"
+    "extraction_limitations": "Shape text and available speaker notes. Images, charts, animation, visual order and layout require originals."
   },
   {
     "source_id": "LOCAL-15",
+    "evidence_id": "LOCAL-15",
+    "duplicate_of": null,
     "path": "MauliDeckAug26-.pdf",
     "sha256": "24f305c349b56cf500b5ac71270152aec1e964b708a74eb8e6791cf5f2a4b9d8",
     "bytes": 6957802,
-    "extraction": "docs/inputs/MauliDeckAug26-.pdf.txt",
+    "extraction": "docs/inputs/MauliDeckAug26-.pdf.md",
+    "units": 42,
+    "locator": "page",
     "status": "supplied source; factual claims require provenance verification",
-    "extraction_limitations": "text only; images, layout, slide notes and charts may require visual inspection"
+    "extraction_limitations": "PDF text layer only. Reading order, diagrams, charts and visual tables require original inspection. No OCR."
   },
   {
     "source_id": "LOCAL-16",
+    "evidence_id": "LOCAL-16",
+    "duplicate_of": null,
     "path": "Senses_in_AI_World_Deck.pdf",
     "sha256": "d17738531c2873e42cb29efb8fd6d9a099cf0fcc946fc410753ed04618bbaaa4",
     "bytes": 1421986,
-    "extraction": "docs/inputs/Senses_in_AI_World_Deck.pdf.txt",
+    "extraction": "docs/inputs/Senses_in_AI_World_Deck.pdf.md",
+    "units": 27,
+    "locator": "page",
     "status": "supplied source; factual claims require provenance verification",
-    "extraction_limitations": "text only; images, layout, slide notes and charts may require visual inspection"
+    "extraction_limitations": "PDF text layer only. Reading order, diagrams, charts and visual tables require original inspection. No OCR."
   },
   {
     "source_id": "LOCAL-17",
+    "evidence_id": "LOCAL-17",
+    "duplicate_of": null,
     "path": "The Future of Commerce — A Physics Lens on Marketing.pptx",
     "sha256": "7371e8a793bed376cabe0712222e1e75541ad8ac695a31179500d13663febddb",
     "bytes": 24460754,
-    "extraction": "docs/inputs/The Future of Commerce — A Physics Lens on Marketing.pptx.txt",
+    "extraction": "docs/inputs/The Future of Commerce — A Physics Lens on Marketing.pptx.md",
+    "units": 20,
+    "locator": "slide",
     "status": "supplied source; factual claims require provenance verification",
-    "extraction_limitations": "text only; images, layout, slide notes and charts may require visual inspection"
+    "extraction_limitations": "Shape text and available speaker notes. Images, charts, animation, visual order and layout require originals."
   }
 ]

@@ -1,6 +1,6 @@
 # Review of the supplied draft direction
 
-This preserves the useful ambition while recording assumptions that the team should resolve. Original documents stay unchanged.
+This records why earlier design assumptions need revision. The owner withdrew the personal student brief on 10 October 2026; it has been removed from the active tree. The replacement is [the updated working brief](../brief/updated-project-brief.md). Other original documents remain unchanged.
 
 | Draft element | Evidence/interpretation issue | Execution adjustment |
 | --- | --- | --- |
@@ -13,4 +13,4 @@ This preserves the useful ambition while recording assumptions that the team sho
 | General claim that in-chat checkout is retreating | Team notes describe a landscape inference; current Shopify help distinguishes channel-specific checkout behaviour | Record each channel's current supported journey and Mauli eligibility separately |
 | Seven-person work allocation | Historical names/roles appear in the team notes; owner has specified a new lead remit | Confirm accountable owners and retain overlap where useful |
 
-Sources: supplied `mauli-rituals-strategy-brief personal student written.md`, `agentic_ai_integration_prd.md` and `Mauli Rituals.md`; current [Shopify Agentic Storefronts help](https://help.shopify.com/en/manual/online-sales-channels/agentic-storefronts), accessed 10 October 2026. Adjustments are project recommendations, not client-approved decisions.
+Sources: review of the now-withdrawn personal draft (historical commit `54de086` only), retained `agentic_ai_integration_prd.md` and `Mauli Rituals.md`; current [Shopify Agentic Storefronts help](https://help.shopify.com/en/manual/online-sales-channels/agentic-storefronts), accessed 10 October 2026. Adjustments are project recommendations, not client-approved decisions.
