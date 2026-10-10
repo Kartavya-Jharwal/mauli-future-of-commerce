@@ -23,6 +23,8 @@ Updated 10 October 2026. Source files and research are the shared working record
 
 ## Working models
 
+The current template-based working version is the local [Foresight integration](../models/foresight/README.md). It combines the two supplied templates with the models below. The workbook stays outside public Git under the templates' redistribution restrictions; the earlier standalone files remain available as source archives.
+
 [Customer economics workbook](../models/customer-economics/mauli-customer-economics.xlsx) provides editable actuals tracking, CAC, matured contribution LTV, matched cohort LTV:CAC, ritual measures and discovery tracking. [Usage guide](metrics/workbook-guide.md) explains source grain, the initial 60-row table capacity and validation limits. Client actuals are deliberately blank.
 
 [Financial scenarios workbook](../models/financial-scenarios/mauli-financial-scenarios.xlsx) compares 24 months with and without the recommendations, including costs, cash, funding and sensitivity. [Model guide](finance/model-guide.md) explains the fictional demonstration inputs, blank client-input mode and calibration requirements.
