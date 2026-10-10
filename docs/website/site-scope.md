@@ -1,6 +1,6 @@
 # Public project showcase: scope and launch contract
 
-Status: scoped for an **in-progress case study**, 10 October 2026. This document defines the website and its first release. It is not a claim that a hosted website or final visual design is complete. The public GitHub repository is separate from the future hosted showcase.
+Status: launched as an **in-progress case study**, 10 October 2026, at [the public showcase](https://kartavya.tech/mauli-future-of-commerce/). GitHub Pages deployment and live HTTPS asset/download checks passed. This document defines the first release; custom motion and final deliverables remain pending.
 
 ## Purpose and audience
 
