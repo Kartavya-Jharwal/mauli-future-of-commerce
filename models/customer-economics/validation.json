@@ -1,0 +1,21 @@
+{
+  "date": "2026-10-10",
+  "engine": "Artifact Tool",
+  "fixture": {
+    "cac": 50,
+    "contribution": 2300,
+    "ltv": 142.5,
+    "repurchase": 0.4
+  },
+  "expected": {
+    "cac": 50,
+    "contribution": 2300,
+    "ltv": 142.5,
+    "repurchase": 0.4
+  },
+  "blankAndZero": true,
+  "actualBaseline": "Not supplied",
+  "metricDefinitions": 56,
+  "rowsPerEntrySheet": 60,
+  "nativeExcelTested": false
+}

@@ -23,6 +23,7 @@ The project owner leads metrics, AI and the technical MVP. Proposed concepts inc
 | `docs/mvp/` | Thread, chord diagram and recommendation experience brief |
 | `docs/website/` | Public case-study scope and integration contract for the separate motion work |
 | `apps/project-site/` | Website content manifest, including pending downloads and team placeholders |
+| `models/customer-economics/` | Editable CAC, observed LTV and KPI-tracking Excel workbook |
 | `apps/` | Coursework prototypes and demonstrations |
 | `packages/` | Shared prototype code and reusable assets |
 

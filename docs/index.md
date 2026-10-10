@@ -19,6 +19,10 @@ Updated 10 October 2026. Source files and research are the shared working record
 
 [Site scope](website/site-scope.md) defines the in-progress launch, section sequence, download availability and team placeholders. [Editorial outline](website/content-outline.md) develops the page copy. [Motion integration](website/motion-integration.md) reserves the separately produced splash and body stroke. The editable [content manifest](../apps/project-site/content/project.json) is the visual-build handoff; a hosted website has not been created yet.
 
+## Working models
+
+[Customer economics workbook](../models/customer-economics/mauli-customer-economics.xlsx) provides editable actuals tracking, CAC, matured contribution LTV, matched cohort LTV:CAC, ritual measures and discovery tracking. [Usage guide](metrics/workbook-guide.md) explains source grain, the initial 60-row table capacity and validation limits. Client actuals are deliberately blank.
+
 ## Evidence and decisions
 
 [Input archive](inputs/README.md) explains all supplied files and extraction limitations. [Inventory](inputs/inventory.json) identifies sources and detects changed originals. Channel and metric source registers sit beside their research. [Governance](governance/project-charter.md) sets scope; [workstreams](governance/team-workstreams.md) defines handoffs. Use [research](templates/research-note.md), [experiment](templates/experiment-record.md) and [decision](templates/decision-record.md) templates to extend the record.
