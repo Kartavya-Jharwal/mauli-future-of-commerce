@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-10",
+  "updatedAt": "2026-10-11",
   "project": {
     "title": "Mauli Rituals: Future of Commerce",
     "workingHeadline": "A thread through the future of commerce.",
@@ -99,20 +99,22 @@
     {
       "id": "presentation",
       "label": "Presentation deck",
-      "state": "forthcoming",
-      "sourcePath": null,
-      "publicUrl": null,
+      "state": "draft_available",
+      "sourcePath": "deliverables/drafts/deck/mauli-course-deck-draft.pdf",
+      "publicUrl": "downloads/mauli-course-deck-draft.pdf",
       "format": "PDF",
-      "version": null
+      "version": "Initial course draft, 11 October 2026",
+      "editableUrl": "downloads/mauli-course-deck-draft.pptx"
     },
     {
       "id": "report",
       "label": "Project report",
-      "state": "forthcoming",
-      "sourcePath": null,
-      "publicUrl": null,
+      "state": "draft_available",
+      "sourcePath": "deliverables/drafts/report/mauli-course-report-draft.pdf",
+      "publicUrl": "downloads/mauli-course-report-draft.pdf",
       "format": "PDF",
-      "version": null
+      "version": "Initial course draft, 11 October 2026",
+      "editableUrl": "downloads/mauli-course-report-draft.docx"
     },
     {
       "id": "client-brief",

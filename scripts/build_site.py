@@ -23,6 +23,15 @@ def build():
     download = OUT / 'downloads' / 'client-brief.pdf'
     shutil.copy2(original, download)
     assert hashlib.sha256(original.read_bytes()).digest() == hashlib.sha256(download.read_bytes()).digest()
+    for folder, stem, formats in (
+        ('deck', 'mauli-course-deck-draft', ('pdf', 'pptx')),
+        ('report', 'mauli-course-report-draft', ('pdf', 'docx')),
+    ):
+        for extension in formats:
+            source = ROOT / 'deliverables' / 'drafts' / folder / f'{stem}.{extension}'
+            target = OUT / 'downloads' / source.name
+            shutil.copy2(source, target)
+            assert hashlib.sha256(source.read_bytes()).digest() == hashlib.sha256(target.read_bytes()).digest()
     (OUT / '.nojekyll').write_text('')
     print(json.dumps({'output': str(OUT), 'brief_sha256': hashlib.sha256(download.read_bytes()).hexdigest(), 'files': [str(p.relative_to(OUT)) for p in OUT.rglob('*') if p.is_file()]}, indent=2))
 

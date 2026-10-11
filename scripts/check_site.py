@@ -34,7 +34,9 @@ content=json.loads((SITE/'content'/'project.json').read_text())
 assert len(content['team'])==7
 assert all(m['linkedinUrl'] is None for m in content['team'])
 assert content['project']['status']=='in_progress'
-assert content['downloads'][0]['state']=='forthcoming'
-assert content['downloads'][1]['state']=='forthcoming'
+assert content['downloads'][0]['state']=='draft_available'
+assert content['downloads'][1]['state']=='draft_available'
+for item in content['downloads']:
+    assert (SITE/item['publicUrl']).is_file(),f"Missing download: {item['id']}"
 assert not any(SITE.rglob('*.xlsx')),'Workbook unexpectedly included in website payload'
 print(f'Passed: {len(p.ids)} unique anchors, {len(p.links)} asset/navigation references, seven placeholders, release states and public payload.')

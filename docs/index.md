@@ -4,6 +4,8 @@ Updated 10 October 2026. Source files and research are the shared working record
 
 ## Read in this order
 
+Initial assessed deliverables: [course deck and report drafts](../deliverables/drafts/README.md), with editable files and PDF reading copies. These compress the research into the assignment format and remain subject to team review.
+
 1. [Updated project brief](brief/updated-project-brief.md): active recommendation, diagnosis and choices, replacing the withdrawn personal draft. [Decision ledger](brief/decision-assumption-ledger.md).
 2. [Execution roadmap](strategy/execution-roadmap.md): recommendation hypothesis, horizons and coursework contract.
 2. [Channels and funnels](research/channels-and-funnels.md): observed entry points and proposed B2B/D2C activation.

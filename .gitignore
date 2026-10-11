@@ -19,6 +19,8 @@ node_modules/
 .nuxt/
 dist/
 build/
+.build/
+deliverables/drafts/report/review-notes.md
 coverage/
 .cache/
 .turbo/

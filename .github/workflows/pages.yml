@@ -5,6 +5,10 @@ on:
     branches: [main]
     paths:
       - 'apps/project-site/**'
+      - 'deliverables/drafts/deck/*.pdf'
+      - 'deliverables/drafts/deck/*.pptx'
+      - 'deliverables/drafts/report/*.pdf'
+      - 'deliverables/drafts/report/*.docx'
       - 'scripts/build_site.py'
       - 'scripts/check_site.py'
       - 'Mauli Rituals - Client Challenge Brief.pdf'
