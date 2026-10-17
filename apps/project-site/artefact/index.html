@@ -4,19 +4,18 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light">
-<title>Aushada Peti - The Sacred Wheel of Botanicals</title>
+<title>Aushada Peti — The Sacred Wheel of Botanicals</title>
+<meta name="description" content="Aushada Peti: an explainable botanical chord wheel for Mauli Rituals coursework. Wellness discovery only — not a clinical or diagnostic tool.">
+<meta name="theme-color" content="#f3e3c9">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cutive+Mono&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Tiro+Devanagari+Sanskrit:ital@0;1&display=swap" rel="stylesheet">
 <style>
 /*
-  Scene 3 of the demo film: the apothecary tool.
-  Layout: feeders (jukebox cards) left, chord wheel centre, reading right, a music box roll of the
-  Pharmacopoeia along the bottom, one thread of six knots as the only navigation.
-  Motion: the lotus blooms, threads unfurl from the centre, every pick bursts into petals, each
-  beat rings a bell ripple out of the lotus, embers rise behind the paper.
-  Design system: cream paper, charcoal serif capitals, crimson line ornament, turmeric as the
-  second mauli thread colour. Single light theme by choice.
+  Aushada Peti — Sacred Wheel of Botanicals (coursework artefact).
+  Layout: chord wheel centre, reading panel, Pharmacopoeia beat, six-knot thread navigation.
+  Design: cream paper, charcoal serif, crimson + turmeric mauli thread. Light theme.
 */
 :root{
   --paper:#f3e3c9;
@@ -57,6 +56,18 @@ button{font:inherit;color:inherit}
 }
 .case-back:hover{color:var(--crimson);border-color:rgba(181,49,59,.35)}
 html.is-embedded .case-back{display:none}
+html.is-embedded .app{padding:8px 10px}
+html.is-embedded .hint{font-size:.62rem;letter-spacing:.22em}
+.course-mark{
+  position:fixed;z-index:55;right:12px;bottom:10px;max-width:min(42ch,70vw);
+  margin:0;padding:6px 8px;font-family:var(--f-mono);font-size:.58rem;line-height:1.35;
+  letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);
+  background:rgba(243,227,201,.82);border:1px solid var(--line);pointer-events:none;
+}
+html.is-embedded .course-mark{font-size:.52rem;right:8px;bottom:6px;max-width:36ch}
+.disclaimer{
+  margin:12px 0 0;font-size:.78rem;line-height:1.4;color:var(--ink-soft);font-style:italic;
+}
 
 /* ambient layers */
 .lamp{position:fixed;left:0;top:0;width:560px;height:560px;margin:-280px 0 0 -280px;border-radius:50%;pointer-events:none;z-index:2;opacity:0;transition:opacity 1.2s ease;
@@ -403,6 +414,7 @@ a.btn{display:inline-block;text-decoration:none}
 
   <footer class="bar"><nav class="thread" id="thread" aria-label="Scene beats"></nav></footer>
 </div>
+<p class="course-mark">Student coursework artefact · Wellness discovery only · Not a diagnosis</p>
 
 <script>
 /*!
@@ -421,7 +433,8 @@ a.btn{display:inline-block;text-decoration:none}
 <script>
 (() => {
 'use strict';
-if (window.self !== window.top) document.documentElement.classList.add('is-embedded');
+const EMBEDDED = window.self !== window.top;
+if (EMBEDDED) document.documentElement.classList.add('is-embedded');
 
 /* ================= helpers ================= */
 const NS = 'http://www.w3.org/2000/svg';
@@ -498,12 +511,12 @@ const LANES = [
 const PARTS = [['Root',20],['Fruit',14],['Whole plant',13],['Stem',12],['Leaf',11],['Bark',10],['Seed',10]];
 
 const BEATS = [
-  {rail:'Motif',         title:'The resonator'},
-  {rail:'Resonator',     title:'The chord rings'},
+  {rail:'Motif',         title:'The red thread'},
+  {rail:'Wheel',         title:'The chord rings'},
   {rail:'Pharmacopoeia', title:'The Pharmacopoeia'},
   {rail:'Botanicals',    title:'Explore the botanicals'},
-  {rail:'Vaidya picks',  title:'The vaidya picks'},
-  {rail:'Your blend',    title:'Your blend'}
+  {rail:'Guidance',      title:'Suggested botanicals'},
+  {rail:'Blend',         title:'Your starting blend'}
 ];
 
 /* ================= model (simulated) ================= */
@@ -959,7 +972,7 @@ function eduHTML() {
   return '<h3 class="botname">' + g.en + '</h3><p class="deva">' + g.dev + '</p>' +
     '<p class="lat">' + g.lat + ' · ' + g.part + ' · ' + (g.virya === 'ushna' ? 'Warming' : 'Cooling') + '</p>' +
     '<p class="lat">Tastes: ' + g.rasa.map(r => TB[r].en).join(' · ') + '</p>' +
-    '<div class="sides">' + DOSHAS.map((d, k) => { const on = g.dosha.includes(d.id); return '<div class="side' + (on ? ' on' : '') + '" style="--k:' + k + '"><b>' + d.en + '<i>' + d.dev + '</i></b><span class="vd">' + (on ? 'Settles' : 'Not its focus') + '</span><span class="q">' + d.q + '</span></div>'; }).join('') + '</div>';
+    '<div class="sides">' + DOSHAS.map((d, k) => { const on = g.dosha.includes(d.id); return '<div class="side' + (on ? ' on' : '') + '" style="--k:' + k + '"><b>' + d.en + '<i>' + d.dev + '</i></b><span class="vd">' + (on ? 'Often linked' : 'Not its focus') + '</span><span class="q">' + d.q + '</span></div>'; }).join('') + '</div>';
 }
 function p4() {
   return cap('Ayurvedic education', 'Choose a botanical', 'Select any botanical on the wheel to see how it speaks to Vata, Pitta and Kapha.',
@@ -980,8 +993,8 @@ function focusBotanical(id) {
 }
 function p5() {
   const ranked = ING.map(g => ({g, u:util(g)})).sort((a, b) => b.u - a.u), mx = ranked[0].u || 1;
-  return '<div class="blk"><p class="eyebrow">Ranked by fit to the reading</p><h2>The vaidya picks</h2>' + ORN +
-    '<p class="body">Choose on the wheel or from the list, or let Auto-pick choose from the reading.</p>' +
+  return '<div class="blk"><p class="eyebrow">Ranked by fit to the reading</p><h2>Suggested botanicals</h2>' + ORN +
+    '<p class="body">Choose on the wheel or from the list, or let Auto-pick choose from the reading. Scores are a transparent demo heuristic — not a clinical ranking.</p>' +
     '<p class="note" id="pickCount">' + picks.size + ' on the shortlist</p>' +
     '<div class="rows">' + ranked.map((x, k) => '<button type="button" class="row' + (picks.has(x.g.id) ? ' on' : '') + '" style="--k:' + k + '" data-pick="' + x.g.id + '"><span class="chk"></span><span class="nm">' + x.g.en + '</span><span class="val">' + (x.u / mx).toFixed(2) + '</span></button>').join('') + '</div>' +
     '<div class="btnrow"><button class="btn" data-act="auto">Auto-pick</button><button class="btn" data-act="clear">Clear</button>' + NEXT + '</div></div>';
@@ -1007,14 +1020,13 @@ function autoPick() {
 }
 function p6() {
   const d = decide();
-  if (!d) return cap('Your blend', 'Nothing chosen yet', 'Pick a few botanicals and a blend will find you.', '<div class="btnrow"><button class="btn primary" data-act="back">Choose botanicals</button></div>');
+  if (!d) return cap('Your starting blend', 'Nothing chosen yet', 'Pick a few botanicals and a starting blend will appear.', '<div class="btnrow"><button class="btn primary" data-act="back">Choose botanicals</button></div>');
   const v = vec(), order = DOSHAS.slice().sort((a, b) => v[b.id] - v[a.id]);
-  return '<div class="blk"><p class="eyebrow">Your blend</p><h2 class="shimmer">' + d.best.sku.name + '</h2>' + knotSVG() +
-    '<p class="body">Prepared for ' + order[0].en + ' and ' + order[1].en + '.</p>' +
-    '<ul class="ings">' + d.best.sku.ing.map((id, k) => { const g = GID[id]; return '<li style="--k:' + k + '"><span class="nm">' + g.en + ' <i>' + g.lat + '</i></span><span class="meta">' + g.part + ' · ' + (g.virya === 'ushna' ? 'Warming' : 'Cooling') + ' · settles ' + g.dosha.map(x => DB[x].en).join(', ') + '</span></li>'; }).join('') + '</ul>' +
-    '<p class="gift">A small gift for our first testers: <b>this blend, at a discount.</b></p>' +
-    /* placeholder: set href to the Shopify checkout link when it exists */
-    '<a class="btn primary buy" href="#" data-outgoing target="_blank" rel="noopener noreferrer">Buy now</a></div>';
+  return '<div class="blk"><p class="eyebrow">Your starting blend</p><h2 class="shimmer">' + d.best.sku.name + '</h2>' + knotSVG() +
+    '<p class="body">Framed for ' + order[0].en + ' and ' + order[1].en + ' — an illustrative match from declared preferences and reviewed botanical notes.</p>' +
+    '<ul class="ings">' + d.best.sku.ing.map((id, k) => { const g = GID[id]; return '<li style="--k:' + k + '"><span class="nm">' + g.en + ' <i>' + g.lat + '</i></span><span class="meta">' + g.part + ' · ' + (g.virya === 'ushna' ? 'Warming' : 'Cooling') + ' · often linked with ' + g.dosha.map(x => DB[x].en).join(', ') + '</span></li>'; }).join('') + '</ul>' +
+    '<p class="disclaimer">Wellness discovery concept for coursework. Not a diagnosis, prescription or guaranteed outcome. Confirm product facts on the live Mauli store.</p>' +
+    '<a class="btn primary buy" href="https://www.maulirituals.com/" data-outgoing target="_blank" rel="noopener noreferrer">Browse the live store</a></div>';
 }
 function countUp(root) {
   $$('[data-count]', root).forEach(e => {
@@ -1111,7 +1123,7 @@ function setBeat(n) {
   }
 }
 thread.addEventListener('click', e => { const s = e.target.closest('.tie'); if (s) setBeat(+s.getAttribute('data-beat')); });
-/* button press and the magnetic Buy now */
+/* button press and gentle pull on the store CTA */
 if (MO) {
   let pressed = null;
   document.addEventListener('pointerdown', e => { const b = e.target.closest('.btn'); if (!b) return; pressed = b; G.to(b, {scale:.94, duration:.12, ease:'power2.out', overwrite:'auto'}); });
@@ -1127,9 +1139,9 @@ if (MO) {
     if (b && !b.contains(e.relatedTarget)) G.to(b, {x:0, y:0, duration:.8, ease:'elastic.out(1,.4)', overwrite:'auto'});
   });
 }
-/* the first three steps advance on any click */
+/* the first three steps advance on any click (skip when interacting with controls) */
 document.addEventListener('click', e => {
-  if (beat > 3 || e.target.closest('a,button,.bar')) return;
+  if (beat > 3 || e.target.closest('a,button,.bar,.node')) return;
   setBeat(beat + 1);
 });
 document.addEventListener('keydown', e => {
