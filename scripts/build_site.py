@@ -48,11 +48,14 @@ def build():
     downloads_out = OUT / 'downloads'
     downloads_out.mkdir(exist_ok=True)
 
-    original = ROOT / 'Mauli Rituals - Client Challenge Brief.pdf'
-    if not original.exists():
-        original = ROOT / 'deliverables' / 'client-brief.pdf'
-    if not original.exists():
-        original = ROOT / 'deliverables' / 'drafts' / 'client-brief.pdf'
+    brief_candidates = [
+        ROOT / 'deliverables' / 'client-brief.pdf',
+        ROOT / 'Mauli Rituals - Client Challenge Brief.pdf',
+        ROOT / 'deliverables' / 'drafts' / 'client-brief.pdf',
+    ]
+    original = next((p for p in brief_candidates if p.exists()), None)
+    if original is None:
+        raise FileNotFoundError('Missing client brief PDF')
     download = downloads_out / 'client-brief.pdf'
     copy_download(original, download)
 

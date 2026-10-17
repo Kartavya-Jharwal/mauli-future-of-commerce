@@ -1,3 +1,3 @@
-# Shared prototype resources
+# Packages
 
-Use this directory for shared code, event schemas, design tokens or reusable assets once two or more prototypes need them. Each package should document its consumers and include its own manifest when applicable. Preserve third-party attribution and asset rights.
+- [`brand-assets/`](brand-assets/) — observed Mauli design tokens, fonts, CSS and imagery used by the showcase.

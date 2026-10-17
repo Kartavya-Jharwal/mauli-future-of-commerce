@@ -10,7 +10,6 @@ on:
       - 'deliverables/**/*.docx'
       - 'scripts/build_site.py'
       - 'scripts/check_site.py'
-      - 'Mauli Rituals - Client Challenge Brief.pdf'
       - 'deliverables/client-brief.pdf'
       - '.github/workflows/pages.yml'
   workflow_dispatch:

@@ -46,5 +46,5 @@ Thumbs.db
 Desktop.ini
 ~$*
 
-# Supplied source documents are intentionally tracked: the owner authorized
-# publication of internal client/course/team inputs. Preserve original names.
+# On the `dev` branch, supplied source documents are intentionally tracked.
+# This `main` branch keeps only client-facing showcase assets.
