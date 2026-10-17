@@ -351,10 +351,11 @@ footer,
 .artefact-embed-wrap { display: grid; gap: 12px; }
 .artefact-embed {
   width: 100%;
-  min-height: min(72vh, 720px);
-  height: min(72vh, 720px);
+  min-height: min(78vh, 760px);
+  height: min(78vh, 760px);
   border: 1px solid var(--rule);
   background: #f3e3c9;
+  border-radius: 2px;
 }
 .demo-video { margin: 0; }
 .demo-frame {
@@ -547,6 +548,10 @@ button:focus-visible {
   .feedback-grid,
   .team-grid {
     grid-template-columns: 1fr;
+  }
+  .artefact-embed {
+    min-height: min(70vh, 640px);
+    height: min(70vh, 640px);
   }
   .section { padding-right: var(--pad); }
   :root { --rail: 28px; }
