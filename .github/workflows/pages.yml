@@ -5,13 +5,13 @@ on:
     branches: [main]
     paths:
       - 'apps/project-site/**'
-      - 'deliverables/drafts/deck/*.pdf'
-      - 'deliverables/drafts/deck/*.pptx'
-      - 'deliverables/drafts/report/*.pdf'
-      - 'deliverables/drafts/report/*.docx'
+      - 'deliverables/**/*.pdf'
+      - 'deliverables/**/*.pptx'
+      - 'deliverables/**/*.docx'
       - 'scripts/build_site.py'
       - 'scripts/check_site.py'
       - 'Mauli Rituals - Client Challenge Brief.pdf'
+      - 'deliverables/client-brief.pdf'
       - '.github/workflows/pages.yml'
   workflow_dispatch:
 

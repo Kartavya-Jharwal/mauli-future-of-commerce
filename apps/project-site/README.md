@@ -1,13 +1,21 @@
-# Project showcase
+# Project site
 
-This workspace contains the implemented static public showcase: `index.html`, `styles.css` and `app.js`. It uses no framework or dependencies, no external fonts and no third-party photography. Original geometric thread artwork connects the editorial sections.
+Static public showcase for the Mauli / Future of Commerce student case study.
 
-The initial release is an in-progress case study. First course deck and report drafts are available as PDFs and editable PowerPoint/Word downloads, dated 11 October 2026. Final team submissions remain pending. See [site scope](../../docs/website/site-scope.md) and [motion integration](../../docs/website/motion-integration.md). The custom splash and body SVG effect will be supplied separately. All seven team members use placeholders for now, as requested.
+## Shape
 
-`content/project.json` records ordered sections, deliverable availability, future feedback/grade states and team placeholders. Page copy is authored in HTML; future content changes should keep the manifest aligned. The release build copies the available original client PDF to `downloads/client-brief.pdf`, along with the parent-owned favicon and sharing illustration. It does not ship the brand research asset archive or restricted Foresight workbooks.
+Curated single-page skimmer (no primary nav): hero visual scaffold → problem/context → deliverable modals → **Aushada Peti** (Sacred Wheel of Botanicals; embedded + [standalone](artefact/index.html)) → sticky horizontal deck gallery (`media/deck/01.jpg`…) → sharper choices → feedback/grading → process → team → closing mark / bowtie → footer.
 
-Live on 10 October 2026: [GitHub Pages showcase](https://kartavya.tech/mauli-future-of-commerce/). Deployment run 38072750325 passed, followed by successful HTTPS checks for the page, styles, script, manifest and client-brief PDF. The PDF download matches the original SHA-256. The repository workflow builds and deploys future website changes automatically.
+A thin SVG yarn thread runs in the background (GSAP ScrollTrigger) with smooth Catmull-Rom curves — no crayon displacement filter. Progress follows section anchors in the viewport.
 
-Reading, anchors and downloads work without JavaScript. The optional static thread introduction is opened by a footer button only when accessible dialog support is present; it can be closed with its Enter button or Escape and restores focus. Direct links never wait for an introduction. The custom splash and body motion exports remain pending. The explanatory chord drawing is a concept sketch, not a working recommendation interface.
+## Files
 
-Responsive layouts include mobile reading order, visible keyboard focus, a skip link and reduced-motion support. The prototype, feedback, assessment, final deck/report and all seven team identities remain explicitly pending until supplied.
+- `index.html` / `styles.css` / `app.js` — main page
+- `artefact/` — Aushada Peti prototype (standalone HTML; also embedded via iframe)
+- `downloads/` — PDF / PPTX / DOCX targets (binaries via release copy)
+- `media/` — demo video target (`demo.mp4`) and deck slide images (`deck/01.jpg`…)
+- `content/project.json` — section/deliverable manifest
+
+GSAP is loaded from jsDelivr CDN on the case-study page; Aushada Peti ships with an inlined GSAP build. Reading, anchors and modal markup remain usable if scripts fail; reduced-motion shows the full thread.
+
+Live: [GitHub Pages showcase](https://kartavya.tech/mauli-future-of-commerce/).
