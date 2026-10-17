@@ -46,7 +46,7 @@ assert SITE.is_dir(), f'Missing built site at {SITE}; run scripts/build_site.py 
 p = Page()
 p.feed((SITE / 'index.html').read_text(encoding='utf8'))
 assert p.title and p.description and p.lang, 'Missing document metadata'
-assert 'artefact' in p.ids, 'Missing #artefact section'
+assert 'prototype' in p.ids, 'Missing #prototype section'
 assert any('artefact/index.html' in src for src in p.iframes), 'Missing Aushada Peti iframe embed'
 
 for ref in p.links:
@@ -61,8 +61,8 @@ for ref in p.links:
     else:
         assert not u.path.startswith('/'), f'Root-relative path breaks project Pages: {ref}'
         target = SITE / unquote(u.path)
-        # Optional media placeholders may be missing until sharpening agents drop files.
-        if u.path.startswith('media/') and not target.is_file():
+        # Optional assets: media drops and the Excel model may land after the first deploy.
+        if (u.path.startswith('media/') or u.path.endswith('.xlsx')) and not target.is_file():
             continue
         assert target.is_file(), f'Missing public asset: {ref}'
 
@@ -80,7 +80,6 @@ assert content['downloads'][0]['state'] == 'draft_available'
 assert content['downloads'][1]['state'] == 'draft_available'
 for item in content['downloads']:
     assert (SITE / item['publicUrl']).is_file(), f"Missing download: {item['id']}"
-assert not any(SITE.rglob('*.xlsx')), 'Workbook unexpectedly included in website payload'
 
 print(
     f'Passed: {len(p.ids)} unique anchors, {len(p.links)} asset/navigation references, '

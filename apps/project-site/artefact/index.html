@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light">
-<title>Aushada Peti — The Sacred Wheel of Botanicals</title>
-<meta name="description" content="Aushada Peti: an explainable botanical chord wheel for Mauli Rituals coursework. Wellness discovery only — not a clinical or diagnostic tool.">
+<title>Aushada Peti — The Guna Wheel for Skin</title>
+<meta name="description" content="Aushada Peti: an explainable wheel mapping Mauli skin botanicals to Ayurvedic gunas, virya and skin-state doshas. Educational wellness discovery only.">
 <meta name="theme-color" content="#f3e3c9">
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,7 +13,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cutive+Mono&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Tiro+Devanagari+Sanskrit:ital@0;1&display=swap" rel="stylesheet">
 <style>
 /*
-  Aushada Peti — Sacred Wheel of Botanicals (coursework artefact).
+  Aushada Peti — Guna Wheel for Skin (coursework artefact).
   Layout: chord wheel centre, reading panel, Pharmacopoeia beat, six-knot thread navigation.
   Design: cream paper, charcoal serif, crimson + turmeric mauli thread. Light theme.
 */
@@ -47,24 +47,22 @@ body::after{
   background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='420' height='420'><filter id='p' x='0' y='0' width='100%25' height='100%25'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' seed='7' result='n'/><feDiffuseLighting in='n' lighting-color='%23ffffff' surfaceScale='1.5'><feDistantLight azimuth='45' elevation='64'/></feDiffuseLighting></filter><rect width='420' height='420' filter='url(%23p)'/></svg>");
 }
 button{font:inherit;color:inherit}
+button:focus-visible,a:focus-visible,[role="button"]:focus-visible{outline:2px solid var(--crimson);outline-offset:3px}
 .eyebrow{margin:0;font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;color:var(--ink-soft)}
 .case-back{
-  position:fixed;z-index:60;left:14px;top:12px;
-  font-family:var(--f-mono);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--ink-soft);text-decoration:none;padding:6px 10px;
-  background:rgba(243,227,201,.88);border:1px solid var(--line);backdrop-filter:blur(4px);
+  position:fixed;z-index:60;left:14px;top:12px;width:34px;height:34px;
+  display:grid;place-items:center;border-radius:50%;
+  font-family:var(--f-mono);font-size:0;
+  color:var(--ink-soft);text-decoration:none;
+  background:rgba(243,227,201,.9);border:1px solid var(--line);backdrop-filter:blur(6px);
+  box-shadow:0 6px 20px rgba(75,70,68,.08);
+  transition:color .25s,border-color .25s,background .25s,transform .25s var(--ease-out);
 }
-.case-back:hover{color:var(--crimson);border-color:rgba(181,49,59,.35)}
+.case-back::before{content:"←";font-size:.9rem;line-height:1}
+.case-back:hover{color:var(--crimson);border-color:rgba(181,49,59,.4);background:rgba(255,248,233,.96);transform:translateX(-2px)}
 html.is-embedded .case-back{display:none}
 html.is-embedded .app{padding:8px 10px}
 html.is-embedded .hint{font-size:.62rem;letter-spacing:.22em}
-.course-mark{
-  position:fixed;z-index:55;right:12px;bottom:10px;max-width:min(42ch,70vw);
-  margin:0;padding:6px 8px;font-family:var(--f-mono);font-size:.58rem;line-height:1.35;
-  letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);
-  background:rgba(243,227,201,.82);border:1px solid var(--line);pointer-events:none;
-}
-html.is-embedded .course-mark{font-size:.52rem;right:8px;bottom:6px;max-width:36ch}
 .disclaimer{
   margin:12px 0 0;font-size:.78rem;line-height:1.4;color:var(--ink-soft);font-style:italic;
 }
@@ -84,7 +82,7 @@ html,body{height:100%;overflow:hidden}
 .app{height:100vh;height:100dvh}
 .center{container:center / size;flex:1 1 0;min-height:0;min-width:0;display:grid;place-items:center}
 .wheel{width:min(100cqw,100cqh);max-width:none;margin:0}
-.right{flex:0 1 auto;max-height:56vh;max-height:56dvh;min-height:0;overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;scrollbar-color:rgba(75,70,68,.3) transparent;padding-block:6px}
+.right{flex:0 1 auto;max-height:56vh;max-height:56dvh;min-height:0;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:rgba(75,70,68,.3) transparent;scrollbar-gutter:stable;padding-block:6px}
 .bar{position:relative;z-index:45;flex:none;height:36px}
 
 /* laptops and landscape tablets: wheel left, reading right, progress along the bottom */
@@ -98,11 +96,13 @@ html,body{height:100%;overflow:hidden}
 /* portrait screens: reading under the wheel, progress thread runs down the right edge */
 @media (orientation:portrait),(max-width:759px){
   .app{padding:12px 42px 12px 16px}
+  .right{padding-top:14px;border-top:1px solid var(--line)}
   .bar{position:absolute;right:8px;top:0;bottom:0;margin:auto 0;height:min(54vh,460px);height:min(54dvh,460px);width:24px;animation:none}
   .thread{flex-direction:column;width:auto;height:100%;padding:0}
   .seg-t{width:4px;height:auto;flex:1}
   .seg-t::before{transform:scaleY(0);transform-origin:top}
   .seg-t.done::before{transform:scaleY(1)}
+  .right.out{transform:translateY(8px)}
 }
 
 /* ---------- wordmark ---------- */
@@ -171,7 +171,7 @@ html,body{height:100%;overflow:hidden}
 .bead-core{fill:var(--turmeric);stroke:var(--crimson);stroke-width:1.4}
 
 /* ---------- tooltip ---------- */
-.tip{position:absolute;left:0;top:0;width:min(15rem,30%);padding:10px 12px;border:1px solid var(--line);background:rgba(255,248,233,.86);border-radius:3px;opacity:0;transform:translateY(6px);transition:opacity .3s,transform .3s var(--ease-out);pointer-events:none;font-size:.9rem;line-height:1.35;z-index:3}
+.tip{position:absolute;left:0;top:0;width:clamp(10rem,38%,15rem);max-width:calc(100% - 12px);padding:10px 12px;border:1px solid var(--line);background:rgba(255,248,233,.94);border-radius:3px;box-shadow:0 12px 30px rgba(75,70,68,.12);backdrop-filter:blur(6px);opacity:0;transform:translateY(6px);transition:opacity .3s,transform .3s var(--ease-out);pointer-events:none;font-size:.9rem;line-height:1.35;z-index:3}
 .tip.on{opacity:1;transform:none}
 .tip b{font-weight:600;letter-spacing:.06em;text-transform:uppercase;font-size:.95rem}
 .tip .deva{font-family:var(--f-deva);color:var(--crimson);font-size:1.05rem}
@@ -222,7 +222,7 @@ dd{margin:0}
 
 /* beat 4 */
 .rows{display:grid;gap:3px;margin-top:12px}
-.row{display:grid;grid-template-columns:18px minmax(0,1fr) 3.4rem 2.2rem;gap:10px;align-items:center;width:100%;text-align:left;background:transparent;border:1px solid transparent;border-radius:3px;padding:5px 6px;cursor:pointer;
+.row{display:grid;grid-template-columns:18px minmax(0,1fr) 3.4rem 2.2rem;gap:10px;align-items:center;width:100%;min-height:32px;text-align:left;background:transparent;border:1px solid transparent;border-radius:3px;padding:5px 6px;cursor:pointer;
   animation:rowin .7s var(--ease-out) backwards;animation-delay:calc(var(--k) * 38ms + .35s);transition:background .25s,border-color .25s,transform .3s var(--ease-out)}
 @keyframes rowin{from{opacity:0;transform:translateX(18px)}}
 .row:hover{border-color:var(--line);background:var(--card);transform:translateX(-3px)}
@@ -274,8 +274,8 @@ dd{margin:0}
   .app[data-beat="1"],.app[data-beat="2"]{grid-template-columns:1fr 0px}
   .right .blk{margin-left:clamp(12px,1.6vw,28px)}
 }
-.hint{position:absolute;left:50%;bottom:clamp(4px,1vh,12px);transform:translateX(-50%);z-index:3;pointer-events:none;font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;color:var(--ink-soft);opacity:0;transition:opacity .8s ease;white-space:nowrap}
-.app[data-beat="1"] .hint,.app[data-beat="2"] .hint,.app[data-beat="3"] .hint{opacity:.85;animation:hintpulse 2.8s ease-in-out infinite}
+.hint{position:absolute;left:50%;bottom:clamp(50px,7vh,62px);transform:translateX(-50%);z-index:3;pointer-events:none;font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;color:var(--ink-soft);opacity:0;transition:opacity .8s ease;white-space:nowrap}
+.app[data-beat="1"] .hint,.app[data-beat="2"] .hint{opacity:.85;animation:hintpulse 2.8s ease-in-out infinite}
 @keyframes hintpulse{50%{opacity:.3}}
 .btn.primary{background:var(--crimson);border-color:var(--crimson);color:#fbefe0}
 .btn.primary:hover{background:#9c2630;color:#fff}
@@ -342,7 +342,7 @@ a.btn{display:inline-block;text-decoration:none}
   .right .body{font-size:.94rem;margin-top:4px}
   .note{margin-top:6px}
   .rows{margin-top:6px;gap:0}
-  .row{padding:2px 6px}
+  .row{min-height:30px;padding:2px 6px}
   .row .nm{font-size:.92rem}
   .btn{margin-top:8px}
   .knot{width:52px;height:52px;margin-top:6px}
@@ -355,7 +355,10 @@ a.btn{display:inline-block;text-decoration:none}
   .side{padding:5px 8px}
   .stat b{font-size:1.5rem}
 }
-@media (orientation:portrait),(max-width:759px){.top .sep{display:none}}
+@media (orientation:portrait),(max-width:759px){
+  .top .sep{display:none}
+  .hint{bottom:8px}
+}
 
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{animation:none !important;transition:none !important}
@@ -391,18 +394,18 @@ a.btn{display:inline-block;text-decoration:none}
   </defs>
 </svg>
 
-<a class="case-back" href="../index.html#artefact">← Case study</a>
+<a class="case-back" href="../index.html#artefact" aria-label="Back to case study">← Case study</a>
 <div class="lamp" id="lamp" aria-hidden="true"></div>
 
 <div class="app" id="app" data-beat="1">
   <header class="top">
     <svg class="orn" viewBox="-52 -12 104 24" aria-hidden="true"><use href="#oh"/><use href="#oh" transform="scale(-1 1)"/><circle r="2.6" style="fill:var(--crimson)"/></svg>
-    <b class="t-main" aria-label="Aushada Peti">Aushada Peti</b><span class="sep" aria-hidden="true">-</span><span class="t-sub">The Sacred Wheel of Botanicals</span>
+    <b class="t-main" aria-label="Aushada Peti">Aushada Peti</b><span class="sep" aria-hidden="true">-</span><span class="t-sub">The Guna Wheel for Skin</span>
   </header>
 
   <main class="center">
     <div class="wheel">
-      <svg id="map" class="map" viewBox="-610 -610 1220 1220" role="group" aria-label="Chord diagram joining ingredients to tastes and doshas"></svg>
+      <svg id="map" class="map" viewBox="-610 -610 1220 1220" role="group" aria-label="Chord diagram joining skin botanicals to Ayurvedic gunas and skin-state doshas"></svg>
       <div class="tip" id="tip" aria-hidden="true"></div>
     </div>
   </main>
@@ -410,11 +413,10 @@ a.btn{display:inline-block;text-decoration:none}
   <aside class="right" id="panel" aria-live="polite"></aside>
 
   <div class="veil" id="veil" aria-hidden="true"></div>
-  <div class="hint" id="hint">Click to continue</div>
+  <div class="hint" id="hint">Tap or click to continue</div>
 
   <footer class="bar"><nav class="thread" id="thread" aria-label="Scene beats"></nav></footer>
 </div>
-<p class="course-mark">Student coursework artefact · Wellness discovery only · Not a diagnosis</p>
 
 <script>
 /*!
@@ -458,50 +460,45 @@ const ORN = '<svg class="orn" viewBox="-52 -12 104 24" aria-hidden="true"><use h
 
 /* ================= data ================= */
 const DOSHAS = [
-  {id:'vata',  en:'Vata',  dev:'वात',  el:'Air + ether',   q:'Dry, light, cold and mobile.',  note:'Governs movement: breath, circulation and the nerve impulse.'},
-  {id:'pitta', en:'Pitta', dev:'पित्त', el:'Fire + water',  q:'Hot, sharp, oily and fluid.',   note:'Governs transformation: digestion, metabolism and body heat.'},
-  {id:'kapha', en:'Kapha', dev:'कफ',   el:'Earth + water', q:'Heavy, slow, cool and steady.', note:'Governs structure: lubrication, stability and bulk.'}
+  {id:'vata',  en:'Vata',  dev:'वात',  el:'Air + ether',   q:'A dry, rough, cool or easily depleted skin state.'},
+  {id:'pitta', en:'Pitta', dev:'पित्त', el:'Fire + water',  q:'A warm, reactive or redness-prone skin state.'},
+  {id:'kapha', en:'Kapha', dev:'कफ',   el:'Earth + water', q:'A dense, oily or congestion-prone skin state.'}
 ];
-const TASTES = [
-  {id:'madhura', en:'Sweet',      sa:'Madhura', dev:'मधुर',  el:'Earth + water', fx:'Soothes Vata and Pitta. Builds Kapha.'},
-  {id:'amla',    en:'Sour',       sa:'Amla',    dev:'अम्ल',  el:'Earth + fire',  fx:'Soothes Vata. Builds Pitta and Kapha.'},
-  {id:'katu',    en:'Pungent',    sa:'Katu',    dev:'कटु',   el:'Fire + air',    fx:'Soothes Kapha. Builds Vata and Pitta.'},
-  {id:'tikta',   en:'Bitter',     sa:'Tikta',   dev:'तिक्त', el:'Air + ether',   fx:'Soothes Pitta and Kapha. Builds Vata.'},
-  {id:'kashaya', en:'Astringent', sa:'Kashaya', dev:'कषाय',  el:'Air + earth',   fx:'Soothes Pitta and Kapha. Builds Vata.'}
+const GUNAS = [
+  {id:'laghu',   en:'Light',     sa:'Laghu',   dev:'लघु',   el:'Air + ether',   fx:'Lightness: the crude drug is described as non-heavy.'},
+  {id:'ruksha',  en:'Dry',       sa:'Ruksha',  dev:'रूक्ष',  el:'Air',           fx:'Dryness: a non-unctuous quality, not a finished-product claim.'},
+  {id:'snigdha', en:'Unctuous',  sa:'Snigdha', dev:'स्निग्ध',el:'Water',         fx:'Unctuousness: an oily, lubricating quality.'},
+  {id:'guru',    en:'Heavy',     sa:'Guru',    dev:'गुरु',   el:'Earth + water', fx:'Heaviness: a dense or weighty quality.'},
+  {id:'tikshna', en:'Sharp',     sa:'Tikshna', dev:'तीक्ष्ण',el:'Fire',          fx:'Sharpness: a swift or penetrating quality.'},
+  {id:'sara',    en:'Mobile',    sa:'Sara',    dev:'सर',    el:'Water + air',   fx:'Mobility: a flowing or moving quality.'}
 ];
-/* demo selection of botanicals. margin, stock and vaidya values are illustrative placeholders */
+/* Mauli skin botanicals. Guna fields follow API-linked IMPPAT monographs; ranking inputs remain illustrative. */
 const ING = [
-  {id:'ashwagandha',en:'Ashwagandha', sa:'',           dev:'अश्वगंधा', lat:'Withania somnifera',   fam:'Solanaceae',     part:'Root',        rasa:['tikta','katu','kashaya'],               virya:'ushna',  dosha:['vata','kapha'],         margin:.62, stock:.50, vaidya:.70},
-  {id:'ginger',     en:'Ginger',      sa:'Shunthi',    dev:'शुण्ठी',   lat:'Zingiber officinale',  fam:'Zingiberaceae',  part:'Rhizome',     rasa:['katu'],                                 virya:'ushna',  dosha:['vata','kapha'],         margin:.35, stock:.60, vaidya:.20},
-  {id:'turmeric',   en:'Turmeric',    sa:'Haridra',    dev:'हरिद्रा',  lat:'Curcuma longa',        fam:'Zingiberaceae',  part:'Rhizome',     rasa:['tikta','katu','kashaya'],               virya:'ushna',  dosha:['vata','pitta','kapha'], margin:.45, stock:.60, vaidya:.45},
-  {id:'cardamom',   en:'Cardamom',    sa:'Ela',        dev:'एला',      lat:'Elettaria cardamomum', fam:'Zingiberaceae',  part:'Seed',        rasa:['madhura','katu'],                       virya:'sheeta', dosha:['vata','kapha'],         margin:.58, stock:.40, vaidya:.35},
-  {id:'pepper',     en:'Black pepper',sa:'Maricha',    dev:'मरिच',     lat:'Piper nigrum',         fam:'Piperaceae',     part:'Fruit',       rasa:['katu'],                                 virya:'ushna',  dosha:['vata','kapha'],         margin:.30, stock:.60, vaidya:.10},
-  {id:'cinnamon',   en:'Cinnamon',    sa:'Twak',       dev:'त्वक्',    lat:'Cinnamomum verum',     fam:'Lauraceae',      part:'Bark',        rasa:['madhura','katu','tikta'],               virya:'ushna',  dosha:['vata','kapha'],         margin:.40, stock:.50, vaidya:.20},
-  {id:'tulsi',      en:'Tulsi',       sa:'',           dev:'तुलसी',    lat:'Ocimum tenuiflorum',   fam:'Lamiaceae',      part:'Leaf',        rasa:['katu','tikta'],                         virya:'ushna',  dosha:['vata','kapha'],         margin:.38, stock:.55, vaidya:.30, hot:true},
-  {id:'cumin',      en:'Cumin',       sa:'Jiraka',     dev:'जीरक',     lat:'Cuminum cyminum',      fam:'Apiaceae',       part:'Seed',        rasa:['katu','tikta'],                         virya:'ushna',  dosha:['vata','kapha'],         margin:.28, stock:.60, vaidya:.20},
-  {id:'fennel',     en:'Fennel',      sa:'Shatapushpa',dev:'शतपुष्पा', lat:'Foeniculum vulgare',   fam:'Apiaceae',       part:'Seed',        rasa:['madhura','katu','tikta'],               virya:'sheeta', dosha:['vata','pitta'],         margin:.30, stock:.55, vaidya:.50},
-  {id:'coriander',  en:'Coriander',   sa:'Dhanyaka',   dev:'धान्यक',   lat:'Coriandrum sativum',   fam:'Apiaceae',       part:'Seed',        rasa:['madhura','tikta','kashaya'],            virya:'sheeta', dosha:['vata','pitta','kapha'], margin:.26, stock:.55, vaidya:.60},
-  {id:'saffron',    en:'Saffron',     sa:'Kumkuma',    dev:'कुंकुम',   lat:'Crocus sativus',       fam:'Iridaceae',      part:'Stigma',      rasa:['katu','tikta'],                         virya:'ushna',  dosha:['vata','pitta','kapha'], margin:.95, stock:.25, vaidya:.60},
-  {id:'tamarind',   en:'Tamarind',    sa:'Amlika',     dev:'अम्लिका',  lat:'Tamarindus indica',    fam:'Fabaceae',       part:'Fruit pulp',  rasa:['amla','madhura'],                       virya:'ushna',  dosha:['vata'],                 margin:.25, stock:.50, vaidya:.10},
-  {id:'licorice',   en:'Licorice',    sa:'Yashtimadhu',dev:'यष्टिमधु', lat:'Glycyrrhiza glabra',   fam:'Fabaceae',       part:'Root',        rasa:['madhura'],                              virya:'sheeta', dosha:['vata','pitta'],         margin:.42, stock:.50, vaidya:.80},
-  {id:'amla',       en:'Amla',        sa:'Amalaki',    dev:'आमलकी',    lat:'Phyllanthus emblica',  fam:'Phyllanthaceae', part:'Fruit',       rasa:['madhura','amla','katu','tikta','kashaya'],virya:'sheeta',dosha:['vata','pitta','kapha'], margin:.55, stock:.60, vaidya:.75},
-  {id:'neem',       en:'Neem',        sa:'Nimba',      dev:'निम्ब',    lat:'Azadirachta indica',   fam:'Meliaceae',      part:'Leaf',        rasa:['tikta','kashaya'],                      virya:'sheeta', dosha:['pitta','kapha'],        margin:.32, stock:.40, vaidya:.20},
-  {id:'shatavari',  en:'Shatavari',   sa:'',           dev:'शतावरी',   lat:'Asparagus racemosus',  fam:'Asparagaceae',   part:'Root',        rasa:['madhura','tikta'],                      virya:'sheeta', dosha:['vata','pitta'],         margin:.72, stock:.45, vaidya:.90},
-  {id:'brahmi',     en:'Brahmi',      sa:'',           dev:'ब्राह्मी', lat:'Bacopa monnieri',      fam:'Plantaginaceae', part:'Whole plant', rasa:['tikta','kashaya'],                      virya:'sheeta', dosha:['vata','pitta'],         margin:.70, stock:.50, vaidya:.85},
-  {id:'rose',       en:'Rose',        sa:'Shatapatri', dev:'शतपत्री',  lat:'Rosa damascena',       fam:'Rosaceae',       part:'Petal',       rasa:['madhura','tikta','kashaya'],            virya:'sheeta', dosha:['pitta'],                margin:.82, stock:.35, vaidya:.60}
+  {id:'ashwagandha',en:'Ashwagandha',sa:'Ashvagandha', dev:'अश्वगंधा',  lat:'Withania somnifera',      fam:'Solanaceae',     part:'Root',        guna:['laghu'],                    virya:'ushna',  dosha:['vata','kapha'],         margin:.62, stock:.50, vaidya:.70},
+  {id:'turmeric',   en:'Turmeric',   sa:'Haridra',      dev:'हरिद्रा',   lat:'Curcuma longa',           fam:'Zingiberaceae',  part:'Rhizome',     guna:['ruksha'],                   virya:'ushna',  dosha:['vata','pitta','kapha'], margin:.45, stock:.60, vaidya:.55},
+  {id:'neem',       en:'Neem',       sa:'Nimba',        dev:'निम्ब',     lat:'Azadirachta indica',      fam:'Meliaceae',      part:'Leaf',        guna:['laghu','ruksha'],           virya:'sheeta', dosha:['pitta','kapha'],        margin:.32, stock:.40, vaidya:.45},
+  {id:'tulsi',      en:'Tulsi',      sa:'Tulasi',       dev:'तुलसी',     lat:'Ocimum tenuiflorum',      fam:'Lamiaceae',      part:'Leaf',        guna:['laghu','ruksha','tikshna'], virya:'ushna',  dosha:['vata','kapha'],         margin:.38, stock:.55, vaidya:.35},
+  {id:'amla',       en:'Amla',       sa:'Amalaki',      dev:'आमलकी',     lat:'Phyllanthus emblica',     fam:'Phyllanthaceae', part:'Fruit',       guna:['laghu','ruksha'],           virya:'sheeta', dosha:['vata','pitta','kapha'], margin:.55, stock:.60, vaidya:.70},
+  {id:'shatavari',  en:'Shatavari',  sa:'Shatavari',    dev:'शतावरी',    lat:'Asparagus racemosus',     fam:'Asparagaceae',   part:'Root',        guna:['guru','snigdha'],           virya:'sheeta', dosha:['vata','pitta'],         margin:.72, stock:.45, vaidya:.85},
+  {id:'rose',       en:'Rose',       sa:'Shatapatrika', dev:'शतपत्रिका', lat:'Rosa centifolia',         fam:'Rosaceae',       part:'Flower',      guna:['laghu'],                    virya:'sheeta', dosha:['pitta'],                margin:.82, stock:.35, vaidya:.70},
+  {id:'saffron',    en:'Saffron',    sa:'Kumkuma',      dev:'कुंकुम',    lat:'Crocus sativus',          fam:'Iridaceae',      part:'Stigma',      guna:['snigdha'],                  virya:'ushna',  dosha:['vata','pitta','kapha'], margin:.95, stock:.25, vaidya:.75},
+  {id:'vetiver',    en:'Vetiver',    sa:'Ushira',       dev:'उशीर',      lat:'Chrysopogon zizanioides', fam:'Poaceae',        part:'Root',        guna:['laghu','snigdha'],          virya:'sheeta', dosha:['pitta','kapha'],        margin:.58, stock:.55, vaidya:.65},
+  {id:'sandalwood', en:'Sandalwood', sa:'Shvetachandana',dev:'श्वेतचन्दन',lat:'Santalum album',           fam:'Santalaceae',    part:'Wood',        guna:['laghu','ruksha'],           virya:'sheeta', dosha:['pitta','kapha'],        margin:.78, stock:.30, vaidya:.80},
+  {id:'gotukola',   en:'Gotu kola',  sa:'Mandukaparni', dev:'मण्डूकपर्णी',lat:'Centella asiatica',         fam:'Apiaceae',       part:'Whole plant', guna:['laghu','sara'],             virya:'sheeta', dosha:['vata','pitta'],         margin:.68, stock:.50, vaidya:.80},
+  {id:'bakuchi',    en:'Bakuchi',    sa:'Bakuchi',      dev:'बाकुची',    lat:'Cullen corylifolium',     fam:'Fabaceae',       part:'Fruit',       guna:['ruksha'],                   virya:'ushna',  dosha:['vata','kapha'],         margin:.74, stock:.40, vaidya:.70}
 ];
-const TB = Object.fromEntries(TASTES.map(t => [t.id, t]));
+const GB = Object.fromEntries(GUNAS.map(g => [g.id, g]));
 const DB = Object.fromEntries(DOSHAS.map(d => [d.id, d]));
 const GID = Object.fromEntries(ING.map(g => [g.id, g]));
 const SKUS = [
-  {id:'SKU_01', name:'Grounding Blend', ing:['ashwagandha','shatavari','licorice','brahmi']},
-  {id:'SKU_02', name:'Radiance Blend',  ing:['saffron','rose','coriander','amla']},
-  {id:'SKU_03', name:'Digest Blend',    ing:['ginger','cumin','cardamom','fennel']}
+  {id:'SKU_01', name:'Radiance Ritual', ing:['saffron','rose','turmeric','sandalwood']},
+  {id:'SKU_02', name:'Harmony Ritual',  ing:['bakuchi','gotukola','ashwagandha','shatavari']},
+  {id:'SKU_03', name:'Balance Ritual',  ing:['neem','tulsi','amla','vetiver']}
 ];
-const SHORTLIST = ['ashwagandha','shatavari','licorice','brahmi','saffron','rose','coriander','amla'];
+const SHORTLIST = ['saffron','rose','turmeric','sandalwood','bakuchi','gotukola','ashwagandha','shatavari'];
 
-/* Pharmacopoeia figures from the PMC10213908 quantitative ethnobotanical analysis */
-const API = {drugs:621, species:393, genera:323, families:115};
+/* Gurvadi gunas: 20 qualities in ten opposing pairs; this wheel shows those present in the selected API monographs. */
+const API = {qualities:20, pairs:10, botanicals:ING.length};
 const LANES = [
   {name:'Fabaceae',n:47},{name:'Apiaceae',n:16},{name:'Poaceae',n:15},{name:'Euphorbiaceae',n:13},
   {name:'Lamiaceae',n:13},{name:'Asteraceae',n:13},{name:'Apocynaceae',n:13},{name:'Cucurbitaceae',n:11},
@@ -520,13 +517,13 @@ const BEATS = [
 ];
 
 /* ================= model (simulated) ================= */
-const VEC = {vata:.42, pitta:.9, kapha:.28};   /* Vay's reading: strong Pitta */
+const SKIN_READING = {vata:.42, pitta:.9, kapha:.28};   /* illustrative warm/reactive skin-state reading */
 const NEUTRAL = {vata:.4, pitta:.4, kapha:.4};
 const feeders = {vay:true, api:true, vaidya:true, stock:true};
 const W = {rel:.5, mrg:.2, stk:.15, vai:.15};
 let scenario = 'normal';
 const picks = new Set();
-const vec = () => feeders.vay ? VEC : NEUTRAL;
+const vec = () => feeders.vay ? SKIN_READING : NEUTRAL;
 
 function relevance(g, v) {
   const tot = v.vata + v.pitta + v.kapha;
@@ -569,14 +566,14 @@ function decide() {
 /* ================= graph and layout ================= */
 const nodes = [];
 DOSHAS.forEach(d => nodes.push({id:'d-' + d.id, kind:'dosha',      data:d, links:[]}));
-TASTES.forEach(t => nodes.push({id:'t-' + t.id, kind:'taste',      data:t, links:[]}));
+GUNAS.forEach(g  => nodes.push({id:'g-' + g.id, kind:'guna',       data:g, links:[]}));
 ING.forEach(g    => nodes.push({id:'i-' + g.id, kind:'ingredient', data:g, links:[]}));
 const byId = Object.fromEntries(nodes.map(n => [n.id, n]));
 const links = [];
 const addLink = (a, b) => { const l = {id:links.length, a, b}; links.push(l); a.links.push(l); b.links.push(l); };
 ING.forEach(g => {
   const s = byId['i-' + g.id];
-  g.rasa.forEach(r => addLink(s, byId['t-' + r]));
+  g.guna.forEach(q => addLink(s, byId['g-' + q]));
   g.dosha.forEach(d => addLink(s, byId['d-' + d]));
 });
 const GAP_N = 0.9, GAP_G = 9;
@@ -736,14 +733,16 @@ const nodeLayer = el('g', {class:'nodes'}, svg);
 function ariaFor(n) {
   const d = n.data;
   if (n.kind === 'ingredient') return d.en + ', ' + d.part.toLowerCase() + ', ' + (d.virya === 'ushna' ? 'warming' : 'cooling') + '. Select to explore.';
-  if (n.kind === 'taste') return d.sa + ', ' + d.en.toLowerCase() + ' taste';
+  if (n.kind === 'guna') return d.sa + ', ' + d.en.toLowerCase() + ' quality';
   return d.en + ' dosha';
 }
 nodes.forEach((n, ni) => {
-  const g = el('g', {class:'node ' + n.kind, tabindex:0, role:'button', 'aria-label':ariaFor(n), 'data-id':n.id}, nodeLayer);
+  const attrs = {class:'node ' + n.kind, tabindex:0, role:'button', 'aria-label':ariaFor(n), 'data-id':n.id};
+  if (n.kind === 'ingredient') attrs['aria-pressed'] = 'false';
+  const g = el('g', attrs, nodeLayer);
   g.style.setProperty('--n', ni);
   el('path', {d:arcPath(R0 - 12, LAB + 14, n.start - .4, n.end + .4), class:'hit'}, g);
-  const fill = n.kind === 'ingredient' ? INK : (n.kind === 'taste' ? CRIMSON : TURMERIC);
+  const fill = n.kind === 'ingredient' ? INK : (n.kind === 'guna' ? CRIMSON : TURMERIC);
   el('path', {d:arcPath(R0, R1, n.start, n.end), fill, class:'arc'}, g);
   const ring = n.kind === 'ingredient' ? (n.data.virya === 'ushna' ? CRIMSON : MOON) : 'rgba(75,70,68,.22)';
   el('path', {d:arcPath(VR0, VR1, n.start, n.end), fill:ring, class:'ring'}, g);
@@ -755,7 +754,7 @@ nodes.forEach((n, ni) => {
   }, g);
   let main, sub;
   if (n.kind === 'ingredient') { main = n.data.en; sub = n.data.sa; }
-  else if (n.kind === 'taste') { main = n.data.sa.toUpperCase(); sub = n.data.en.toLowerCase(); }
+  else if (n.kind === 'guna') { main = n.data.sa.toUpperCase(); sub = n.data.en.toLowerCase(); }
   else { main = n.data.en.toUpperCase(); sub = '0.00'; }
   const mk = (cls, txt, dx) => { const s = el('tspan', {class:cls}, t); s.textContent = txt; if (dx) s.setAttribute('dx', dx); return s; };
   if (sub) {
@@ -767,7 +766,7 @@ nodes.forEach((n, ni) => {
 
 /* effects layer sits above everything, with a bell target over the lotus */
 const fxLayer = el('g', {'pointer-events':'none'}, svg);
-const bellHit = el('circle', {r:104, fill:'transparent', style:'cursor:pointer'}, svg);
+const bellHit = el('circle', {r:104, fill:'transparent', style:'cursor:pointer', tabindex:0, role:'button', 'aria-label':'Animate the central lotus'}, svg);
 bellHit.setAttribute('pointer-events', 'all');
 
 function bell(color, maxR) {
@@ -828,7 +827,11 @@ function applyState() {
       else o = n.links.some(l => litIds.has(l.a.data.id)) ? 1 : .28;
     }
     n.el.style.setProperty('--o', o);
-    if (n.kind === 'ingredient') n.el.classList.toggle('picked', picks.has(n.data.id));
+    if (n.kind === 'ingredient') {
+      const picked = picks.has(n.data.id);
+      n.el.classList.toggle('picked', picked);
+      n.el.setAttribute('aria-pressed', String(picked));
+    }
     if (n.kind === 'dosha') {
       n.el.style.setProperty('--v', vec()[n.data.id].toFixed(2));
       if (n.subEl) n.subEl.textContent = vec()[n.data.id].toFixed(2);
@@ -889,8 +892,12 @@ function frame(t) {
   if (!RM) {
     ptr.x += (ptr.tx - ptr.x) * .09; ptr.y += (ptr.ty - ptr.y) * .09;
     lamp.style.transform = 'translate3d(' + f1(ptr.x) + 'px,' + f1(ptr.y) + 'px,0)';
-    const nx = (ptr.x / window.innerWidth - .5) * 2, ny = (ptr.y / window.innerHeight - .5) * 2;
-    lotusK += ((beat === 1 ? 2.7 : 1) - lotusK) * .06;
+    const vw = Math.max(1, window.innerWidth || document.documentElement.clientWidth || 1);
+    const vh = Math.max(1, window.innerHeight || document.documentElement.clientHeight || 1);
+    const nx = Number.isFinite(ptr.x) ? (ptr.x / vw - .5) * 2 : 0;
+    const ny = Number.isFinite(ptr.y) ? (ptr.y / vh - .5) * 2 : 0;
+    const targetK = beat === 1 ? 2.7 : 1;
+    lotusK = Number.isFinite(lotusK) ? lotusK + (targetK - lotusK) * .06 : targetK;
     mandala.setAttribute('transform', 'translate(' + f1(nx * 7) + ' ' + f1(ny * 7) + ') scale(' + f(lotusK) + ')');
   } else mandala.setAttribute('transform', 'scale(' + (beat === 1 ? 2.7 : 1) + ')');
   requestAnimationFrame(frame);
@@ -903,8 +910,8 @@ function showTip(n) {
   if (n.kind === 'ingredient') {
     h = '<b>' + d.en + '</b>' + (d.sa ? ' <i>' + d.sa + '</i>' : '') + '<div class="deva" lang="sa">' + d.dev + '</div>' +
       '<div class="sm"><i>' + d.lat + '</i></div><div class="sm">' + d.fam + ' · ' + d.part + '</div>' +
-      '<div class="sm">' + (d.virya === 'ushna' ? 'Warming' : 'Cooling') + (d.hot ? ' · hot node in the API analysis' : '') + '</div>';
-  } else if (n.kind === 'taste') {
+      '<div class="sm">Gunas: ' + d.guna.map(q => GB[q].en).join(' · ') + '</div><div class="sm">Virya: ' + (d.virya === 'ushna' ? 'warming' : 'cooling') + '</div>';
+  } else if (n.kind === 'guna') {
     h = '<b>' + d.sa + '</b> <i>' + d.en.toLowerCase() + '</i><div class="deva" lang="sa">' + d.dev + '</div><div class="sm">' + d.el + '. ' + d.fx + '</div>';
   } else {
     h = '<b>' + d.en + '</b> <i>' + d.el.toLowerCase() + '</i><div class="deva" lang="sa">' + d.dev + '</div><div class="sm">' + d.q + '</div>';
@@ -953,7 +960,11 @@ nodes.forEach(n => {
   g.addEventListener('click', act);
   g.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); act(); } });
 });
-bellHit.addEventListener('click', () => { bell(TURMERIC); setTimeout(() => bell(CRIMSON, 300), 160); bloomLotus(); });
+function ringLotus() { bell(TURMERIC); setTimeout(() => bell(CRIMSON, 300), 160); bloomLotus(); }
+bellHit.addEventListener('click', ringLotus);
+bellHit.addEventListener('keydown', e => {
+  if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); ringLotus(); }
+});
 
 /* ================= reading panel ================= */
 const panel = $('#panel');
@@ -963,19 +974,21 @@ const NEXT = '<button class="btn primary" data-act="next">Continue</button>';
 function p1() { return ''; }   /* the lotus alone */
 function p2() { return ''; }   /* the rings grow and the name appears */
 function p3() {
-  return '<div class="blk"><p class="eyebrow">Part I · Single botanical drugs</p><h2>Ayurvedic Pharmacopoeia of India</h2>' + ORN +
-    '<div class="stats"><div class="stat"><b data-count="' + API.drugs + '">0</b><span>Drugs</span></div><div class="stat"><b data-count="' + API.species + '">0</b><span>Species</span></div><div class="stat"><b data-count="' + API.families + '">0</b><span>Families</span></div></div></div>';
+  return '<div class="blk"><p class="eyebrow">Part I · Single botanical drugs</p><h2>Pharmacopoeia, through a skin lens</h2>' + ORN +
+    '<p class="body">API monographs keep rasa, guna, virya, vipaka and karma distinct. Because this is a topical skin concept, the wheel maps inherent gunas—not edible tastes—and keeps virya as a separate warm/cool band.</p>' +
+    '<div class="stats"><div class="stat"><b data-count="' + API.qualities + '">0</b><span>Gunas</span></div><div class="stat"><b data-count="' + API.pairs + '">0</b><span>Pairs</span></div><div class="stat"><b data-count="' + API.botanicals + '">0</b><span>Botanicals</span></div></div>' +
+    '<p class="src">Sources: <a href="https://pcimh.gov.in/show_content.php?lang=1&amp;level=1&amp;lid=54&amp;ls_id=56" target="_blank" rel="noopener noreferrer">PCIM&amp;H / API</a> · <a href="https://cb.imsc.res.in/imppat/" target="_blank" rel="noopener noreferrer">IMPPAT</a> · <a href="https://www.maulirituals.com/en-us/products/ultimate-skin-ritual" target="_blank" rel="noopener noreferrer">Mauli skin ritual</a></p><div class="btnrow">' + NEXT + '</div></div>';
 }
 function eduHTML() {
   const g = focusId && GID[focusId];
   if (!g) return '<p class="note">Choose any botanical on the wheel.</p>';
   return '<h3 class="botname">' + g.en + '</h3><p class="deva">' + g.dev + '</p>' +
-    '<p class="lat">' + g.lat + ' · ' + g.part + ' · ' + (g.virya === 'ushna' ? 'Warming' : 'Cooling') + '</p>' +
-    '<p class="lat">Tastes: ' + g.rasa.map(r => TB[r].en).join(' · ') + '</p>' +
+    '<p class="lat">' + g.lat + ' · ' + g.part + ' · ' + (g.virya === 'ushna' ? 'Warming virya' : 'Cooling virya') + '</p>' +
+    '<p class="lat">Gunas: ' + g.guna.map(q => GB[q].sa + ' (' + GB[q].en.toLowerCase() + ')').join(' · ') + '</p>' +
     '<div class="sides">' + DOSHAS.map((d, k) => { const on = g.dosha.includes(d.id); return '<div class="side' + (on ? ' on' : '') + '" style="--k:' + k + '"><b>' + d.en + '<i>' + d.dev + '</i></b><span class="vd">' + (on ? 'Often linked' : 'Not its focus') + '</span><span class="q">' + d.q + '</span></div>'; }).join('') + '</div>';
 }
 function p4() {
-  return cap('Ayurvedic education', 'Choose a botanical', 'Select any botanical on the wheel to see how it speaks to Vata, Pitta and Kapha.',
+  return cap('Topical Ayurvedic education', 'Choose a skin botanical', 'Select a botanical to inspect its API-listed gunas, virya and traditional dosha linkage. These describe the crude drug, not the performance of a finished cosmetic.',
     '<div class="edu" id="edu">' + eduHTML() + '</div><div class="btnrow">' + NEXT + '</div>');
 }
 function focusBotanical(id) {
@@ -993,10 +1006,10 @@ function focusBotanical(id) {
 }
 function p5() {
   const ranked = ING.map(g => ({g, u:util(g)})).sort((a, b) => b.u - a.u), mx = ranked[0].u || 1;
-  return '<div class="blk"><p class="eyebrow">Ranked by fit to the reading</p><h2>Suggested botanicals</h2>' + ORN +
-    '<p class="body">Choose on the wheel or from the list, or let Auto-pick choose from the reading. Scores are a transparent demo heuristic — not a clinical ranking.</p>' +
+  return '<div class="blk"><p class="eyebrow">Ranked by fit to the skin-state reading</p><h2>Suggested skin botanicals</h2>' + ORN +
+    '<p class="body">Choose on the wheel or from the list, or let Auto-pick respond to the illustrative skin-state signals. Scores are a transparent demo heuristic—not efficacy or a clinical ranking.</p>' +
     '<p class="note" id="pickCount">' + picks.size + ' on the shortlist</p>' +
-    '<div class="rows">' + ranked.map((x, k) => '<button type="button" class="row' + (picks.has(x.g.id) ? ' on' : '') + '" style="--k:' + k + '" data-pick="' + x.g.id + '"><span class="chk"></span><span class="nm">' + x.g.en + '</span><span class="val">' + (x.u / mx).toFixed(2) + '</span></button>').join('') + '</div>' +
+    '<div class="rows">' + ranked.map((x, k) => '<button type="button" class="row' + (picks.has(x.g.id) ? ' on' : '') + '" style="--k:' + k + '" data-pick="' + x.g.id + '" aria-pressed="' + picks.has(x.g.id) + '"><span class="chk" aria-hidden="true"></span><span class="nm">' + x.g.en + '</span><span class="val">' + (x.u / mx).toFixed(2) + '</span></button>').join('') + '</div>' +
     '<div class="btnrow"><button class="btn" data-act="auto">Auto-pick</button><button class="btn" data-act="clear">Clear</button>' + NEXT + '</div></div>';
 }
 /* Auto-pick: the model ranks every botanical against the reading, stock, craft and vaidya notes, then gathers the top eight one by one */
@@ -1022,11 +1035,12 @@ function p6() {
   const d = decide();
   if (!d) return cap('Your starting blend', 'Nothing chosen yet', 'Pick a few botanicals and a starting blend will appear.', '<div class="btnrow"><button class="btn primary" data-act="back">Choose botanicals</button></div>');
   const v = vec(), order = DOSHAS.slice().sort((a, b) => v[b.id] - v[a.id]);
+  const skinState = {vata:'dry or depleted', pitta:'warm or reactive', kapha:'oily or congested'};
   return '<div class="blk"><p class="eyebrow">Your starting blend</p><h2 class="shimmer">' + d.best.sku.name + '</h2>' + knotSVG() +
-    '<p class="body">Framed for ' + order[0].en + ' and ' + order[1].en + ' — an illustrative match from declared preferences and reviewed botanical notes.</p>' +
-    '<ul class="ings">' + d.best.sku.ing.map((id, k) => { const g = GID[id]; return '<li style="--k:' + k + '"><span class="nm">' + g.en + ' <i>' + g.lat + '</i></span><span class="meta">' + g.part + ' · ' + (g.virya === 'ushna' ? 'Warming' : 'Cooling') + ' · often linked with ' + g.dosha.map(x => DB[x].en).join(', ') + '</span></li>'; }).join('') + '</ul>' +
-    '<p class="disclaimer">Wellness discovery concept for coursework. Not a diagnosis, prescription or guaranteed outcome. Confirm product facts on the live Mauli store.</p>' +
-    '<a class="btn primary buy" href="https://www.maulirituals.com/" data-outgoing target="_blank" rel="noopener noreferrer">Browse the live store</a></div>';
+    '<p class="body">Framed around the ' + skinState[order[0].id] + ' and ' + skinState[order[1].id] + ' signals in this illustrative skin reading.</p>' +
+    '<ul class="ings">' + d.best.sku.ing.map((id, k) => { const g = GID[id]; return '<li style="--k:' + k + '"><span class="nm">' + g.en + ' <i>' + g.lat + '</i></span><span class="meta">' + g.guna.map(q => GB[q].sa).join(' · ') + ' · ' + (g.virya === 'ushna' ? 'warming' : 'cooling') + ' virya</span></li>'; }).join('') + '</ul>' +
+    '<p class="disclaimer">Topical wellness-discovery concept for coursework. Gunas describe traditional crude-drug attributes; they do not establish finished-product efficacy, suitability or safety. Patch test and confirm product facts on the live Mauli store.</p>' +
+    '<a class="btn primary buy" href="https://www.maulirituals.com/collections/skincare" data-outgoing target="_blank" rel="noopener noreferrer">Explore Mauli skincare</a></div>';
 }
 function countUp(root) {
   $$('[data-count]', root).forEach(e => {
@@ -1067,6 +1081,7 @@ function syncPicks() {
     const on = picks.has(r.getAttribute('data-pick'));
     if (on === r.classList.contains('on')) return;
     r.classList.toggle('on', on);
+    r.setAttribute('aria-pressed', String(on));
     if (on && MO) G.fromTo($('.chk', r), {scale:.4}, {scale:1.12, duration:.55, ease:'back.out(3)', clearProps:'transform'});
   });
   const pc = $('#pickCount');
@@ -1108,7 +1123,12 @@ function setBeat(n) {
   if (changed && beat === 5 && autoQ.length) cancelAuto(true);
   beat = nb;
   app.setAttribute('data-beat', beat);
-  $$('.tie', thread).forEach((s, i) => { s.classList.toggle('on', i + 1 === beat); s.classList.toggle('done', i + 1 < beat); });
+  $$('.tie', thread).forEach((s, i) => {
+    const current = i + 1 === beat;
+    s.classList.toggle('on', current);
+    s.classList.toggle('done', i + 1 < beat);
+    if (current) s.setAttribute('aria-current', 'step'); else s.removeAttribute('aria-current');
+  });
   $$('.seg-t', thread).forEach((s, i) => s.classList.toggle('done', i + 1 < beat));
   unhover(true);
   const show = beat >= 2;

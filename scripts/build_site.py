@@ -74,6 +74,16 @@ def build():
                 raise FileNotFoundError(f'Missing deliverable: {stem}.{extension}')
             copy_download(source, downloads_out / source.name)
 
+    # Optional Excel model: copied when present, otherwise the card links to a forthcoming file.
+    model_candidates = [
+        ROOT / 'deliverables' / 'mauli-financial-model.xlsx',
+        ROOT / 'deliverables' / 'drafts' / 'model' / 'mauli-financial-model.xlsx',
+        ROOT / 'models' / 'financial-scenarios' / 'mauli-financial-scenarios.xlsx',
+    ]
+    model = next((p for p in model_candidates if p.exists()), None)
+    if model is not None:
+        copy_download(model, downloads_out / 'mauli-financial-model.xlsx')
+
     # Mirror downloads into the source tree for local preview consistency.
     site_downloads = SOURCE / 'downloads'
     site_downloads.mkdir(exist_ok=True)

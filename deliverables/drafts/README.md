@@ -4,7 +4,6 @@
 
 - [Presentation PDF](deck/mauli-course-deck-draft.pdf) and [editable PowerPoint](deck/mauli-course-deck-draft.pptx).
 - [Report PDF](report/mauli-course-report-draft.pdf) and [editable Word document](report/mauli-course-report-draft.docx).
-- [Course alignment and review checklist](course-alignment.md).
 
 The supplied assignment requires a maximum four-page written brief with supporting appendices and a five-to-eight-slide, six-minute pitch followed by four-minute Q&A. The main argument prioritises explainable personalisation and practitioner social/live education around the existing Shopify experience. Course frameworks inform decisions rather than replacing Mauli-specific evidence.
 
