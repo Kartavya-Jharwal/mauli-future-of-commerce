@@ -1,12 +1,8 @@
 # Deck slide images
 
-Place presentation slide exports here for the sticky horizontal gallery:
+Sticky horizontal gallery assets (29 frames):
 
-- `01.jpg` — Opening
-- `02.jpg` — Problem
-- `03.jpg` — Insight
-- `04.jpg` — Prototype
-- `05.jpg` — Choices
-- `06.jpg` — Next steps
+- Prefer `01.webp` … `29.webp` for the live site (already referenced in `index.html`).
+- Keep matching `01.png` … `29.png` as source masters if needed; the public build strips PNGs from `dist/` and ships WebP only.
 
-PNG also works if you update the `src` extensions in `index.html`. Until files exist, numbered placeholders show in each frame.
+First slide loads eagerly; remaining slides lazy-load via `data-src` as they approach the viewport.

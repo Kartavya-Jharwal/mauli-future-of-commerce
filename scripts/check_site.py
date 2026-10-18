@@ -34,6 +34,8 @@ class Page(HTMLParser):
             self.links.append(a['href'])
         if tag in ('script', 'img') and 'src' in a:
             self.links.append(a['src'])
+        if tag == 'img' and 'data-src' in a:
+            self.links.append(a['data-src'])
         if tag == 'iframe' and 'src' in a:
             self.iframes.append(a['src'])
             self.links.append(a['src'])
@@ -47,7 +49,10 @@ p = Page()
 p.feed((SITE / 'index.html').read_text(encoding='utf8'))
 assert p.title and p.description and p.lang, 'Missing document metadata'
 assert 'prototype' in p.ids, 'Missing #prototype section'
+assert 'deck' in p.ids, 'Missing #deck horizontal gallery section'
 assert any('artefact/index.html' in src for src in p.iframes), 'Missing Aushada Peti iframe embed'
+assert (SITE / 'media' / 'deck' / '01.webp').is_file(), 'Missing first deck WebP slide'
+assert len(list((SITE / 'media' / 'deck').glob('[0-9][0-9].webp'))) >= 29, 'Expected 29 deck WebP slides'
 
 for ref in p.links:
     u = urlparse(ref)
@@ -74,14 +79,17 @@ assert '../index.html' in artefact_html, 'Standalone artefact is missing case-st
 
 content = json.loads((SITE / 'content' / 'project.json').read_text(encoding='utf8'))
 assert len(content['team']) == 7
-assert all(m['linkedinUrl'] is None for m in content['team'])
+assert all(m['name'] and m['linkedinUrl'].startswith('https://www.linkedin.com/') for m in content['team'])
 assert content['project']['status'] == 'in_progress'
-assert content['downloads'][0]['state'] == 'draft_available'
-assert content['downloads'][1]['state'] == 'draft_available'
+assert content['downloads'][0]['state'] == 'available'
+assert content['downloads'][1]['state'] == 'available'
+assert any(item['id'] == 'model' and item['state'] == 'available' for item in content['downloads'])
 for item in content['downloads']:
     assert (SITE / item['publicUrl']).is_file(), f"Missing download: {item['id']}"
+    if item.get('editableUrl'):
+        assert (SITE / item['editableUrl']).is_file(), f"Missing editable download: {item['id']}"
 
 print(
     f'Passed: {len(p.ids)} unique anchors, {len(p.links)} asset/navigation references, '
-    f'{len(p.iframes)} iframe embed(s), seven placeholders, release states and public payload.'
+    f'{len(p.iframes)} iframe embed(s), seven linked team profiles, release states and public payload.'
 )

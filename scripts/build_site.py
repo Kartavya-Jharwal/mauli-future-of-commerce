@@ -45,6 +45,25 @@ def build():
     copy_tree(SOURCE / 'artefact', OUT / 'artefact')
     copy_tree(SOURCE / 'media', OUT / 'media')
 
+    # Numbered deck exports supplied at the repository root. Keep source and
+    # built media in sync so both direct previews and the public build work.
+    slides = sorted((ROOT / 'Slides').glob('[0-9][0-9].png'))
+    source_slides = SOURCE / 'media' / 'deck'
+    source_slides.mkdir(parents=True, exist_ok=True)
+    for old_slide in source_slides.glob('[0-9][0-9].png'):
+        old_slide.unlink()
+    for slide in slides:
+        shutil.copy2(slide, source_slides / slide.name)
+
+    # Public carousel ships WebP only. Keep numbered WebP copies; strip heavy PNGs.
+    output_slides = OUT / 'media' / 'deck'
+    output_slides.mkdir(parents=True, exist_ok=True)
+    for raw_slide in output_slides.glob('[0-9][0-9].png'):
+        raw_slide.unlink()
+    webps = sorted(output_slides.glob('[0-9][0-9].webp'))
+    if len(webps) < 1:
+        raise FileNotFoundError('Missing media/deck/*.webp slide exports for the horizontal gallery')
+
     downloads_out = OUT / 'downloads'
     downloads_out.mkdir(exist_ok=True)
 
@@ -59,23 +78,31 @@ def build():
     download = downloads_out / 'client-brief.pdf'
     copy_download(original, download)
 
-    for folder, stem, formats in (
-        ('deck', 'mauli-course-deck-draft', ('pdf', 'pptx')),
-        ('report', 'mauli-course-report-draft', ('pdf', 'docx')),
+    for folder, output_stem, formats in (
+        ('deck', 'mauli-presentation-deck', ('pdf', 'pptx')),
+        ('report', 'mauli-project-report', ('pdf', 'docx')),
     ):
         for extension in formats:
+            if folder == 'deck':
+                root_name = 'Mauli_Rituals-Deck_Final-Extended.pdf' if extension == 'pdf' else 'Mauli Rituals.pptx'
+                legacy_stem = 'mauli-course-deck-draft'
+            else:
+                root_name = f'Mauli Rituals_Team-3.{extension}'
+                legacy_stem = 'mauli-course-report-draft'
             candidates = [
-                ROOT / 'deliverables' / 'drafts' / folder / f'{stem}.{extension}',
-                ROOT / 'deliverables' / folder / f'{stem}.{extension}',
-                ROOT / 'deliverables' / f'{stem}.{extension}',
+                ROOT / root_name,
+                ROOT / 'deliverables' / 'drafts' / folder / f'{legacy_stem}.{extension}',
+                ROOT / 'deliverables' / folder / f'{legacy_stem}.{extension}',
+                ROOT / 'deliverables' / f'{legacy_stem}.{extension}',
             ]
             source = next((p for p in candidates if p.exists()), None)
             if source is None:
-                raise FileNotFoundError(f'Missing deliverable: {stem}.{extension}')
-            copy_download(source, downloads_out / source.name)
+                raise FileNotFoundError(f'Missing deliverable: {output_stem}.{extension}')
+            copy_download(source, downloads_out / f'{output_stem}.{extension}')
 
     # Optional Excel model: copied when present, otherwise the card links to a forthcoming file.
     model_candidates = [
+        ROOT / 'NOT-A-Deliverable-Mauli-Rituals-Extended-Excel.xlsx',
         ROOT / 'deliverables' / 'mauli-financial-model.xlsx',
         ROOT / 'deliverables' / 'drafts' / 'model' / 'mauli-financial-model.xlsx',
         ROOT / 'models' / 'financial-scenarios' / 'mauli-financial-scenarios.xlsx',

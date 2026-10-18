@@ -60,6 +60,170 @@
     dialogBackdropClose(dialog);
   })();
 
+  /* --------------------- Sticky horizontal deck + custom scrollbar + lazy IO */
+  function bootDeckCarousel() {
+    const parent = $('.sticky-parent');
+    const sticky = $('.deck-sticky') || $('.sticky');
+    const track = $('#deck-track') || $('.horizontal');
+    if (!parent || !sticky || !track) return;
+
+    const slides = $$('.deck-slide', track);
+    const currentOutput = $('#slide-current');
+    const previous = $('[data-slide-prev]');
+    const next = $('[data-slide-next]');
+    const scrollbar = $('.deck-scrollbar');
+    const thumb = $('.deck-scrollbar-thumb');
+    if (!slides.length) return;
+
+    let active = 0;
+    let maxScroll = 1;
+    let parentTravel = 1;
+    let frame = 0;
+    let dragging = false;
+
+    const load = (slide) => {
+      if (!slide) return;
+      const image = $('img[data-src]', slide);
+      if (!image) return;
+      const src = image.dataset.src;
+      image.removeAttribute('data-src');
+      image.src = src;
+    };
+
+    const preloadAround = (index) => {
+      for (let i = index - 1; i <= index + 2; i += 1) load(slides[i]);
+    };
+
+    if ('IntersectionObserver' in window) {
+      const loader = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          load(entry.target);
+          loader.unobserve(entry.target);
+        });
+      }, { root: null, rootMargin: '40% 60%', threshold: 0.01 });
+      slides.forEach((slide) => loader.observe(slide));
+    } else {
+      slides.forEach(load);
+    }
+
+    const measure = () => {
+      const stickyH = sticky.clientHeight || window.innerHeight;
+      maxScroll = Math.max(track.scrollWidth - sticky.clientWidth, 1);
+      // Enough vertical travel to map 1:1 onto the horizontal distance.
+      parentTravel = maxScroll;
+      parent.style.height = `${Math.round(stickyH + parentTravel)}px`;
+      parentTravel = Math.max(parent.getBoundingClientRect().height - stickyH, 1);
+    };
+
+    const progress = () => {
+      const top = parent.getBoundingClientRect().top;
+      return clamp(-top / parentTravel, 0, 1);
+    };
+
+    const setActive = (index, p) => {
+      active = clamp(index, 0, slides.length - 1);
+      preloadAround(active);
+      if (currentOutput) currentOutput.value = slides[active].dataset.slide || String(active + 1).padStart(2, '0');
+      if (previous) previous.disabled = active === 0;
+      if (next) next.disabled = active === slides.length - 1;
+      if (scrollbar) scrollbar.setAttribute('aria-valuenow', String(active + 1));
+      if (thumb) {
+        const thumbW = Math.max(100 / slides.length, 9);
+        thumb.style.width = `${thumbW}%`;
+        thumb.style.left = `${p * (100 - thumbW)}%`;
+      }
+    };
+
+    const sync = () => {
+      frame = 0;
+      if (reduceMotion) {
+        track.style.transform = '';
+        sticky.scrollLeft = 0;
+        setActive(0, 0);
+        return;
+      }
+      const p = progress();
+      const x = p * maxScroll;
+      track.style.transform = `translate3d(${-x}px, 0, 0)`;
+      const centre = x + sticky.clientWidth * 0.45;
+      const index = slides.reduce((best, slide, i) => (
+        Math.abs(slide.offsetLeft + slide.offsetWidth / 2 - centre) <
+        Math.abs(slides[best].offsetLeft + slides[best].offsetWidth / 2 - centre) ? i : best
+      ), 0);
+      setActive(index, p);
+    };
+
+    const queue = () => {
+      if (!frame) frame = requestAnimationFrame(sync);
+    };
+
+    const scrollToProgress = (p, smooth) => {
+      const top = parent.offsetTop + p * parentTravel;
+      window.scrollTo({ top, behavior: smooth && !reduceMotion ? 'smooth' : 'auto' });
+    };
+
+    const go = (index) => {
+      const target = clamp(index, 0, slides.length - 1);
+      const slide = slides[target];
+      const p = clamp(slide.offsetLeft / maxScroll, 0, 1);
+      scrollToProgress(p, true);
+    };
+
+    const pointerProgress = (clientX) => {
+      const trackEl = $('.deck-scrollbar-track', scrollbar) || scrollbar;
+      const rect = trackEl.getBoundingClientRect();
+      return clamp((clientX - rect.left) / Math.max(rect.width, 1), 0, 1);
+    };
+
+    if (scrollbar) {
+      const onMove = (event) => {
+        if (!dragging) return;
+        const clientX = event.touches ? event.touches[0].clientX : event.clientX;
+        scrollToProgress(pointerProgress(clientX), false);
+      };
+      const onUp = () => {
+        dragging = false;
+        window.removeEventListener('pointermove', onMove);
+        window.removeEventListener('pointerup', onUp);
+        window.removeEventListener('touchmove', onMove);
+        window.removeEventListener('touchend', onUp);
+      };
+      const onDown = (event) => {
+        dragging = true;
+        const clientX = event.touches ? event.touches[0].clientX : event.clientX;
+        scrollToProgress(pointerProgress(clientX), false);
+        window.addEventListener('pointermove', onMove, { passive: true });
+        window.addEventListener('pointerup', onUp);
+        window.addEventListener('touchmove', onMove, { passive: true });
+        window.addEventListener('touchend', onUp);
+        event.preventDefault();
+      };
+      scrollbar.addEventListener('pointerdown', onDown);
+      scrollbar.addEventListener('keydown', (event) => {
+        if (event.key === 'ArrowLeft') { event.preventDefault(); go(active - 1); }
+        if (event.key === 'ArrowRight') { event.preventDefault(); go(active + 1); }
+        if (event.key === 'Home') { event.preventDefault(); go(0); }
+        if (event.key === 'End') { event.preventDefault(); go(slides.length - 1); }
+      });
+    }
+
+    track.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowLeft') { event.preventDefault(); go(active - 1); }
+      if (event.key === 'ArrowRight') { event.preventDefault(); go(active + 1); }
+    });
+    if (previous) previous.addEventListener('click', () => go(active - 1));
+    if (next) next.addEventListener('click', () => go(active + 1));
+
+    measure();
+    load(slides[0]);
+    preloadAround(0);
+    sync();
+    document.addEventListener('scroll', queue, { passive: true });
+    window.addEventListener('resize', () => { measure(); sync(); });
+    window.addEventListener('load', () => { measure(); sync(); });
+  }
+
   /* ------------------------------------------------------- Curve helpers */
   const dist = (a, b) => Math.hypot(b.x - a.x, b.y - a.y);
 
@@ -496,7 +660,7 @@
 
     function paintTo(value, immediate) {
       if (gsapReady && !immediate) {
-        if (!paint) paint = window.gsap.quickTo(state, 'drawn', { duration: 0.5, ease: 'power2.out', onUpdate: paintNow });
+        if (!paint) paint = window.gsap.quickTo(state, 'drawn', { duration: 0.28, ease: 'power2.out', onUpdate: paintNow });
         paint(value);
       } else {
         state.drawn = value;
@@ -509,7 +673,7 @@
       const to = target();
       if (gsapReady) {
         introTween = window.gsap.fromTo(state, { drawn: 0 }, {
-          drawn: to, duration: 2.8, ease: 'power2.inOut', onUpdate: paintNow, onComplete: finishIntro
+          drawn: to, duration: 1.15, ease: 'power2.out', onUpdate: paintNow, onComplete: finishIntro
         });
       } else {
         state.drawn = to; paintNow(); introDone = true;
@@ -522,6 +686,7 @@
       resizeTimer = setTimeout(() => { layout(); if (gsapReady) window.ScrollTrigger.refresh(); }, 120);
     };
 
+    // First paint immediately so the thread appears without waiting on fonts/GSAP CDN.
     layout();
     intro();
     if (gsapReady) {
@@ -534,7 +699,10 @@
     }
     window.addEventListener('resize', relayout);
     window.addEventListener('load', relayout);
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(relayout).catch(() => {});
+    // Soft refresh after fonts settle — don't block the first draw.
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(() => { requestAnimationFrame(relayout); }).catch(() => {});
+    }
     if ('ResizeObserver' in window) {
       let lastH = main.offsetHeight;
       new ResizeObserver(() => {
@@ -602,7 +770,11 @@
 
   function start() {
     bootThread();
-    bootWeave();
+    bootDeckCarousel();
+    // Weave grain is decorative — defer so the thread and deck win first paint.
+    const deferWeave = () => bootWeave();
+    if ('requestIdleCallback' in window) window.requestIdleCallback(deferWeave, { timeout: 1200 });
+    else setTimeout(deferWeave, 180);
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
