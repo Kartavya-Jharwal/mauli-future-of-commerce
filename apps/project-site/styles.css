@@ -511,7 +511,7 @@ main, .mast, footer { position: relative; z-index: 2; }
 .vaidya-dock elevenlabs-convai { pointer-events: auto; }
 /* Widget stays hidden until the reader reaches the Vaidya section. */
 .vaidya-dock:not(.is-revealed) { opacity: 0; visibility: hidden; }
-.vaidya-dock:not(.is-revealed) elevenlabs-convai { pointer-events: none; }
+.vaidya-dock:not(.is-revealed) elevenlabs-convai { display: none !important; }
 .vaidya-dock.is-revealed { opacity: 1; visibility: visible; transition: transform 800ms var(--ease), opacity 500ms ease; }
 
 /* Horizons */
