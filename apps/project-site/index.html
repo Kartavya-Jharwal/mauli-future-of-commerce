@@ -11,21 +11,77 @@
   <meta property="og:type" content="website">
   <link rel="canonical" href="https://kartavya.tech/mauli-future-of-commerce/">
   <meta property="og:url" content="https://kartavya.tech/mauli-future-of-commerce/">
-  <meta property="og:image" content="https://kartavya.tech/mauli-future-of-commerce/share.svg">
-  <meta property="og:image:alt" content="Mauli / Future of Commerce — an independent student case study">
+  <meta property="og:image" content="https://kartavya.tech/mauli-future-of-commerce/media/og/slide-01.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="675">
+  <meta property="og:image:alt" content="Mauli Rituals — The Art of Rejuvenating the Brand">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://kartavya.tech/mauli-future-of-commerce/media/og/slide-01.jpg">
+  <link rel="icon" href="favicon.png" type="image/png" sizes="512x512">
+  <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" sizes="180x180">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300&family=Inter:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300&family=Inter:wght@400;500;600&family=Marcellus&display=swap">
   <link rel="stylesheet" href="styles.css">
-  <!-- Thread boots from app.js; keep GSAP ahead of it. Three.js loads later on idle. -->
+  <link rel="stylesheet" href="splash.css">
+  <!-- Thread boots from app.js; keep GSAP ahead of splash + app. Three.js loads later on idle. -->
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+  <script src="splash.js" defer></script>
   <script src="app.js" defer></script>
 </head>
-<body>
+<body class="is-splash">
 <a class="skip" href="#main">Skip to content</a>
+
+<!-- Preload on mark, then splash v6 intro, then main case study -->
+<div id="splash" role="status" aria-live="polite" aria-busy="true" aria-label="Loading Mauli Rituals"
+     data-logo="MAULI" data-sub="RITUALS" data-letter="M" data-speed="1" data-skippable="true">
+  <div class="splash-preload" id="splash-preload">
+    <div class="splash-preload-inner">
+      <div class="splash-lockup" role="img" aria-label="Mauli Rituals">
+        <div class="ms-word ms-word--static" id="splash-lockup-word"></div>
+        <div class="ms-sub ms-sub--static" id="splash-lockup-sub"></div>
+      </div>
+      <div class="splash-meter" aria-hidden="true">
+        <div class="splash-meter-track"><span id="splash-progress-fill"></span></div>
+        <p class="splash-meter-label"><span id="splash-progress-label">Preparing</span></p>
+      </div>
+    </div>
+    <button type="button" class="splash-skip" id="splash-skip">Enter the case study</button>
+  </div>
+
+  <div class="ms-ember" aria-hidden="true"></div>
+  <div class="ms-halo" aria-hidden="true"></div>
+  <div class="ms-brand" aria-hidden="true">
+    <div class="ms-word"></div>
+    <div class="ms-sub"></div>
+  </div>
+  <div class="netflix-stage" id="netflix-stage" aria-hidden="true">
+    <div class="splash-animation" id="splash-anim" letter="M">
+      <div class="helper helper-1">
+        <div class="effect-brush" id="brush-1"></div>
+        <div class="effect-lumieres" id="lamps-1"></div>
+      </div>
+      <div class="helper helper-2">
+        <div class="effect-brush" id="brush-2"></div>
+      </div>
+      <div class="helper helper-3">
+        <div class="effect-brush" id="brush-3"></div>
+      </div>
+      <div class="helper helper-4">
+        <div class="effect-brush" id="brush-4"></div>
+      </div>
+    </div>
+  </div>
+  <div class="ms-vignette" aria-hidden="true"></div>
+  <div class="ms-grain" aria-hidden="true"></div>
+  <div class="ms-fade" aria-hidden="true"></div>
+  <button type="button" class="ms-skip" id="splash-intro-skip">Skip intro</button>
+</div>
 
 <div class="thread-progress" aria-hidden="true"><span id="thread-progress-fill"></span></div>
 <canvas id="weave-canvas" aria-hidden="true"></canvas>
@@ -75,9 +131,20 @@
 <main id="main">
   <!-- Cover -->
   <section class="hero wrap" id="top" data-thread="hero">
-    <p class="eyebrow">Future of Commerce · Independent student case study</p>
-    <h1 id="hero-title">A thread through<br>the <em>future</em> of commerce.</h1>
+    <p class="hero-client">
+      Client: <a href="https://www.linkedin.com/in/anita-kaushal-a59639b/" target="_blank" rel="noopener">Mauli Rituals</a>
+      <span class="hero-disclaimer">· Independent pro bono student advisory work</span>
+    </p>
+    <h1 id="hero-title">The art of<br><em>rejuvenating</em> the brand.</h1>
     <p class="hero-line" id="hero-line">The blessed red Mauli thread—a symbol of protection, connection and care—is not decoration. It is the mechanism through which Mauli Rituals evolves.</p>
+    <footer class="hero-credits">
+      <p>
+        Future of Commerce · MKT 030305 ·
+        <a href="https://www.linkedin.com/in/nikhilsoi2208/" target="_blank" rel="noopener">Prof. Nikhil Soi</a>
+        · Guest judge:
+        <a href="https://www.linkedin.com/in/satrupaghosh/" target="_blank" rel="noopener">Prof. Satrupa Ghosh</a>
+      </p>
+    </footer>
   </section>
 
   <!-- 01 -->
@@ -171,7 +238,7 @@
   </section>
 
   <!-- 07 Sticky horizontal deck gallery -->
-  <section class="deck-gallery" id="deck" data-thread="pile" data-pile-target=".deck-sticky" data-entry="left" data-exit="right" aria-label="Presentation deck slides">
+  <section class="deck-gallery" id="deck" data-thread="deck" data-entry="left" data-exit="right" aria-label="Presentation deck slides">
     <div class="deck-gallery-intro section wrap">
       <span class="section-index">07 — The deck</span>
       <h2>In frames.</h2>
@@ -239,7 +306,7 @@
     <span class="section-index">09 — Team</span>
     <h2>Seven hands, one thread.</h2>
     <ul class="team">
-      <li data-thread-pass><span class="member-no">01</span><a href="https://www.linkedin.com/in/kartavyajharwal" target="_blank" rel="noopener"><span class="member-name">Kartavya Jharwal</span><span class="member-link">LinkedIn ↗</span></a></li>
+      <li data-thread-pass><span class="member-no">01</span><a href="https://www.linkedin.com/in/kartavyajharwal/" target="_blank" rel="noopener"><span class="member-name">Kartavya Jharwal</span><span class="member-link">LinkedIn ↗</span></a></li>
       <li data-thread-pass><span class="member-no">02</span><a href="https://www.linkedin.com/search/results/people/?keywords=Marcella%20Ibanez" target="_blank" rel="noopener"><span class="member-name">Marcella Ibanez</span><span class="member-link">LinkedIn ↗</span></a></li>
       <li data-thread-pass><span class="member-no">03</span><a href="https://www.linkedin.com/search/results/people/?keywords=Yasmin%20Souza" target="_blank" rel="noopener"><span class="member-name">Yasmin Souza</span><span class="member-link">LinkedIn ↗</span></a></li>
       <li data-thread-pass><span class="member-no">04</span><a href="https://www.linkedin.com/in/olta-abdyli" target="_blank" rel="noopener"><span class="member-name">Olta Abdyli</span><span class="member-link">LinkedIn ↗</span></a></li>
@@ -258,7 +325,7 @@
 </main>
 
 <footer class="wrap">
-  <p>Independent pro bono student advisory work for the Future of Commerce course under Prof. Nikhil Soi at Hult International Business School. Produced by the student team; not an official Mauli Rituals or Hult website and no endorsement is implied. Names, marks and supplied materials belong to their respective owners.</p>
+  <p>Independent pro bono student advisory work for <a href="https://www.linkedin.com/in/anita-kaushal-a59639b/" target="_blank" rel="noopener">Mauli Rituals</a> in the Future of Commerce course (MKT 030305) at Hult International Business School under <a href="https://www.linkedin.com/in/nikhilsoi2208/" target="_blank" rel="noopener">Prof. Nikhil Soi</a>, with guest judge <a href="https://www.linkedin.com/in/satrupaghosh/" target="_blank" rel="noopener">Prof. Satrupa Ghosh</a>. Produced by the student team; not an official Mauli Rituals or Hult website and no endorsement is implied. Names, marks and supplied materials belong to their respective owners.</p>
   <div class="footer-bottom">
     <span>Work in progress · October 2026</span>
     <a href="#top">Back to the beginning <span aria-hidden="true">↑</span></a>
@@ -314,6 +381,22 @@
   </div>
 </dialog>
 
+<script>
+  // The agent's terms acceptance is stored by the widget in localStorage under this key
+  // (set in the ElevenLabs agent settings). Mirror it through sessionStorage so it lasts one session.
+  (function () {
+    var KEY = 'terms_accepted';
+    try {
+      var kept = sessionStorage.getItem(KEY);
+      if (kept === null) localStorage.removeItem(KEY);
+      else localStorage.setItem(KEY, kept);
+      window.addEventListener('pagehide', function () {
+        var value = localStorage.getItem(KEY);
+        if (value !== null) sessionStorage.setItem(KEY, value);
+      });
+    } catch (e) {}
+  })();
+</script>
 <div class="vaidya-dock" id="vaidya-dock">
   <elevenlabs-convai agent-id="agent_0901m4hnp4ysf5gakwe25ngn2dgh"></elevenlabs-convai>
 </div>

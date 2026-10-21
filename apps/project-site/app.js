@@ -5,6 +5,76 @@
   const $ = (s, root) => (root || document).querySelector(s);
   const $$ = (s, root) => [...(root || document).querySelectorAll(s)];
 
+  /* ------------------------------------------- In-page anchors + smooth scroll */
+  function initSmoothScroll() {
+    const root = document.documentElement;
+    let snapTimer = 0;
+
+    let snapScrollListener = null;
+
+    const releaseSnapLock = () => {
+      clearTimeout(snapTimer);
+      // Keep snap disabled until native smooth scroll has mostly settled.
+      snapTimer = window.setTimeout(() => {
+        if (snapScrollListener) {
+          window.removeEventListener('scroll', snapScrollListener);
+          snapScrollListener = null;
+        }
+        root.classList.remove('is-smooth-scrolling');
+      }, 520);
+    };
+
+    const scrollToTarget = (el, { updateHash } = {}) => {
+      if (!el) return;
+      const behavior = reduceMotion ? 'auto' : 'smooth';
+      if (!reduceMotion) {
+        root.classList.add('is-smooth-scrolling');
+        if (!snapScrollListener) {
+          snapScrollListener = () => releaseSnapLock();
+          window.addEventListener('scroll', snapScrollListener, { passive: true });
+        }
+        releaseSnapLock();
+      }
+      el.scrollIntoView({ behavior, block: 'start' });
+      if (updateHash) {
+        const id = el.id;
+        if (id) history.pushState(null, '', `#${id}`);
+      }
+    };
+
+    document.addEventListener('click', (event) => {
+      const link = event.target.closest('a[href^="#"]');
+      if (!link || link.target === '_blank') return;
+      const raw = link.getAttribute('href');
+      if (!raw || raw === '#') return;
+      let target;
+      try {
+        target = document.querySelector(raw);
+      } catch (err) {
+        return;
+      }
+      if (!target) return;
+      event.preventDefault();
+      scrollToTarget(target, { updateHash: true });
+    });
+
+    const hashTarget = () => {
+      const raw = window.location.hash;
+      if (!raw || raw === '#') return;
+      let target;
+      try {
+        target = document.querySelector(raw);
+      } catch (err) {
+        return;
+      }
+      if (target) scrollToTarget(target, { updateHash: false });
+    };
+
+    window.addEventListener('hashchange', hashTarget);
+    if (document.readyState === 'complete') hashTarget();
+    else window.addEventListener('load', hashTarget, { once: true });
+  }
+
   /* ---------------------------------------------------------------- Modals */
   function dialogBackdropClose(dialog) {
     dialog.addEventListener('click', (event) => {
@@ -232,9 +302,11 @@
     load(slides[0]);
     preloadAround(0);
     sync();
+    // Parent height drives the deck thread path — nudge a relayout once measured.
+    window.dispatchEvent(new Event('resize'));
     document.addEventListener('scroll', queue, { passive: true });
     window.addEventListener('resize', () => { measure(); sync(); });
-    window.addEventListener('load', () => { measure(); sync(); });
+    window.addEventListener('load', () => { measure(); sync(); window.dispatchEvent(new Event('resize')); });
   }
 
   /* ----------------------- Vaidya widget: corner dock, centre stage at #vaidya */
@@ -272,6 +344,7 @@
       const H = window.innerHeight;
       const s = stage.getBoundingClientRect();
       const want = s.top < H * 0.5 && s.bottom > H * 0.5;
+      if (!dock.classList.contains('is-revealed') && s.top < H * 0.75) dock.classList.add('is-revealed');
       if (want && !staged) base = measure();
       staged = want;
       document.documentElement.classList.toggle('vaidya-staged', staged);
@@ -304,8 +377,8 @@
   /* ------------------------------------------------------- Curve helpers */
   const dist = (a, b) => Math.hypot(b.x - a.x, b.y - a.y);
 
-  // Centripetal Catmull-Rom → cubic Béziers. No cusps, no overshoot, smooth through uneven spacing.
-  function smoothPath(points) {
+  // Centripetal Catmull-Rom → cubic Béziers. Tension keeps corners soft without overshoot.
+  function smoothPath(points, tension = 0.42) {
     const pts = points.filter((p, i) => i === 0 || dist(p, points[i - 1]) > 0.5);
     if (pts.length < 2) return '';
     let d = `M${f(pts[0].x)} ${f(pts[0].y)}`;
@@ -317,25 +390,33 @@
       const d1 = Math.sqrt(dist(p0, p1)) || 1e-3;
       const d2 = Math.sqrt(dist(p1, p2)) || 1e-3;
       const d3 = Math.sqrt(dist(p2, p3)) || 1e-3;
-      const b1x = (d1 * d1 * p2.x - d2 * d2 * p0.x + (2 * d1 * d1 + 3 * d1 * d2 + d2 * d2) * p1.x) / (3 * d1 * (d1 + d2));
-      const b1y = (d1 * d1 * p2.y - d2 * d2 * p0.y + (2 * d1 * d1 + 3 * d1 * d2 + d2 * d2) * p1.y) / (3 * d1 * (d1 + d2));
-      const b2x = (d3 * d3 * p1.x - d2 * d2 * p3.x + (2 * d3 * d3 + 3 * d3 * d2 + d2 * d2) * p2.x) / (3 * d3 * (d3 + d2));
-      const b2y = (d3 * d3 * p1.y - d2 * d2 * p3.y + (2 * d3 * d3 + 3 * d3 * d2 + d2 * d2) * p2.y) / (3 * d3 * (d3 + d2));
+      let b1x = (d1 * d1 * p2.x - d2 * d2 * p0.x + (2 * d1 * d1 + 3 * d1 * d2 + d2 * d2) * p1.x) / (3 * d1 * (d1 + d2));
+      let b1y = (d1 * d1 * p2.y - d2 * d2 * p0.y + (2 * d1 * d1 + 3 * d1 * d2 + d2 * d2) * p1.y) / (3 * d1 * (d1 + d2));
+      let b2x = (d3 * d3 * p1.x - d2 * d2 * p3.x + (2 * d3 * d3 + 3 * d3 * d2 + d2 * d2) * p2.x) / (3 * d3 * (d3 + d2));
+      let b2y = (d3 * d3 * p1.y - d2 * d2 * p3.y + (2 * d3 * d3 + 3 * d3 * d2 + d2 * d2) * p2.y) / (3 * d3 * (d3 + d2));
+      if (tension < 1) {
+        const mx = p1.x + (p2.x - p1.x) * tension;
+        const my = p1.y + (p2.y - p1.y) * tension;
+        b1x = p1.x + (b1x - p1.x) * tension;
+        b1y = p1.y + (b1y - p1.y) * tension;
+        b2x = mx + (b2x - mx) * tension;
+        b2y = my + (b2y - my) * tension;
+      }
       d += ` C${f(b1x)} ${f(b1y)}, ${f(b2x)} ${f(b2y)}, ${f(p2.x)} ${f(p2.y)}`;
     }
     return d;
   }
 
-  // Three long, nearly horizontal wraps cross the full card before returning
-  // to its centre. This is the flat tied-card silhouette from the sketch.
-  function flatWrapPath(kx, ky, left, right) {
-    const span = right - left;
-    const rise = clamp(span * 0.015, 6, 20);
+  // Two edge-to-edge horizontal lines drawn by the same stroke. The pen starts
+  // off-canvas left on the lower line; U-turns happen off-canvas (the thread
+  // layer clips at the viewport) so both lines read as full-width rules.
+  function flatWrapPath(kx, ky, W, gap) {
+    const out = 14;
+    const lowY = ky + gap;
     return (
-      ` L${f(right)} ${f(ky)}` +
-      ` C${f(right - span * 0.24)} ${f(ky + rise)}, ${f(left + span * 0.3)} ${f(ky - rise)}, ${f(left)} ${f(ky + 2)}` +
-      ` C${f(left + span * 0.28)} ${f(ky - rise)}, ${f(right - span * 0.24)} ${f(ky + rise)}, ${f(right)} ${f(ky - 2)}` +
-      ` C${f(right - span * 0.2)} ${f(ky - rise)}, ${f(kx + span * 0.12)} ${f(ky + rise)}, ${f(kx)} ${f(ky)}`
+      ` L${f(W + out)} ${f(lowY)}` +
+      ` C${f(W + out + gap * 1.4)} ${f(lowY)}, ${f(W + out + gap * 1.4)} ${f(ky)}, ${f(W + out)} ${f(ky)}` +
+      ` L${f(kx)} ${f(ky)}`
     );
   }
 
@@ -358,14 +439,15 @@
       ` C${f(kx - s * 0.88)} ${f(ky + s * 0.92)}, ${f(kx - s * 1.18)} ${f(ky - s * 0.22)}, ${f(kx - s * 0.2)} ${f(ky - s * 0.62)}` +
       ` C${f(kx + s * 0.7)} ${f(ky - s * 1.02)}, ${f(kx + s * 1.02)} ${f(ky - s * 0.04)}, ${f(kx + s * 0.28)} ${f(ky + s * 0.42)}` +
       ` C${f(kx - s * 0.42)} ${f(ky + s * 0.82)}, ${f(kx - s * 0.8)} ${f(ky + s * 0.08)}, ${f(kx)} ${f(ky)}` +
-      // Two short cut ends; no vertical post or plus sign
-      ` M${f(kx - s * 0.22)} ${f(ky + s * 0.12)} C${f(kx - w * 0.34)} ${f(ky + h * 0.42)}, ${f(kx - w * 0.6)} ${f(ky + h * 0.7)}, ${f(kx - w * 0.88)} ${f(ky + h * 0.82)}` +
-      ` M${f(kx + s * 0.22)} ${f(ky + s * 0.12)} C${f(kx + w * 0.34)} ${f(ky + h * 0.42)}, ${f(kx + w * 0.6)} ${f(ky + h * 0.7)}, ${f(kx + w * 0.88)} ${f(ky + h * 0.82)}`
+      // Leave the knot along the upper line to the left edge.
+      ` L${f(-14)} ${f(ky)}`
     );
   }
 
   /* ------------------------------------------------------------ The thread */
-  function bootThread() {
+  function bootThread(options) {
+    const opts = options || {};
+    const holdIntro = !!opts.holdIntro;
     const under = $('#thread-svg');
     const over = $('#thread-svg-over');
     const paths = [$('#thread-path'), $('#thread-shadow'), $('#thread-path-over')];
@@ -374,7 +456,9 @@
     const hero = $('#top');
     const title = $('#hero-title');
     const main = $('#main');
-    if (!under || !over || !hero || !title || paths.some((p) => !p)) return;
+    if (!under || !over || !hero || !title || paths.some((p) => !p)) {
+      return { ready: Promise.resolve(), releaseIntro: () => {} };
+    }
 
     const layers = $$('.thread-layer');
     const gsapReady = typeof window.gsap !== 'undefined' && typeof window.ScrollTrigger !== 'undefined';
@@ -384,7 +468,8 @@
     let lookup = [];
     let lookupStep = 10;
     const state = { drawn: 0 };
-    let paint = null;
+    let scrollGoal = 0;
+    let drawFrame = 0;
     let introDone = reduceMotion;
     let trigger = null;
 
@@ -474,16 +559,24 @@
       }
     }
 
-    // Flattened S inside the gap between sections: rail → rounded corner → across → corner → other rail
+    // Flattened S between rails — extra samples so the stroke reads as one flowing line.
     function crossOver(pts, fromX, toX, crossY, R) {
       const dir = toX > fromX ? 1 : -1;
-      const bend = Math.min(Math.abs(toX - fromX) * 0.12, 90);
+      const span = Math.abs(toX - fromX);
+      const bend = Math.min(span * 0.14, 96);
       const last = pts[pts.length - 1];
+      const y0 = last ? last.y : crossY - 90;
       if (!last || last.y < crossY - 110) pts.push({ x: fromX, y: crossY - 70 });
-      pts.push({ x: fromX + dir * bend, y: crossY });
-      pts.push({ x: toX - dir * bend, y: crossY });
-      pts.push({ x: toX, y: crossY + 70 });
-      pts.push({ x: toX, y: crossY + 150 });
+      const steps = 5;
+      for (let i = 1; i <= steps; i += 1) {
+        const t = i / steps;
+        const ease = t * t * (3 - 2 * t);
+        const x = fromX + (toX - fromX) * ease + Math.sin(t * Math.PI) * dir * bend * 0.22;
+        const y = y0 + (crossY - y0) * ease;
+        pts.push({ x, y });
+      }
+      pts.push({ x: toX, y: crossY + 48 });
+      pts.push({ x: toX, y: crossY + 130 });
     }
 
     // Weave around items row by row (boustrophedon), never through them.
@@ -549,6 +642,75 @@
         }
       });
       return dir === 1 ? 'right' : 'left';
+    }
+
+    // Squiggle through each deck slide as the sticky carousel scrolls.
+    // Maps each slide to a band of the tall sticky-parent height so the ink
+    // draws through that image while it is centred; odd slides clip over.
+    function deckSquiggle(pts, parentEl, stickyEl, slides, entrySide, exitSide, R, overEls) {
+      const parent = rectOf(parentEl);
+      const stickyH = stickyEl.clientHeight || window.innerHeight;
+      const travel = Math.max(parent.h - stickyH, 1);
+      const frameEl = $('.deck-frame', slides[0]) || slides[0];
+      const sample = frameEl ? frameEl.getBoundingClientRect() : stickyEl.getBoundingClientRect();
+      const frameW = Math.max(sample.width, 240);
+      const frameH = Math.max(sample.height, 160);
+      const cx = document.documentElement.clientWidth / 2;
+      const left = cx - frameW / 2;
+      const right = cx + frameW / 2;
+      const n = slides.length;
+      const entryX = entrySide === 'left' ? R.left : R.right;
+
+      pts.push({ x: entryX, y: Math.max(0, parent.t - 48) });
+      pts.push({ x: entryX, y: parent.t + stickyH * 0.18 });
+
+      for (let i = 0; i < n; i += 1) {
+        const t = n === 1 ? 0 : i / (n - 1);
+        const yCenter = parent.t + t * travel + stickyH * 0.42;
+        const top = yCenter - frameH / 2;
+        const bot = yCenter + frameH / 2;
+        const over = i % 2 === 1;
+        if (over) {
+          overEls.push({
+            l: left - 10,
+            t: top - 10,
+            w: frameW + 20,
+            h: frameH + 20
+          });
+        }
+
+        const dir = i % 2 === 0 ? 1 : -1;
+        const xIn = dir === 1 ? left - 28 : right + 28;
+        const xOut = dir === 1 ? right + 28 : left - 28;
+        const baseY = over ? top + frameH * 0.32 : bot - frameH * 0.32;
+        const amp = clamp(frameH * 0.14, 28, 72);
+
+        pts.push({ x: xIn, y: baseY + (i === 0 ? -amp * 0.2 : 0) });
+        const steps = 7;
+        for (let s = 1; s <= steps; s += 1) {
+          const u = s / (steps + 1);
+          const x = xIn + (xOut - xIn) * u;
+          const wave = Math.sin(u * Math.PI * 2.4 + i * 0.85) * amp
+            + Math.sin(u * Math.PI * 5.1 + i * 1.4) * amp * 0.32;
+          pts.push({ x, y: baseY + (over ? wave : -wave) });
+        }
+        pts.push({ x: xOut, y: baseY });
+
+        if (i < n - 1) {
+          const nextT = (i + 1) / (n - 1);
+          const nextY = parent.t + nextT * travel + stickyH * 0.42;
+          const bridge = (baseY + nextY) / 2;
+          pts.push({ x: xOut + dir * 12, y: bridge - amp * 0.15 });
+          pts.push({ x: xOut - dir * 36, y: bridge + amp * 0.1 });
+        }
+      }
+
+      const exitX = exitSide === 'left' ? R.left : R.right;
+      const last = pts[pts.length - 1];
+      pts.push({ x: last.x, y: parent.b - stickyH * 0.15 });
+      pts.push({ x: exitX, y: parent.b + 36 });
+      pts.push({ x: exitX, y: parent.b + 96 });
+      return exitSide;
     }
 
     // Pile loose loops behind a big box (the demo frame, the video clips).
@@ -622,6 +784,18 @@
           side = weave(pts, items, side, R, overEls, mode);
           const last = pts[pts.length - 1];
           pts.push({ x: side === 'left' ? R.left : R.right, y: Math.min(last.y + 120, r.b + 20) });
+        } else if (kind === 'deck') {
+          const parentEl = $('.sticky-parent', sec);
+          const stickyEl = $('.deck-sticky', sec) || $('.sticky', sec);
+          const slides = $$('.deck-slide', sec);
+          const entry = sec.getAttribute('data-entry') || side;
+          const exit = sec.getAttribute('data-exit') || 'right';
+          if (!parentEl || !stickyEl || !slides.length) return;
+          if (entry !== side) {
+            crossOver(pts, side === 'left' ? R.left : R.right, entry === 'left' ? R.left : R.right, r.t + 40, R);
+            side = entry;
+          }
+          side = deckSquiggle(pts, parentEl, stickyEl, slides, entry, exit, R, overEls);
         } else if (kind === 'pile') {
           const targetEl = $(sec.getAttribute('data-pile-target') || '', sec);
           if (!targetEl) return;
@@ -641,9 +815,6 @@
           const kx = W / 2;
           const bw = clamp(W * 0.07, 52, 100);
           const wrapLeft = Math.max(12, R.left);
-          const wrapRight = Math.min(W - 12, R.right);
-          const tieLeft = wrapLeft + clamp(W * 0.04, 28, 62);
-
           // Always enter the closing card from its left edge. On narrow layouts
           // the preceding weave may finish right, so switch sides in the empty
           // band above the closing copy.
@@ -660,10 +831,12 @@
           // Vertical first, then a broad horizontal tie crossing the full card.
           pts.push({ x: wrapLeft, y: r.t + 20 });
           pts.push({ x: wrapLeft, y: lineY - 108 });
-          pts.push({ x: wrapLeft, y: lineY - 48 });
-          pts.push({ x: wrapLeft + 12, y: lineY - 14 });
-          pts.push({ x: tieLeft, y: lineY });
-          bowD = flatWrapPath(kx, lineY, tieLeft, wrapRight) + bowPath(kx, lineY, bw);
+          // Curl off the left edge and re-enter on the lower line.
+          const gap = clamp(W * 0.018, 14, 26);
+          pts.push({ x: wrapLeft, y: lineY - 20 });
+          pts.push({ x: Math.max(wrapLeft * 0.4, 4), y: lineY + gap * 0.7 });
+          pts.push({ x: -14, y: lineY + gap });
+          bowD = flatWrapPath(kx, lineY, W, gap) + bowPath(kx, lineY, bw);
         }
       });
 
@@ -703,8 +876,9 @@
         maxY = Math.max(maxY, paths[0].getPointAtLength(l).y);
         lookup.push(maxY);
       }
+      setScrollGoal();
       if (reduceMotion) { state.drawn = total; paintNow(); return; }
-      if (introDone) paintTo(target(), true);
+      if (introDone) paintTo(scrollGoal, true);
       else if (introTween && gsapReady) {
         // Keep momentum; only re-aim — don't restart a long tween from scratch.
         const to = Math.max(target(), state.drawn);
@@ -724,12 +898,17 @@
     let introTween = null;
     let introStarted = false;
     const introStartedAt = performance.now();
-    function finishIntro() { introDone = true; introTween = null; paintTo(target()); }
+    function finishIntro() {
+      introDone = true;
+      introTween = null;
+      setScrollGoal();
+      startDrawLoop();
+    }
 
     function target() {
       const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
       if (sy() >= maxScroll - 4) return total;
-      const y = sy() + window.innerHeight * 0.82;
+      const y = sy() + window.innerHeight * 0.78;
       let lo = 0;
       let hi = lookup.length - 1;
       if (hi < 0 || lookup[0] > y) return 0;
@@ -737,7 +916,37 @@
         const mid = (lo + hi + 1) >> 1;
         if (lookup[mid] <= y) lo = mid; else hi = mid - 1;
       }
-      return Math.min(total, lo * lookupStep);
+      const base = lo * lookupStep;
+      if (lo >= lookup.length - 1) return total;
+      const y0 = lookup[lo];
+      const y1 = lookup[lo + 1];
+      const span = Math.max(y1 - y0, 1e-3);
+      const frac = clamp((y - y0) / span, 0, 1);
+      return Math.min(total, base + frac * lookupStep);
+    }
+
+    function setScrollGoal() {
+      scrollGoal = target();
+    }
+
+    function startDrawLoop() {
+      if (drawFrame || reduceMotion) return;
+      const step = () => {
+        if (!introDone) {
+          drawFrame = requestAnimationFrame(step);
+          return;
+        }
+        const diff = scrollGoal - state.drawn;
+        if (Math.abs(diff) < 0.35) {
+          state.drawn = scrollGoal;
+        } else {
+          const gain = clamp(0.2 + Math.abs(diff) / total * 0.28, 0.18, 0.48);
+          state.drawn += diff * gain;
+        }
+        paintNow();
+        drawFrame = requestAnimationFrame(step);
+      };
+      drawFrame = requestAnimationFrame(step);
     }
 
     function paintNow() {
@@ -747,11 +956,9 @@
     }
 
     function paintTo(value, immediate) {
-      if (gsapReady && !immediate) {
-        if (!paint) paint = window.gsap.quickTo(state, 'drawn', { duration: 0.28, ease: 'power2.out', onUpdate: paintNow });
-        paint(value);
-      } else {
-        state.drawn = value;
+      scrollGoal = clamp(value, 0, total);
+      if (immediate || reduceMotion) {
+        state.drawn = scrollGoal;
         paintNow();
       }
     }
@@ -774,7 +981,7 @@
       } else {
         state.drawn = to;
         paintNow();
-        introDone = true;
+        finishIntro();
       }
     }
 
@@ -786,17 +993,17 @@
       resizeTimer = setTimeout(() => { layout(); if (gsapReady) window.ScrollTrigger.refresh(); }, force ? 0 : 140);
     };
 
-    // First paint immediately so the thread appears without waiting on fonts.
+    // First layout immediately so the splash can wait on a real thread path.
     layout();
-    intro();
+    if (!holdIntro) intro();
+    const onScrollGoal = () => { if (introDone) setScrollGoal(); };
     if (gsapReady) {
       trigger = window.ScrollTrigger.create({
         start: 0, end: 'max',
-        onUpdate: () => { if (introDone) paintTo(target()); }
+        onUpdate: onScrollGoal
       });
-    } else {
-      window.addEventListener('scroll', () => { if (introDone) paintTo(target(), true); }, { passive: true });
     }
+    window.addEventListener('scroll', onScrollGoal, { passive: true });
     window.addEventListener('resize', () => relayout(true));
     window.addEventListener('load', () => relayout(true));
     // Soft refresh after fonts settle — don't block or erase the first draw.
@@ -812,6 +1019,200 @@
         if (Math.abs(h - lastH) > 2) { lastH = h; relayout(false); }
       }).observe(main);
     }
+
+    const ready = new Promise((resolve) => {
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => resolve());
+      });
+    });
+
+    return {
+      ready,
+      releaseIntro: () => { if (holdIntro) intro(); }
+    };
+  }
+
+  /* ----------------------------------------------------------- Splash preloader */
+  function bootSplash(onReady) {
+    const root = $('#splash');
+    const fill = $('#splash-progress-fill');
+    const label = $('#splash-progress-label');
+    const skip = $('#splash-skip');
+    if (!root) {
+      onReady({ holdIntro: false });
+      return;
+    }
+
+    const deepLink = !!(window.location.hash && window.location.hash !== '#');
+    const bypass = deepLink || reduceMotion;
+    let settled = false;
+    let booted = false;
+    let api = null;
+    let weights = { libs: 0, fonts: 0, images: 0, thread: 0 };
+    const labels = {
+      libs: 'Libraries',
+      fonts: 'Type',
+      images: 'Images',
+      thread: 'Thread'
+    };
+
+    const ensureBoot = (holdIntro) => {
+      if (!booted) {
+        booted = true;
+        api = onReady({ holdIntro: !!holdIntro }) || { ready: Promise.resolve(), releaseIntro: () => {} };
+      }
+      return api;
+    };
+
+    const setProgress = () => {
+      const value = (weights.libs * 0.28) + (weights.fonts * 0.12) + (weights.images * 0.35) + (weights.thread * 0.25);
+      const pct = Math.round(clamp(value, 0, 1) * 100);
+      if (fill) fill.style.width = `${pct}%`;
+      if (label) {
+        const pending = Object.keys(weights).find((key) => weights[key] < 1);
+        label.textContent = pending ? labels[pending] : 'Ready';
+      }
+      return pct;
+    };
+
+    const loadImage = (src) => new Promise((resolve) => {
+      if (!src) { resolve(false); return; }
+      const img = new Image();
+      img.decoding = 'async';
+      img.onload = () => resolve(true);
+      img.onerror = () => resolve(false);
+      img.src = src;
+    });
+
+    const waitForGsap = () => new Promise((resolve) => {
+      if (typeof window.gsap !== 'undefined' && typeof window.ScrollTrigger !== 'undefined') {
+        resolve(true);
+        return;
+      }
+      let tries = 0;
+      const tick = () => {
+        if (typeof window.gsap !== 'undefined' && typeof window.ScrollTrigger !== 'undefined') {
+          resolve(true);
+          return;
+        }
+        tries += 1;
+        if (tries > 80) { resolve(false); return; }
+        setTimeout(tick, 50);
+      };
+      tick();
+    });
+
+    const waitForSplash = () => new Promise((resolve) => {
+      if (window.MatterSplash && typeof window.MatterSplash.start === 'function') {
+        resolve(true);
+        return;
+      }
+      let tries = 0;
+      const tick = () => {
+        if (window.MatterSplash && typeof window.MatterSplash.start === 'function') {
+          resolve(true);
+          return;
+        }
+        tries += 1;
+        if (tries > 40) { resolve(false); return; }
+        setTimeout(tick, 50);
+      };
+      tick();
+    });
+
+    const openMain = (release) => {
+      if (settled) return;
+      settled = true;
+      if (root) root.setAttribute('aria-busy', 'false');
+      document.body.classList.remove('is-splash');
+      const current = ensureBoot(false);
+      if (release && current.releaseIntro) current.releaseIntro();
+    };
+
+    const skipToMain = () => {
+      if (window.MatterSplash && window.MatterSplash.active) {
+        window.MatterSplash.skip();
+        return;
+      }
+      if (window.MatterSplash && typeof window.MatterSplash.finish === 'function') {
+        window.MatterSplash.finish();
+        return;
+      }
+      openMain(true);
+      if (root && root.parentNode) root.remove();
+    };
+
+    document.addEventListener('matter-splash:end', () => openMain(true), { once: true });
+
+    const run = async () => {
+      if (bypass) {
+        ensureBoot(false);
+        skipToMain();
+        return;
+      }
+
+      ensureBoot(true);
+      setProgress();
+
+      const libs = Promise.all([waitForGsap(), waitForSplash()]).then(([gsapOk]) => {
+        weights.libs = gsapOk ? 1 : 0.85;
+        setProgress();
+      });
+
+      const marcellus = (document.fonts && document.fonts.load
+        ? document.fonts.load('400 48px "Marcellus"').then(() => true).catch(() => false)
+        : Promise.resolve(true)
+      );
+
+      const fonts = Promise.all([
+        marcellus,
+        document.fonts && document.fonts.ready
+          ? document.fonts.ready.then(() => true).catch(() => false)
+          : Promise.resolve(true)
+      ]).then(() => {
+        weights.fonts = 1;
+        setProgress();
+      });
+
+      const imageList = [
+        'media/splash/thread.png',
+        'media/logos/mauli-rituals.png',
+        'media/logos/hult.png',
+        'media/deck/01.webp',
+        'media/deck/02.webp',
+        'media/deck/03.webp',
+        'media/deck/04.webp'
+      ];
+      const images = Promise.all(imageList.map(loadImage)).then((results) => {
+        const ok = results.filter(Boolean).length;
+        weights.images = clamp(ok / imageList.length, 0.4, 1);
+        setProgress();
+      });
+
+      const thread = ensureBoot(true).ready.then(() => {
+        weights.thread = 1;
+        setProgress();
+      });
+
+      await Promise.all([libs, fonts, images, thread]);
+      await new Promise((r) => setTimeout(r, 320));
+      if (settled) return;
+      if (window.MatterSplash && typeof window.MatterSplash.start === 'function') {
+        window.MatterSplash.start();
+      } else {
+        skipToMain();
+      }
+    };
+
+    if (skip) skip.addEventListener('click', () => {
+      ensureBoot(false);
+      skipToMain();
+    });
+
+    run().catch(() => {
+      ensureBoot(false);
+      skipToMain();
+    });
   }
 
   /* -------------------------------------------- Three.js woven-cloth grain */
@@ -884,13 +1285,17 @@
   }
 
   function start() {
-    bootThread();
-    bootDeckCarousel();
-    bootVaidyaDock();
-    // Weave grain is decorative — defer so the thread and deck win first paint.
-    const deferWeave = () => bootWeave();
-    if ('requestIdleCallback' in window) window.requestIdleCallback(deferWeave, { timeout: 1200 });
-    else setTimeout(deferWeave, 180);
+    initSmoothScroll();
+    bootSplash((opts) => {
+      const threadApi = bootThread({ holdIntro: !!(opts && opts.holdIntro) });
+      bootDeckCarousel();
+      bootVaidyaDock();
+      // Weave grain is decorative — defer so the thread and deck win first paint.
+      const deferWeave = () => bootWeave();
+      if ('requestIdleCallback' in window) window.requestIdleCallback(deferWeave, { timeout: 1200 });
+      else setTimeout(deferWeave, 180);
+      return threadApi;
+    });
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
