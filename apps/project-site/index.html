@@ -16,11 +16,12 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300&family=Inter:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="styles.css">
+  <!-- Thread boots from app.js; keep GSAP ahead of it. Three.js loads later on idle. -->
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js" defer></script>
   <script src="app.js" defer></script>
 </head>
 <body>
@@ -125,9 +126,17 @@
     </p>
   </section>
 
-  <!-- 04 -->
+  <!-- 04 The floating voice widget steps into the centre here -->
+  <section class="section wrap vaidya-stage" id="vaidya" data-thread="side" data-side="right" aria-labelledby="vaidya-title">
+    <span class="section-index">04 — Ask Vaidya</span>
+    <h2 id="vaidya-title">Talk it through first.</h2>
+    <p class="lead">Vaidya, our ElevenLabs voice guide, waits in the corner of every screen. Here it steps into the centre: start a call and ask about a skin concern, a ritual or the botanicals in the demo below.</p>
+    <div class="vaidya-spot" aria-hidden="true"></div>
+  </section>
+
+  <!-- 05 -->
   <section class="section wrap" id="prototype" data-thread="pile" data-pile-target=".window" data-entry="right" data-exit="left">
-    <span class="section-index">04 — Prototype</span>
+    <span class="section-index">05 — Prototype</span>
     <h2>Aushada Peti.</h2>
     <p class="lead">
       <em>Auṣadha peṭī</em>, Sanskrit for "medicine box". Explore how Mauli's skin and body-care botanicals relate to Ayurvedic gunas (inherent qualities), warming or cooling virya, and dry, reactive or congested skin states. Try the demo here or <a href="artefact/index.html" target="_blank" rel="noopener">open it in its own window ↗</a>.
@@ -142,9 +151,9 @@
     </div>
   </section>
 
-  <!-- 05 -->
+  <!-- 06 -->
   <section class="section wrap" id="agent" data-thread="pile" data-pile-target=".clips" data-entry="left" data-exit="left">
-    <span class="section-index">05 — Voice agent</span>
+    <span class="section-index">06 — Voice agent</span>
     <h2>Vaidya, the voice guide.</h2>
     <p class="lead">An ElevenLabs conversational agent that talks a shopper through the ritual. Two short clips; they load when you press play.</p>
     <div class="clips">
@@ -161,12 +170,12 @@
     </div>
   </section>
 
-  <!-- 06 Sticky horizontal deck gallery -->
+  <!-- 07 Sticky horizontal deck gallery -->
   <section class="deck-gallery" id="deck" data-thread="pile" data-pile-target=".deck-sticky" data-entry="left" data-exit="right" aria-label="Presentation deck slides">
     <div class="deck-gallery-intro section wrap">
-      <span class="section-index">06 — The deck</span>
+      <span class="section-index">07 — The deck</span>
       <h2>In frames.</h2>
-      <p>Scroll to move sideways through the presentation. Use the scrollbar or arrows to jump.</p>
+      <p>Keep scrolling down: each scroll moves one slide sideways. Use the scrollbar or arrows to jump.</p>
     </div>
     <div class="sticky-parent">
       <div class="deck-sticky sticky">
@@ -214,9 +223,9 @@
     <p class="deck-fallback wrap"><a href="downloads/mauli-presentation-deck.pdf">Open the complete presentation deck (PDF)</a></p>
   </section>
 
-  <!-- 07 -->
+  <!-- 08 -->
   <section class="section wrap" id="choices" data-thread="side" data-side="left">
-    <span class="section-index">07 — What we would sharpen</span>
+    <span class="section-index">08 — What we would sharpen</span>
     <h2>Three horizons.</h2>
     <ol class="horizon">
       <li><span>Immediate</span><h3>Make the next step clear.</h3><p>Clarify guidance, define activation events, agree the baseline.</p></li>
@@ -225,9 +234,9 @@
     </ol>
   </section>
 
-  <!-- 08 -->
+  <!-- 09 -->
   <section class="section wrap" id="team" data-thread="weave" data-weave="under" data-side="left">
-    <span class="section-index">08 — Team</span>
+    <span class="section-index">09 — Team</span>
     <h2>Seven hands, one thread.</h2>
     <ul class="team">
       <li data-thread-pass><span class="member-no">01</span><a href="https://www.linkedin.com/in/kartavyajharwal" target="_blank" rel="noopener"><span class="member-name">Kartavya Jharwal</span><span class="member-link">LinkedIn ↗</span></a></li>
@@ -240,7 +249,7 @@
     </ul>
   </section>
 
-  <!-- 09 -->
+  <!-- 10 -->
   <section class="closing wrap" id="closing" data-thread="bow">
     <p class="eyebrow">Closing mark</p>
     <h2>Every connection<br>ends in a <em>knot.</em></h2>
@@ -304,5 +313,10 @@
     </div>
   </div>
 </dialog>
+
+<div class="vaidya-dock" id="vaidya-dock">
+  <elevenlabs-convai agent-id="agent_0901m4hnp4ysf5gakwe25ngn2dgh"></elevenlabs-convai>
+</div>
+<script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
 </body>
 </html>

@@ -107,6 +107,18 @@
       slides.forEach(load);
     }
 
+    // One vertical snap point per slide, so each scroll gesture lands on the next frame.
+    const snaps = slides.map(() => {
+      const marker = document.createElement('span');
+      marker.className = 'deck-snap';
+      marker.setAttribute('aria-hidden', 'true');
+      parent.appendChild(marker);
+      return marker;
+    });
+
+    // Horizontal offset that centres a slide in the sticky frame.
+    const slideX = (slide) => clamp(slide.offsetLeft + slide.offsetWidth / 2 - sticky.clientWidth / 2, 0, maxScroll);
+
     const measure = () => {
       const stickyH = sticky.clientHeight || window.innerHeight;
       maxScroll = Math.max(track.scrollWidth - sticky.clientWidth, 1);
@@ -114,6 +126,9 @@
       parentTravel = maxScroll;
       parent.style.height = `${Math.round(stickyH + parentTravel)}px`;
       parentTravel = Math.max(parent.getBoundingClientRect().height - stickyH, 1);
+      slides.forEach((slide, i) => {
+        snaps[i].style.top = `${Math.round((slideX(slide) / maxScroll) * parentTravel)}px`;
+      });
     };
 
     const progress = () => {
@@ -146,7 +161,7 @@
       const p = progress();
       const x = p * maxScroll;
       track.style.transform = `translate3d(${-x}px, 0, 0)`;
-      const centre = x + sticky.clientWidth * 0.45;
+      const centre = x + sticky.clientWidth * 0.5;
       const index = slides.reduce((best, slide, i) => (
         Math.abs(slide.offsetLeft + slide.offsetWidth / 2 - centre) <
         Math.abs(slides[best].offsetLeft + slides[best].offsetWidth / 2 - centre) ? i : best
@@ -159,15 +174,13 @@
     };
 
     const scrollToProgress = (p, smooth) => {
-      const top = parent.offsetTop + p * parentTravel;
-      window.scrollTo({ top, behavior: smooth && !reduceMotion ? 'smooth' : 'auto' });
+      const top = parent.getBoundingClientRect().top + window.scrollY + p * parentTravel;
+      window.scrollTo({ top: Math.round(top), behavior: smooth && !reduceMotion ? 'smooth' : 'auto' });
     };
 
     const go = (index) => {
       const target = clamp(index, 0, slides.length - 1);
-      const slide = slides[target];
-      const p = clamp(slide.offsetLeft / maxScroll, 0, 1);
-      scrollToProgress(p, true);
+      scrollToProgress(slideX(slides[target]) / maxScroll, true);
     };
 
     const pointerProgress = (clientX) => {
@@ -222,6 +235,70 @@
     document.addEventListener('scroll', queue, { passive: true });
     window.addEventListener('resize', () => { measure(); sync(); });
     window.addEventListener('load', () => { measure(); sync(); });
+  }
+
+  /* ----------------------- Vaidya widget: corner dock, centre stage at #vaidya */
+  function bootVaidyaDock() {
+    const dock = $('#vaidya-dock');
+    const stage = $('#vaidya');
+    const spot = $('.vaidya-spot');
+    if (!dock || !stage || !spot) return;
+    const widget = $('elevenlabs-convai', dock);
+    const deckParent = $('.sticky-parent');
+    const deckNav = $('.deck-nav');
+    let staged = false;
+    let base = null;
+    let frame = 0;
+
+    // Centre of the widget as it sits in the corner. Its UI lives in a shadow
+    // root; fall back to the default bottom-right pill if that is closed.
+    const measure = () => {
+      const root = widget && widget.shadowRoot;
+      let l = Infinity; let t = Infinity; let r = -Infinity; let b = -Infinity;
+      if (root) {
+        $$('*', root).forEach((node) => {
+          const q = node.getBoundingClientRect();
+          if (q.width < 8 || q.height < 8 || q.width > window.innerWidth * 0.9) return;
+          l = Math.min(l, q.left); t = Math.min(t, q.top);
+          r = Math.max(r, q.right); b = Math.max(b, q.bottom);
+        });
+      }
+      if (r > l && b > t) return { x: (l + r) / 2, y: (t + b) / 2 };
+      return { x: window.innerWidth - 150, y: window.innerHeight - 58 };
+    };
+
+    const place = () => {
+      frame = 0;
+      const H = window.innerHeight;
+      const s = stage.getBoundingClientRect();
+      const want = s.top < H * 0.5 && s.bottom > H * 0.5;
+      if (want && !staged) base = measure();
+      staged = want;
+      document.documentElement.classList.toggle('vaidya-staged', staged);
+
+      if (staged) {
+        const target = spot.getBoundingClientRect();
+        const cx = target.left + target.width / 2;
+        const cy = clamp(target.top + target.height / 2, H * 0.3, H * 0.8);
+        const scale = window.innerWidth < 760 ? 1.1 : 1.35;
+        dock.style.transformOrigin = `${base.x}px ${base.y}px`;
+        dock.style.transform = `translate(${f(cx - base.x)}px, ${f(cy - base.y)}px) scale(${scale})`;
+        return;
+      }
+
+      // Lift clear of the deck's arrows and counter while the slides are pinned.
+      let lift = 0;
+      if (deckParent && deckNav) {
+        const d = deckParent.getBoundingClientRect();
+        if (d.top <= 1 && d.bottom >= H - 1) lift = deckNav.offsetHeight + 6;
+      }
+      dock.style.transform = lift ? `translate(0, ${-lift}px)` : '';
+    };
+
+    const queue = () => { if (!frame) frame = requestAnimationFrame(place); };
+    document.addEventListener('scroll', queue, { passive: true });
+    window.addEventListener('resize', queue);
+    place();
   }
 
   /* ------------------------------------------------------- Curve helpers */
@@ -618,8 +695,8 @@
       total = Math.max(paths[0].getTotalLength(), 1);
       paths.forEach((p) => { p.style.strokeDasharray = `${total} ${total}`; });
 
-      // Depth → length table so the tip stays at the reader's eye line
-      lookupStep = Math.max(8, total / 2600);
+      // Coarser depth table = faster first layout on the tall sticky-deck page.
+      lookupStep = Math.max(28, total / 720);
       lookup = [];
       let maxY = 0;
       for (let l = 0; l <= total; l += lookupStep) {
@@ -628,14 +705,25 @@
       }
       if (reduceMotion) { state.drawn = total; paintNow(); return; }
       if (introDone) paintTo(target(), true);
-      else if (introTween) {
-        // Layout moved under the intro (fonts, iframe height): re-aim the tween at the new target
+      else if (introTween && gsapReady) {
+        // Keep momentum; only re-aim — don't restart a long tween from scratch.
+        const to = Math.max(target(), state.drawn);
         introTween.kill();
-        introTween = window.gsap.to(state, { drawn: target(), duration: 1.4, ease: 'power2.out', onUpdate: paintNow, onComplete: finishIntro });
+        introTween = window.gsap.to(state, {
+          drawn: to,
+          duration: 0.4,
+          ease: 'power2.out',
+          onUpdate: paintNow,
+          onComplete: finishIntro
+        });
+      } else if (!introStarted) {
+        paintNow();
       }
     }
 
     let introTween = null;
+    let introStarted = false;
+    const introStartedAt = performance.now();
     function finishIntro() { introDone = true; introTween = null; paintTo(target()); }
 
     function target() {
@@ -669,24 +757,36 @@
     }
 
     function intro() {
-      if (reduceMotion) return;
-      const to = target();
+      if (reduceMotion || introStarted) return;
+      introStarted = true;
+      const to = Math.max(target(), Math.min(total * 0.12, 420));
+      // Seed a visible length on the first frame so the thread is never blank while GSAP catches up.
+      state.drawn = Math.max(to * 0.45, Math.min(total * 0.06, 180));
+      paintNow();
       if (gsapReady) {
-        introTween = window.gsap.fromTo(state, { drawn: 0 }, {
-          drawn: to, duration: 1.15, ease: 'power2.out', onUpdate: paintNow, onComplete: finishIntro
+        introTween = window.gsap.to(state, {
+          drawn: to,
+          duration: 0.5,
+          ease: 'power2.out',
+          onUpdate: paintNow,
+          onComplete: finishIntro
         });
       } else {
-        state.drawn = to; paintNow(); introDone = true;
+        state.drawn = to;
+        paintNow();
+        introDone = true;
       }
     }
 
     let resizeTimer = 0;
-    const relayout = () => {
+    const relayout = (force) => {
       clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(() => { layout(); if (gsapReady) window.ScrollTrigger.refresh(); }, 120);
+      // Ignore soft layout thrash (fonts/iframes) during the opening draw.
+      if (!force && !introDone && performance.now() - introStartedAt < 700) return;
+      resizeTimer = setTimeout(() => { layout(); if (gsapReady) window.ScrollTrigger.refresh(); }, force ? 0 : 140);
     };
 
-    // First paint immediately so the thread appears without waiting on fonts/GSAP CDN.
+    // First paint immediately so the thread appears without waiting on fonts.
     layout();
     intro();
     if (gsapReady) {
@@ -697,26 +797,41 @@
     } else {
       window.addEventListener('scroll', () => { if (introDone) paintTo(target(), true); }, { passive: true });
     }
-    window.addEventListener('resize', relayout);
-    window.addEventListener('load', relayout);
-    // Soft refresh after fonts settle — don't block the first draw.
+    window.addEventListener('resize', () => relayout(true));
+    window.addEventListener('load', () => relayout(true));
+    // Soft refresh after fonts settle — don't block or erase the first draw.
     if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(() => { requestAnimationFrame(relayout); }).catch(() => {});
+      document.fonts.ready.then(() => {
+        setTimeout(() => relayout(false), 80);
+      }).catch(() => {});
     }
     if ('ResizeObserver' in window) {
       let lastH = main.offsetHeight;
       new ResizeObserver(() => {
         const h = main.offsetHeight;
-        if (Math.abs(h - lastH) > 2) { lastH = h; relayout(); }
+        if (Math.abs(h - lastH) > 2) { lastH = h; relayout(false); }
       }).observe(main);
     }
   }
 
   /* -------------------------------------------- Three.js woven-cloth grain */
+  let weaveLoading = false;
   function bootWeave() {
     const canvas = $('#weave-canvas');
-    if (!canvas || reduceMotion || typeof window.THREE === 'undefined') return;
+    if (!canvas || reduceMotion) return;
     if (getComputedStyle(canvas).display === 'none') return;
+    // Load Three only after the thread is up — it used to block app.js via defer order.
+    if (typeof window.THREE === 'undefined') {
+      if (weaveLoading) return;
+      weaveLoading = true;
+      const script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js';
+      script.async = true;
+      script.onload = () => { weaveLoading = false; bootWeave(); };
+      script.onerror = () => { weaveLoading = false; canvas.remove(); };
+      document.head.appendChild(script);
+      return;
+    }
     let renderer;
     try {
       renderer = new window.THREE.WebGLRenderer({ canvas, alpha: true, antialias: false, powerPreference: 'low-power' });
@@ -771,6 +886,7 @@
   function start() {
     bootThread();
     bootDeckCarousel();
+    bootVaidyaDock();
     // Weave grain is decorative — defer so the thread and deck win first paint.
     const deferWeave = () => bootWeave();
     if ('requestIdleCallback' in window) window.requestIdleCallback(deferWeave, { timeout: 1200 });
