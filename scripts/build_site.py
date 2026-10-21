@@ -32,11 +32,14 @@ def build():
         shutil.rmtree(OUT)
     OUT.mkdir(parents=True, exist_ok=True)
 
-    for name in ('index.html', 'styles.css', 'app.js', 'favicon.svg', 'share.svg'):
+    for name in (
+        'index.html', 'styles.css', 'splash.css', 'splash.js', 'app.js',
+        'favicon.svg', 'favicon.png', 'favicon-32.png', 'apple-touch-icon.png', 'share.svg',
+    ):
         path = SOURCE / name
         if path.exists():
             shutil.copy2(path, OUT / name)
-        elif name in ('index.html', 'styles.css', 'app.js'):
+        elif name in ('index.html', 'styles.css', 'splash.css', 'splash.js', 'app.js'):
             raise FileNotFoundError(path)
 
     (OUT / 'content').mkdir(exist_ok=True)

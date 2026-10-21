@@ -34,6 +34,7 @@ venv/
 # Site download mirrors are assembled by scripts/build_site.py
 apps/project-site/downloads/*
 !apps/project-site/downloads/README.md
+apps/project-site/media/deck/*.png
 
 # Accidental nested clone
 /mauli/

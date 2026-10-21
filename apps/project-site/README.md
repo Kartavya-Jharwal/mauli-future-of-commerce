@@ -8,13 +8,18 @@ The static public showcase for the Mauli / Future of Commerce case study. Plain 
 2. **The problem**
 3. **Approach:** four cards the thread weaves under and over
 4. **Deliverables:** deck, report and financial model, plus small links to the brief and the repo
-5. **Aushada Peti:** the prototype, embedded at full viewport height, with an open-in-new-window link
-6. **Voice agent:** two clips that open in a lightbox and load only on click
-7. **The deck:** a six-slide grid the thread snakes through
-8. **Three horizons**
-9. **Team:** the thread loops behind every name
-10. **Closing mark:** the thread ties a bow
-11. **Footer**
+5. **Ask Vaidya:** the floating ElevenLabs voice widget (docked bottom-right on every screen) glides into the centre of this screen, then back to the corner
+6. **Aushada Peti:** the prototype, embedded at full viewport height, with an open-in-new-window link
+7. **Voice agent:** two clips that open in a lightbox and load only on click
+8. **The deck:** all 29 slide exports in a sticky horizontal carousel driven by vertical scroll, one slide per scroll gesture
+9. **Three horizons**
+10. **Team:** the thread loops behind every name
+11. **Closing mark:** the thread ties a bow
+12. **Footer**
+
+## Snapping
+
+The page uses CSS scroll snapping (`mandatory` on desktop, `proximity` on phones). The masthead, every `.section`, the closing card and the footer are snap points. Inside the deck, `app.js` adds one invisible snap marker per slide, positioned so that each stop centres that slide; scrolling down into the deck therefore pins it, and each wheel or trackpad gesture moves exactly one slide sideways.
 
 ## The thread
 
@@ -41,8 +46,8 @@ Progress is driven by GSAP ScrollTrigger: the tip of the thread sits at about 82
 ## Swapping in assets
 
 - **Logos:** `media/logos/mauli-rituals.png` and `media/logos/hult.png`.
-- **Slides:** `media/deck/01.jpg` to `06.jpg`.
+- **Slides:** root-level `Slides/*.png` files are copied into `media/deck/` by the build.
 - **Videos:** `media/video/demo.mp4`, `guardrails.mp4` and their `-thumb.jpg` files.
-- **Excel model:** `deliverables/mauli-financial-model.xlsx` (the build copies it into `downloads/`).
+- **Excel model:** the supplied root workbook is published as `downloads/mauli-financial-model.xlsx`.
 
 Fonts are Fraunces and Inter from Google Fonts, falling back to Georgia and Arial.

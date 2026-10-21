@@ -485,15 +485,31 @@ const ING = [
   {id:'vetiver',    en:'Vetiver',    sa:'Ushira',       dev:'उशीर',      lat:'Chrysopogon zizanioides', fam:'Poaceae',        part:'Root',        guna:['laghu','snigdha'],          virya:'sheeta', dosha:['pitta','kapha'],        margin:.58, stock:.55, vaidya:.65},
   {id:'sandalwood', en:'Sandalwood', sa:'Shvetachandana',dev:'श्वेतचन्दन',lat:'Santalum album',           fam:'Santalaceae',    part:'Wood',        guna:['laghu','ruksha'],           virya:'sheeta', dosha:['pitta','kapha'],        margin:.78, stock:.30, vaidya:.80},
   {id:'gotukola',   en:'Gotu kola',  sa:'Mandukaparni', dev:'मण्डूकपर्णी',lat:'Centella asiatica',         fam:'Apiaceae',       part:'Whole plant', guna:['laghu','sara'],             virya:'sheeta', dosha:['vata','pitta'],         margin:.68, stock:.50, vaidya:.80},
-  {id:'bakuchi',    en:'Bakuchi',    sa:'Bakuchi',      dev:'बाकुची',    lat:'Cullen corylifolium',     fam:'Fabaceae',       part:'Fruit',       guna:['ruksha'],                   virya:'ushna',  dosha:['vata','kapha'],         margin:.74, stock:.40, vaidya:.70}
+  {id:'bakuchi',    en:'Bakuchi',    sa:'Bakuchi',      dev:'बाकुची',    lat:'Cullen corylifolium',     fam:'Fabaceae',       part:'Fruit',       guna:['ruksha'],                   virya:'ushna',  dosha:['vata','kapha'],         margin:.74, stock:.40, vaidya:.70},
+  {id:'ginger',     en:'Ginger',     sa:'Shunthi',      dev:'शुण्ठी',     lat:'Zingiber officinale',     fam:'Zingiberaceae',  part:'Rhizome',     guna:['laghu','snigdha'],          virya:'ushna',  dosha:['vata','kapha'],         margin:.46, stock:.60, vaidya:.45},
+  {id:'cardamom',   en:'Cardamom',   sa:'Sukshmaila',   dev:'सूक्ष्मैला', lat:'Elettaria cardamomum',    fam:'Zingiberaceae',  part:'Seed',        guna:['laghu'],                    virya:'sheeta', dosha:['vata','kapha'],         margin:.58, stock:.50, vaidya:.45},
+  {id:'blackpepper',en:'Black pepper',sa:'Maricha',     dev:'मरिच',      lat:'Piper nigrum',             fam:'Piperaceae',     part:'Fruit',       guna:['laghu','ruksha','tikshna'], virya:'ushna',  dosha:['vata','kapha'],         margin:.38, stock:.55, vaidya:.35},
+  {id:'cinnamon',   en:'Cinnamon',   sa:'Tvak',         dev:'त्वक्',      lat:'Cinnamomum verum',         fam:'Lauraceae',      part:'Bark',        guna:['laghu','ruksha','tikshna'], virya:'ushna',  dosha:['vata','kapha'],         margin:.52, stock:.50, vaidya:.45},
+  {id:'moringa',    en:'Moringa',    sa:'Shigru',       dev:'शिग्रु',     lat:'Moringa oleifera',         fam:'Moringaceae',    part:'Seed',        guna:['laghu','ruksha','tikshna','sara'],virya:'ushna',dosha:['vata','kapha'],      margin:.64, stock:.60, vaidya:.65},
+  {id:'cedarwood',  en:'Cedarwood',  sa:'Devadaru',     dev:'देवदारु',    lat:'Cedrus deodara',           fam:'Pinaceae',       part:'Wood',        guna:['laghu','snigdha'],          virya:'ushna',  dosha:['vata','kapha'],         margin:.56, stock:.55, vaidya:.55}
 ];
 const GB = Object.fromEntries(GUNAS.map(g => [g.id, g]));
 const DB = Object.fromEntries(DOSHAS.map(d => [d.id, d]));
 const GID = Object.fromEntries(ING.map(g => [g.id, g]));
+const MAULI_USE = {
+  ashwagandha:'cream extract', turmeric:'mask and cleanser botanical', neem:'cleanser and mist botanical',
+  tulsi:'mist botanical', amla:'mist botanical', shatavari:'mask botanical', rose:'skin and body aromatic',
+  saffron:'mask and cream botanical', vetiver:'mask and body aromatic', sandalwood:'mask and body aromatic',
+  gotukola:'cream extract', bakuchi:'cream botanical', ginger:'warming body-oil aromatic',
+  cardamom:'warming body-oil aromatic', blackpepper:'warming body-oil aromatic',
+  cinnamon:'warming body-oil aromatic', moringa:'face-serum oil', cedarwood:'skin and body aromatic'
+};
 const SKUS = [
   {id:'SKU_01', name:'Radiance Ritual', ing:['saffron','rose','turmeric','sandalwood']},
   {id:'SKU_02', name:'Harmony Ritual',  ing:['bakuchi','gotukola','ashwagandha','shatavari']},
-  {id:'SKU_03', name:'Balance Ritual',  ing:['neem','tulsi','amla','vetiver']}
+  {id:'SKU_03', name:'Balance Ritual',  ing:['neem','tulsi','amla','vetiver']},
+  {id:'SKU_04', name:'Spirited Body Ritual', ing:['ginger','blackpepper','cinnamon','cardamom']},
+  {id:'SKU_05', name:'Nourishing Oil Ritual', ing:['moringa','cedarwood','rose','vetiver']}
 ];
 const SHORTLIST = ['saffron','rose','turmeric','sandalwood','bakuchi','gotukola','ashwagandha','shatavari'];
 
@@ -910,7 +926,8 @@ function showTip(n) {
   if (n.kind === 'ingredient') {
     h = '<b>' + d.en + '</b>' + (d.sa ? ' <i>' + d.sa + '</i>' : '') + '<div class="deva" lang="sa">' + d.dev + '</div>' +
       '<div class="sm"><i>' + d.lat + '</i></div><div class="sm">' + d.fam + ' · ' + d.part + '</div>' +
-      '<div class="sm">Gunas: ' + d.guna.map(q => GB[q].en).join(' · ') + '</div><div class="sm">Virya: ' + (d.virya === 'ushna' ? 'warming' : 'cooling') + '</div>';
+      '<div class="sm">Gunas: ' + d.guna.map(q => GB[q].en).join(' · ') + '</div><div class="sm">Virya: ' + (d.virya === 'ushna' ? 'warming' : 'cooling') + '</div>' +
+      '<div class="sm">Mauli context: ' + MAULI_USE[d.id] + '</div>';
   } else if (n.kind === 'guna') {
     h = '<b>' + d.sa + '</b> <i>' + d.en.toLowerCase() + '</i><div class="deva" lang="sa">' + d.dev + '</div><div class="sm">' + d.el + '. ' + d.fx + '</div>';
   } else {
@@ -974,10 +991,10 @@ const NEXT = '<button class="btn primary" data-act="next">Continue</button>';
 function p1() { return ''; }   /* the lotus alone */
 function p2() { return ''; }   /* the rings grow and the name appears */
 function p3() {
-  return '<div class="blk"><p class="eyebrow">Part I · Single botanical drugs</p><h2>Pharmacopoeia, through a skin lens</h2>' + ORN +
-    '<p class="body">API monographs keep rasa, guna, virya, vipaka and karma distinct. Because this is a topical skin concept, the wheel maps inherent gunas—not edible tastes—and keeps virya as a separate warm/cool band.</p>' +
+  return '<div class="blk"><p class="eyebrow">Ayurvedic botanical properties</p><h2>How each botanical behaves</h2>' + ORN +
+    '<p class="body">Read each botanical in three layers: guna describes inherent qualities such as light, unctuous or sharp; virya identifies warming or cooling potency; dosha connects those qualities with dry, reactive or congested skin states. These are traditional crude-drug attributes—finished formulas can behave differently.</p>' +
     '<div class="stats"><div class="stat"><b data-count="' + API.qualities + '">0</b><span>Gunas</span></div><div class="stat"><b data-count="' + API.pairs + '">0</b><span>Pairs</span></div><div class="stat"><b data-count="' + API.botanicals + '">0</b><span>Botanicals</span></div></div>' +
-    '<p class="src">Sources: <a href="https://pcimh.gov.in/show_content.php?lang=1&amp;level=1&amp;lid=54&amp;ls_id=56" target="_blank" rel="noopener noreferrer">PCIM&amp;H / API</a> · <a href="https://cb.imsc.res.in/imppat/" target="_blank" rel="noopener noreferrer">IMPPAT</a> · <a href="https://www.maulirituals.com/en-us/products/ultimate-skin-ritual" target="_blank" rel="noopener noreferrer">Mauli skin ritual</a></p><div class="btnrow">' + NEXT + '</div></div>';
+    '<p class="src">Sources: <a href="https://pcimh.gov.in/show_content.php?lang=1&amp;level=1&amp;lid=54&amp;ls_id=56" target="_blank" rel="noopener noreferrer">PCIM&amp;H / API</a> · <a href="https://cb.imsc.res.in/imppat/" target="_blank" rel="noopener noreferrer">IMPPAT</a> · <a href="https://www.maulirituals.com/en-us/pages/ingredients" target="_blank" rel="noopener noreferrer">Mauli ingredients</a></p><div class="btnrow">' + NEXT + '</div></div>';
 }
 function eduHTML() {
   const g = focusId && GID[focusId];
@@ -985,6 +1002,7 @@ function eduHTML() {
   return '<h3 class="botname">' + g.en + '</h3><p class="deva">' + g.dev + '</p>' +
     '<p class="lat">' + g.lat + ' · ' + g.part + ' · ' + (g.virya === 'ushna' ? 'Warming virya' : 'Cooling virya') + '</p>' +
     '<p class="lat">Gunas: ' + g.guna.map(q => GB[q].sa + ' (' + GB[q].en.toLowerCase() + ')').join(' · ') + '</p>' +
+    '<p class="lat">Mauli context: ' + MAULI_USE[g.id] + '</p>' +
     '<div class="sides">' + DOSHAS.map((d, k) => { const on = g.dosha.includes(d.id); return '<div class="side' + (on ? ' on' : '') + '" style="--k:' + k + '"><b>' + d.en + '<i>' + d.dev + '</i></b><span class="vd">' + (on ? 'Often linked' : 'Not its focus') + '</span><span class="q">' + d.q + '</span></div>'; }).join('') + '</div>';
 }
 function p4() {
@@ -1006,8 +1024,8 @@ function focusBotanical(id) {
 }
 function p5() {
   const ranked = ING.map(g => ({g, u:util(g)})).sort((a, b) => b.u - a.u), mx = ranked[0].u || 1;
-  return '<div class="blk"><p class="eyebrow">Ranked by fit to the skin-state reading</p><h2>Suggested skin botanicals</h2>' + ORN +
-    '<p class="body">Choose on the wheel or from the list, or let Auto-pick respond to the illustrative skin-state signals. Scores are a transparent demo heuristic—not efficacy or a clinical ranking.</p>' +
+  return '<div class="blk"><p class="eyebrow">For warm, reactive skin signals</p><h2>Suggested skin botanicals</h2>' + ORN +
+    '<p class="body">Compare botanicals manually, or let Auto-pick combine dosha relevance, warm/cool potency, availability and practitioner weighting. The score explains the demo logic; it does not measure efficacy.</p>' +
     '<p class="note" id="pickCount">' + picks.size + ' on the shortlist</p>' +
     '<div class="rows">' + ranked.map((x, k) => '<button type="button" class="row' + (picks.has(x.g.id) ? ' on' : '') + '" style="--k:' + k + '" data-pick="' + x.g.id + '" aria-pressed="' + picks.has(x.g.id) + '"><span class="chk" aria-hidden="true"></span><span class="nm">' + x.g.en + '</span><span class="val">' + (x.u / mx).toFixed(2) + '</span></button>').join('') + '</div>' +
     '<div class="btnrow"><button class="btn" data-act="auto">Auto-pick</button><button class="btn" data-act="clear">Clear</button>' + NEXT + '</div></div>';
@@ -1037,7 +1055,7 @@ function p6() {
   const v = vec(), order = DOSHAS.slice().sort((a, b) => v[b.id] - v[a.id]);
   const skinState = {vata:'dry or depleted', pitta:'warm or reactive', kapha:'oily or congested'};
   return '<div class="blk"><p class="eyebrow">Your starting blend</p><h2 class="shimmer">' + d.best.sku.name + '</h2>' + knotSVG() +
-    '<p class="body">Framed around the ' + skinState[order[0].id] + ' and ' + skinState[order[1].id] + ' signals in this illustrative skin reading.</p>' +
+    '<p class="body">This concept responds to ' + skinState[order[0].id] + ' and ' + skinState[order[1].id] + ' skin signals.</p>' +
     '<ul class="ings">' + d.best.sku.ing.map((id, k) => { const g = GID[id]; return '<li style="--k:' + k + '"><span class="nm">' + g.en + ' <i>' + g.lat + '</i></span><span class="meta">' + g.guna.map(q => GB[q].sa).join(' · ') + ' · ' + (g.virya === 'ushna' ? 'warming' : 'cooling') + ' virya</span></li>'; }).join('') + '</ul>' +
     '<p class="disclaimer">Topical wellness-discovery concept for coursework. Gunas describe traditional crude-drug attributes; they do not establish finished-product efficacy, suitability or safety. Patch test and confirm product facts on the live Mauli store.</p>' +
     '<a class="btn primary buy" href="https://www.maulirituals.com/collections/skincare" data-outgoing target="_blank" rel="noopener noreferrer">Explore Mauli skincare</a></div>';

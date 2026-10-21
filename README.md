@@ -20,9 +20,9 @@ Our working answer: strengthen Mauli’s existing Shopify experience with **expl
 | --- | --- |
 | Case-study microsite | [`apps/project-site/`](apps/project-site/) |
 | **Aushada Peti**, the Sacred Wheel of Botanicals (interactive prototype) | [`apps/project-site/artefact/`](apps/project-site/artefact/) |
-| Presentation deck (PDF · PPTX) | [`deliverables/drafts/deck/`](deliverables/drafts/deck/) |
-| Project report (PDF · DOCX) | [`deliverables/drafts/report/`](deliverables/drafts/report/) |
-| Financial model (XLSX) | `deliverables/mauli-financial-model.xlsx` (to be added) |
+| Presentation deck | [`Mauli_Rituals-Deck_Final-Extended.pdf`](Mauli_Rituals-Deck_Final-Extended.pdf) · [`Mauli Rituals.pptx`](Mauli%20Rituals.pptx) |
+| Project report | [`Mauli Rituals_Team-3.pdf`](Mauli%20Rituals_Team-3.pdf) · [`Mauli Rituals_Team-3.docx`](Mauli%20Rituals_Team-3.docx) |
+| Financial model (XLSX) | [`NOT-A-Deliverable-Mauli-Rituals-Extended-Excel.xlsx`](NOT-A-Deliverable-Mauli-Rituals-Extended-Excel.xlsx) |
 | Client challenge brief (PDF) | [`deliverables/client-brief.pdf`](deliverables/client-brief.pdf) |
 | Observed brand tokens and reference assets | [`packages/brand-assets/`](packages/brand-assets/) |
 
@@ -55,7 +55,7 @@ Then open <http://localhost:8000>. Pushes to `main` deploy to GitHub Pages throu
 
 ## Status
 
-Work in progress. The deck and report are course drafts dated 11 October 2026. Client feedback, final submissions and grading are still pending.
+Work in progress. The supplied presentation, report, model, slide exports and demo recordings are integrated into the showcase. Client feedback and grading are still pending.
 
 ---
 

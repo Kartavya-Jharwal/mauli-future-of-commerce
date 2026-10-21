@@ -3,26 +3,33 @@
   "updatedAt": "2026-10-11",
   "project": {
     "title": "Mauli Rituals: Future of Commerce",
-    "workingHeadline": "A thread through the future of commerce.",
+    "workingHeadline": "The art of rejuvenating the brand.",
+    "courseCode": "MKT 030305",
     "summary": "A student advisory project exploring how Mauli Rituals can carry its story and ritual-led experience into changing channels of discovery and commerce.",
     "status": "in_progress",
     "course": "Future of Commerce",
     "institution": "Hult International Business School",
     "professor": "Nikhil Soi",
+    "professorLinkedIn": "https://www.linkedin.com/in/nikhilsoi2208/",
+    "guestJudge": "Satrupa Ghosh",
+    "guestJudgeLinkedIn": "https://www.linkedin.com/in/satrupaghosh/",
+    "clientName": "Mauli Rituals",
+    "clientLinkedIn": "https://www.linkedin.com/in/anita-kaushal-a59639b/",
     "attributionBasis": "Project owner and supplied coursework materials",
     "repositoryUrl": "https://github.com/Kartavya-Jharwal/mauli-future-of-commerce",
     "siteUrl": "https://kartavya.tech/mauli-future-of-commerce/"
   },
   "motion": {
     "splash": {
-      "status": "awaiting_asset",
-      "entry": null,
-      "poster": null,
+      "status": "ready",
+      "entry": "media/splash/mark.png",
+      "poster": "media/splash/mark.png",
+      "threadAccent": "media/splash/thread.png",
       "skipLabel": "Enter the case study"
     },
     "bodyStroke": {
-      "status": "awaiting_asset",
-      "entry": null
+      "status": "site_thread",
+      "entry": "apps/project-site/app.js#bootThread"
     },
     "respectReducedMotion": true,
     "bypassSplashForDeepLinks": true
@@ -58,6 +65,12 @@
         "docs/research/stp-and-icps.md",
         "docs/metrics/measurement-plan.md"
       ]
+    },
+    {
+      "id": "vaidya",
+      "title": "Ask Vaidya",
+      "state": "available",
+      "agentId": "agent_0901m4hnp4ysf5gakwe25ngn2dgh"
     },
     {
       "id": "prototyping",
@@ -99,22 +112,31 @@
     {
       "id": "presentation",
       "label": "Presentation deck",
-      "state": "draft_available",
-      "sourcePath": "deliverables/drafts/deck/mauli-course-deck-draft.pdf",
-      "publicUrl": "downloads/mauli-course-deck-draft.pdf",
+      "state": "available",
+      "sourcePath": "Mauli_Rituals-Deck_Final-Extended.pdf",
+      "publicUrl": "downloads/mauli-presentation-deck.pdf",
       "format": "PDF",
-      "version": "Initial course draft, 11 October 2026",
-      "editableUrl": "downloads/mauli-course-deck-draft.pptx"
+      "version": "Extended presentation, October 2026",
+      "editableUrl": "downloads/mauli-presentation-deck.pptx"
     },
     {
       "id": "report",
       "label": "Project report",
-      "state": "draft_available",
-      "sourcePath": "deliverables/drafts/report/mauli-course-report-draft.pdf",
-      "publicUrl": "downloads/mauli-course-report-draft.pdf",
+      "state": "available",
+      "sourcePath": "Mauli Rituals_Team-3.pdf",
+      "publicUrl": "downloads/mauli-project-report.pdf",
       "format": "PDF",
-      "version": "Initial course draft, 11 October 2026",
-      "editableUrl": "downloads/mauli-course-report-draft.docx"
+      "version": "Team report, October 2026",
+      "editableUrl": "downloads/mauli-project-report.docx"
+    },
+    {
+      "id": "model",
+      "label": "Financial model",
+      "state": "available",
+      "sourcePath": "NOT-A-Deliverable-Mauli-Rituals-Extended-Excel.xlsx",
+      "publicUrl": "downloads/mauli-financial-model.xlsx",
+      "format": "XLSX",
+      "version": "Supporting workbook, October 2026"
     },
     {
       "id": "client-brief",
@@ -129,45 +151,45 @@
   "team": [
     {
       "id": "member-1",
-      "name": "Team member 01",
+      "name": "Kartavya Jharwal",
       "role": null,
-      "linkedinUrl": null
+      "linkedinUrl": "https://www.linkedin.com/in/kartavyajharwal/"
     },
     {
       "id": "member-2",
-      "name": "Team member 02",
+      "name": "Marcella Ibanez",
       "role": null,
-      "linkedinUrl": null
+      "linkedinUrl": "https://www.linkedin.com/search/results/people/?keywords=Marcella%20Ibanez"
     },
     {
       "id": "member-3",
-      "name": "Team member 03",
+      "name": "Yasmin Souza",
       "role": null,
-      "linkedinUrl": null
+      "linkedinUrl": "https://www.linkedin.com/search/results/people/?keywords=Yasmin%20Souza"
     },
     {
       "id": "member-4",
-      "name": "Team member 04",
+      "name": "Olta Abdyli",
       "role": null,
-      "linkedinUrl": null
+      "linkedinUrl": "https://www.linkedin.com/in/olta-abdyli"
     },
     {
       "id": "member-5",
-      "name": "Team member 05",
+      "name": "Adar Aksak",
       "role": null,
-      "linkedinUrl": null
+      "linkedinUrl": "https://www.linkedin.com/in/adar-aksak-3b570b203"
     },
     {
       "id": "member-6",
-      "name": "Team member 06",
+      "name": "Ali Sarp Acar",
       "role": null,
-      "linkedinUrl": null
+      "linkedinUrl": "https://www.linkedin.com/search/results/people/?keywords=Ali%20Sarp%20Acar"
     },
     {
       "id": "member-7",
-      "name": "Team member 07",
+      "name": "Zuzanna Zalicka",
       "role": null,
-      "linkedinUrl": null
+      "linkedinUrl": "https://www.linkedin.com/search/results/people/?keywords=Zuzanna%20Zalicka"
     }
   ],
   "footer": {

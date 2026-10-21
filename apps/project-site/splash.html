@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<!-- ============================================================
+     MAULI RITUALS — splash v6 "merged: perspective grow + Netflix-strip swap"
+
+     Combines:
+       (A) the v4 flow: lockup → smooth quick erase → SVG M grows
+           out of perspective → swap at ~80% → fade → hero
+       (B) Netflix-strip INSPIRATION for how to render the
+           fur/threads/lines at the swap target: 4 helpers, 31
+           vertical fur strips per helper (3-5px wide), 28 chromatic
+           lamp beams in red+amber, brush-moving wipe, zoom-in
+           scale like the Netflix "ta-dum"
+
+     FLOW (seconds at data-speed="1"):
+       0.0   EMBER     glow wakes
+       0.85  LOCKUP    MAULI appears — M is inline SVG (single M
+                       typeform, custom flare M) from frame 1
+       2.4   ERASE     smooth quick backspace: A·U·L·I drop at fixed
+                       .075s interval — no pauses
+       3.6   GROW     SVG M grows toward viewport from deep
+                       perspective (translateZ -3800 → -300,
+                       perceived 24% → 80%)
+       7.0   SWAP     At ~80% growth: swap solid SVG fill →
+                       Netflix-strip M (4 helpers + fur strips +
+                       lamp beams in red+amber, positioned at the
+                       SVG M's last rect, scaled to match)
+       7.0→ NETFLIX  brush wipe reveals the strips; lamp beams
+            11.0     sweep left/right; zoom-in scale(1 → ~25) fills
+                     the viewport like the Netflix "ta-dum"
+       11.0  FADE → 12.0 DARK → 12.5 END
+       12.5  HERO    splash removed, hero page revealed with lorem
+                     ipsum + ambient red/amber thread canvas
+     ============================================================ -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#000000">
+<title>Mauli Rituals — splash</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&display=swap" rel="stylesheet">
+<style>
+/* ============== red + amber palette only ============== */
+:root{
+  --brand:#f04a1d;        /* mauli red (v4 brand)     */
+  --brand-red:#e02026;    /* deep red                 */
+  --saffron:#ff8c1a;
+  --turmeric:#ffc22e;
+  --amber:#ffb340;
+  --ivory:#f3e7d3;
+  --netflix-red:#ff0f1f;  /* netflix brand red        */
+  --bright-red:#ff3030;
+  --orange-red:#ff5500;
+  --orange:#ff7700;
+  --light-orange:#ff9600;
+  --warm-amber:#ffae01;
+  --yellow-amber:#ffc601;
+  --red-pink:#f30b34;
+  --pure-red:#ec0014;
+  --bg:#000000;
+  --serif:"Marcellus","Optima","Palatino Linotype",Georgia,serif;
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{height:100%;margin:0;padding:0;width:100%}
+body{background:var(--bg);font-family:var(--serif);overflow-x:hidden}
+
+/* ============== HERO PAGE ============== */
+#hero{
+  position:relative;
+  min-height:100vh;
+  background:radial-gradient(120% 100% at 50% 40%,#150a05 0%,#070403 70%,#000 100%);
+  color:var(--ivory);
+  overflow:hidden;
+  opacity:0;
+  transition:opacity 1.2s ease;
+}
+#hero.is-live{opacity:1}
+#hero-thread-bg{position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.75}
+#hero-thread-bg::after{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(120% 80% at 50% 50%,rgba(0,0,0,0) 30%,rgba(0,0,0,.65) 100%);
+}
+#hero-content{
+  position:relative;z-index:2;
+  display:grid;place-items:center;
+  min-height:100vh;
+  padding:80px 24px;
+  text-align:center;
+}
+#hero-content h1{
+  font-family:var(--serif);
+  font-size:clamp(40px,8vw,84px);
+  letter-spacing:.22em;text-indent:.22em;
+  color:var(--ivory);
+  margin:0 0 28px;
+  text-shadow:0 0 40px rgba(255,15,31,.25);
+}
+#hero-content .tagline{
+  font-size:clamp(11px,1.6vw,14px);
+  letter-spacing:.6em;text-indent:.6em;
+  text-transform:uppercase;
+  color:var(--amber);
+  margin:0 0 56px;
+}
+#hero-content .body{
+  max-width:680px;
+  margin:0 auto;
+  font-size:15px;
+  line-height:1.95;
+  color:rgba(243,231,211,.78);
+}
+#hero-content .body p{margin:0 0 18px}
+#hero-cta{
+  margin-top:48px;
+  display:inline-block;
+  padding:14px 32px;
+  font:600 12px/1 var(--serif);
+  letter-spacing:.3em;text-indent:.3em;
+  text-transform:uppercase;
+  color:#0a0604;
+  background:linear-gradient(135deg,var(--amber),var(--brand));
+  border:none;
+  border-radius:999px;
+  cursor:pointer;
+  box-shadow:0 8px 40px rgba(240,74,29,.35);
+  transition:transform .25s ease,box-shadow .25s ease;
+}
+#hero-cta:hover{
+  transform:translateY(-2px);
+  box-shadow:0 12px 50px rgba(240,74,29,.5);
+}
+
+/* ============== SPLASH OVERLAY ============== */
+#splash{
+  position:fixed;inset:0;z-index:9999;
+  background:var(--bg);
+  overflow:hidden;
+  user-select:none;-webkit-user-select:none;
+  -webkit-tap-highlight-color:transparent;
+  touch-action:none;
+  transition:opacity var(--fade,1s) ease;
+}
+#splash.is-done{opacity:0;pointer-events:none}
+
+/* ember + halo */
+.ms-ember{position:absolute;left:50%;top:50%;width:130vmin;height:130vmin;margin:-65vmin;
+  border-radius:50%;pointer-events:none;opacity:0;transform:scale(.7);
+  background:radial-gradient(closest-side,rgba(240,74,29,.30),rgba(224,32,38,.12) 45%,rgba(0,0,0,0) 72%);
+  animation:ember-in 1.6s ease-out both,ember-flicker 6s ease-in-out 1.7s infinite;
+  z-index:1;
+}
+@keyframes ember-in{from{opacity:0;transform:scale(.7)}to{opacity:.9;transform:scale(1)}}
+@keyframes ember-flicker{0%,100%{opacity:.8;transform:scale(1)}18%{opacity:.66;transform:scale(.985)}
+  41%{opacity:.88;transform:scale(1.02)}63%{opacity:.7;transform:scale(.99)}82%{opacity:.92;transform:scale(1.025)}}
+.ms-halo{position:absolute;left:50%;top:50%;width:120vmin;height:120vmin;margin:-60vmin;border-radius:50%;
+  pointer-events:none;opacity:0;transition:opacity 1.4s ease;z-index:1;
+  background:radial-gradient(closest-side,rgba(255,140,26,.14),rgba(224,32,38,.06) 55%,rgba(0,0,0,0) 75%)}
+.ms-halo.is-on{opacity:1;animation:halo-pulse 6s ease-in-out infinite}
+.ms-halo.dim{opacity:0!important;transition:opacity 1s ease}
+@keyframes halo-pulse{0%,100%{opacity:.7}50%{opacity:1}}
+
+/* cinematic layers */
+.ms-vignette{position:absolute;inset:0;pointer-events:none;z-index:2;
+  background:radial-gradient(120% 92% at 50% 46%,rgba(0,0,0,0) 55%,rgba(0,0,0,.78))}
+.ms-grain{position:absolute;inset:-120px;pointer-events:none;z-index:2;opacity:.05;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/></filter><rect width='160' height='160' filter='url(%23n)'/></svg>");
+  animation:grain .9s steps(4) infinite}
+@keyframes grain{0%{transform:translate(0,0)}25%{transform:translate(-42px,28px)}
+  50%{transform:translate(28px,-48px)}75%{transform:translate(-28px,-22px)}100%{transform:translate(0,0)}}
+.ms-fade{position:absolute;inset:0;background:#000;opacity:0;transition:opacity 1.2s ease;
+  pointer-events:none;z-index:5}
+.ms-fade.is-on{opacity:1}
+
+/* ============================================================
+   PHASE 1-3 — lockup, caret, smooth quick erase.
+   .ms-brand carries the perspective so the inline SVG M can
+   translateZ out of the page during the grow phase.
+   ============================================================ */
+.ms-brand{position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;gap:clamp(12px,2.4vmin,28px);pointer-events:none;
+  perspective:1200px;perspective-origin:50% 50%}
+.ms-word{display:flex;align-items:center;justify-content:center;
+  font-family:var(--serif);font-weight:400;line-height:1;
+  font-size:clamp(44px,11vmin,120px);letter-spacing:.1em;margin-right:-.1em;
+  color:var(--ivory);text-shadow:0 0 30px rgba(255,180,90,.14);
+  transition:color 1.2s ease;white-space:nowrap;transform-style:preserve-3d}
+.ms-word span{display:inline-block;opacity:0;will-change:transform,opacity,filter}
+.ms-word span.in{animation:ch-in .22s ease both}
+@keyframes ch-in{from{opacity:0;transform:translateY(.05em)}to{opacity:1;transform:none}}
+.ms-word span.del{animation:ch-del .12s ease-in both}
+@keyframes ch-del{to{opacity:0;transform:translateY(.02em) scale(.7);filter:blur(3px)}}
+
+/* THE M — inline SVG using the custom flare M polygon. ONE M
+   typeform throughout the entire splash. */
+.ms-word .ms-m-svg{
+  display:inline-block;
+  width:.64em;height:.70em;
+  vertical-align:baseline;
+  position:relative;
+  color:var(--ivory);
+  opacity:0;
+  will-change:transform,opacity,filter;
+  transform-origin:center center;
+  transform-style:preserve-3d;
+  transition:color .8s ease;
+}
+.ms-word .ms-m-svg svg{display:block;width:100%;height:100%;overflow:visible;
+  filter:drop-shadow(0 0 .04em rgba(255,140,26,.4)) drop-shadow(0 0 .14em rgba(224,32,38,.25));}
+.ms-word .ms-m-svg.in{animation:ch-in .22s ease both}
+.ms-word .ms-m-svg.grow{
+  animation:m-perspective-grow 3.4s cubic-bezier(.6,.04,.3,1) both;
+}
+/* SVG M grows toward the viewport from deep perspective.
+   0%   translateZ(-3800px) → perceived scale ≈ 0.24 (24%)
+   100% translateZ(-300px)  → perceived scale ≈ 0.80 (80%)
+   At 100%, swap solid SVG fill → Netflix-strip M. */
+@keyframes m-perspective-grow{
+  0%  {transform:translateZ(-3800px);opacity:.4}
+  18% {opacity:1}
+  100%{transform:translateZ(-300px);opacity:1}
+}
+.ms-word .ms-m-svg.fading{
+  transition:opacity .35s ease;
+  opacity:0;
+}
+
+.ms-caret{display:inline-block;width:2px;height:.68em;margin-left:.05em;background:var(--saffron);opacity:0}
+.ms-caret.on{animation:caret-in .18s both,caret-blink 1.05s steps(1) .18s infinite}
+.ms-caret.off{animation:caret-out .4s ease both}
+@keyframes caret-in{from{opacity:0}to{opacity:1}}
+@keyframes caret-blink{0%,60%{opacity:1}61%,100%{opacity:0}}
+@keyframes caret-out{to{opacity:0}}
+.ms-sub{font-size:clamp(11px,2.3vmin,21px);letter-spacing:.85em;text-indent:.85em;text-transform:uppercase;
+  color:rgba(243,231,211,.62);opacity:0;
+  transition:opacity .9s ease,letter-spacing 1.2s cubic-bezier(.2,.7,.3,1),text-indent 1.2s cubic-bezier(.2,.7,.3,1)}
+.ms-sub.in{opacity:1;letter-spacing:.58em;text-indent:.58em}
+.ms-sub.out{opacity:0;transition:opacity .7s ease}
+
+/* ============================================================
+   NETFLIX-STAGE — the swap target.
+   Hidden until phaseWeave, then positioned + scaled to match
+   the SVG M's last rect, and .is-on triggers all the Netflix-
+   style animations (brush wipe, lamp beams, zoom-in).
+   ============================================================ */
+.netflix-stage{
+  position:fixed;
+  z-index:3;
+  width:300px;
+  height:300px;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .35s ease;
+  transform-origin:center center;
+  /* transform set via JS at swap time (translate + scale to match SVG rect) */
+}
+.netflix-stage.is-on{opacity:1}
+
+.splash-animation{
+  display:block;
+  position:relative;
+  width:300px;
+  height:300px;
+  overflow:hidden;
+  background-size:4000px;
+  background-position:-1950px 0;
+  transform-origin:50% 65%;   /* zoom toward the V vertex */
+  will-change:transform;
+}
+.splash-animation::before{
+  content:"";
+  position:absolute;
+  display:block;
+  background-color:var(--bg);
+  width:150%;
+  height:30%;
+  left:-25%;
+  bottom:-27%;
+  border-radius:50%;
+  z-index:5;
+  transform-origin:left center;
+}
+
+/* helpers — positioned to form the M (2 verticals + V-pivot diagonals) */
+.helper{position:absolute;will-change:transform,opacity}
+
+/* helper-1: LEFT vertical stem (rotated 180, fades its red box) */
+.helper-1{
+  width:19.5%;
+  height:100%;
+  background-color:rgba(255,15,31,0.5);
+  left:22.4%;
+  top:0;
+  transform:rotate(180deg);
+}
+.helper-1 [class*="fur-"]{
+  bottom:0;
+  height:40%;
+}
+
+/* helper-2: RIGHT vertical stem */
+.helper-2{
+  width:19.5%;
+  height:100%;
+  left:57.8%;
+  top:0;
+  transform:rotate(180deg);
+  overflow:hidden;
+}
+
+/* helper-3: LEFT diagonal — pivots from V vertex at bottom-center,
+   rotate(-19.5deg) tilts the top LEFT (counterclockwise),
+   reaching up toward the top of the left vertical. */
+.helper-3{
+  width:19%;
+  height:64.5%;
+  left:40.5%;
+  top:0;
+  transform-origin:50% 100%;
+  transform:rotate(-19.5deg);
+  box-shadow:0 0 35px -12px rgba(0,0,0,0.4);
+  overflow:hidden;
+}
+
+/* helper-4: RIGHT diagonal — mirror of helper-3.
+   rotate(+19.5deg) tilts the top RIGHT (clockwise). */
+.helper-4{
+  width:19%;
+  height:64.5%;
+  left:40.5%;
+  top:0;
+  transform-origin:50% 100%;
+  transform:rotate(19.5deg);
+  box-shadow:0 0 35px -12px rgba(0,0,0,0.4);
+  overflow:hidden;
+}
+
+/* effect-brush — the wipe container holding the fur strips */
+.effect-brush{
+  position:absolute;
+  width:100%;
+  height:300%;
+  top:0;
+  overflow:hidden;
+  will-change:transform;
+}
+.effect-brush::before{
+  display:block;
+  content:"";
+  position:absolute;
+  background-color:var(--netflix-red);
+  width:100%;
+  height:70%;
+  box-shadow:0 0 29px 24px var(--netflix-red);
+}
+
+/* fur strips — 3-5px wide on 300px stage = 1-1.7% widths */
+[class*="fur-"]{
+  display:block;
+  position:absolute;
+  bottom:10%;
+  height:30%;
+  box-sizing:border-box;
+  backface-visibility:hidden;
+  transform:translateZ(0);
+  will-change:opacity,transform;
+  transition:background 0.01s linear;
+}
+
+/* effect-lumieres — chromatic lamp beams (helper-1 only) */
+.effect-lumieres{
+  position:absolute;
+  width:100%;
+  height:100%;
+  opacity:0;
+  will-change:opacity;
+}
+.lamp{
+  position:absolute;
+  display:block;
+  height:100%;
+  box-shadow:0 0 10px 0 rgba(255,15,31,0.75);
+  background:var(--color);
+  opacity:0.9;
+  filter:brightness(1.3);
+  will-change:transform;
+}
+.lamp::before{
+  position:absolute;
+  content:" ";
+  display:block;
+  width:100%;
+  height:100%;
+  background:var(--color);
+  box-shadow:0 0 10px 0 rgba(255,15,31,0.75);
+}
+
+/* ============================================================
+   ANIMATIONS — only triggered when .netflix-stage.is-on is set
+   at swap time. The 0.5–1.6s delays are then relative to the
+   swap moment.
+   ============================================================ */
+.netflix-stage.is-on .splash-animation{
+  animation:zoom-in 3.5s 0.5s ease-in forwards;
+}
+.netflix-stage.is-on .helper-1{
+  animation:fading-lumieres-box 2s 0.6s forwards;
+}
+.netflix-stage.is-on .helper-1 .effect-brush{
+  animation:brush-moving 2.5s 1.2s forwards;
+}
+.netflix-stage.is-on .helper-2 .effect-brush{
+  animation:brush-moving 2s 0.5s forwards;
+}
+.netflix-stage.is-on .helper-3 .effect-brush{
+  animation:brush-moving 2s 0.8s forwards;
+}
+.netflix-stage.is-on .helper-4 .effect-brush{
+  animation:brush-moving 2s 0.7s forwards;
+}
+.netflix-stage.is-on .effect-lumieres{
+  animation:reveal-beams 2s 1.6s forwards;
+}
+.netflix-stage.is-on .lamp-left{
+  animation:move-left 5s forwards;
+}
+.netflix-stage.is-on .lamp-left::before{
+  animation:move-left 5.5s forwards;
+}
+.netflix-stage.is-on .lamp-right{
+  animation:move-right 5s forwards;
+}
+.netflix-stage.is-on .lamp-right::before{
+  animation:move-right 5.5s forwards;
+}
+
+/* skip button */
+.ms-skip{position:absolute;right:max(18px,env(safe-area-inset-right));bottom:max(18px,env(safe-area-inset-bottom));
+  padding:10px 16px;font:600 11px/1 var(--serif);letter-spacing:.16em;text-transform:uppercase;
+  color:rgba(255,255,255,.6);background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.2);
+  border-radius:999px;cursor:pointer;opacity:0;visibility:hidden;z-index:6;
+  transition:opacity .4s ease,visibility .4s ease}
+.ms-skip.is-on{opacity:1;visibility:visible}
+.ms-skip:hover{color:#fff;background:rgba(255,255,255,.13)}
+
+/* reduced motion fallback */
+@media (prefers-reduced-motion:reduce){
+  .ms-ember,.ms-grain{animation:none!important;opacity:.5}
+  .ms-word .ms-m-svg,.ms-word span,.ms-sub,.ms-caret{opacity:1!important;animation:none!important}
+  .netflix-stage{opacity:1!important}
+  .splash-animation{transform:scale(8)!important}
+  .helper,.effect-brush,.lamp,.effect-lumieres{animation:none!important;opacity:1!important}
+}
+
+/* ============== KEYFRAMES ============== */
+@keyframes brush-moving{
+  0%{transform:translateY(0)}
+  100%{transform:translateY(-100%)}
+}
+@keyframes zoom-in{
+  0%{transform:scale(1)}
+  100%{transform:scale(var(--zoom-final, 25))}
+}
+@keyframes reveal-beams{
+  0%{opacity:0}
+  40%{opacity:.3}
+  60%{opacity:.8}
+  100%{opacity:1}
+}
+@keyframes fading-lumieres-box{
+  0%{background-color:rgba(255,15,31,0.5)}
+  100%{background-color:rgba(255,15,31,0)}
+}
+@keyframes move-left{
+  0%{transform:translate(0);opacity:.8}
+  40%{transform:translate(10px) scaleX(1);opacity:1}
+  50%{transform:translate(60px);opacity:1}
+  100%{transform:translate(120px) scaleX(3);opacity:.8}
+}
+@keyframes move-right{
+  0%{transform:translate(0);opacity:.8}
+  40%{transform:translate(-10px) scaleX(1);opacity:1}
+  50%{transform:translate(-60px);opacity:1}
+  100%{transform:translate(-120px) scaleX(3);opacity:.8}
+}
+</style>
+</head>
+<body>
+
+<!-- ============== HERO PAGE ============== -->
+<main id="hero" hidden>
+  <canvas id="hero-thread-bg" aria-hidden="true"></canvas>
+  <div id="hero-content">
+    <h1>Mauli Rituals</h1>
+    <p class="tagline">Threads of Devotion</p>
+    <div class="body">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+      <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+    </div>
+    <button id="hero-cta" type="button">Begin the Ritual</button>
+  </div>
+</main>
+
+<!-- ============== SPLASH OVERLAY ============== -->
+<div id="splash" role="status" aria-label="Loading Mauli Rituals"
+     data-logo="MAULI" data-sub="RITUALS" data-letter="M"
+     data-speed="1" data-skippable="true">
+  <div class="ms-ember" aria-hidden="true"></div>
+  <div class="ms-halo" aria-hidden="true"></div>
+
+  <!-- Phase 1-3: lockup + erase + perspective grow (SVG M inline) -->
+  <div class="ms-brand" aria-hidden="true">
+    <div class="ms-word"></div>
+    <div class="ms-sub"></div>
+  </div>
+
+  <!-- Phase 4: Netflix-strip M (the swap target, hidden until .is-on) -->
+  <div class="netflix-stage" id="netflix-stage" aria-hidden="true">
+    <div class="splash-animation" id="splash-anim" letter="M">
+      <div class="helper helper-1">
+        <div class="effect-brush" id="brush-1"></div>
+        <div class="effect-lumieres" id="lamps-1"></div>
+      </div>
+      <div class="helper helper-2">
+        <div class="effect-brush" id="brush-2"></div>
+      </div>
+      <div class="helper helper-3">
+        <div class="effect-brush" id="brush-3"></div>
+      </div>
+      <div class="helper helper-4">
+        <div class="effect-brush" id="brush-4"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ms-vignette" aria-hidden="true"></div>
+  <div class="ms-grain" aria-hidden="true"></div>
+  <div class="ms-fade" aria-hidden="true"></div>
+  <button class="ms-skip" type="button">Skip intro</button>
+</div>
+
+<script>
+(() => {
+'use strict';
+
+const splash   = document.getElementById('splash');
+const word     = splash.querySelector('.ms-word');
+const sub      = splash.querySelector('.ms-sub');
+const halo     = splash.querySelector('.ms-halo');
+const fadeEl   = splash.querySelector('.ms-fade');
+const skipBtn  = splash.querySelector('.ms-skip');
+const stage    = document.getElementById('netflix-stage');
+const splashAnim = document.getElementById('splash-anim');
+if (!splash || !word || !stage) return;
+
+/* ================= config ================= */
+const clampN = (x,a,b)=>Math.min(b,Math.max(a,x));
+const cfg = {
+  logo:  (splash.dataset.logo  || 'MAULI').toUpperCase(),
+  sub:   (splash.dataset.sub   || '').toUpperCase(),
+  letter:(splash.dataset.letter|| 'M').trim().charAt(0).toUpperCase(),
+  speed: clampN(parseFloat(splash.dataset.speed)||1,.4,2),
+  skippable: splash.dataset.skippable !== 'false',
+};
+
+/* ============ TIMELINE (s @ speed 1) ============ */
+const TL = {
+  wordIn:  .85,
+  subAt:   1.6,
+  delAt:   2.4,
+  caretOff:3.0,
+  growAt:  3.6,
+  weaveAt: 7.0,    // swap SVG → Netflix-strip M at ~80% growth
+  fadeAt: 11.0,   // Netflix zoom-in complete (7.0 + 0.5 + 3.5)
+  darkAt: 12.0,
+  endAt:  12.5
+};
+const DUR = {
+  chIn:      .22,
+  stagger:   .075,
+  eraseStep: .075,
+  grow:      3.4,
+  weaveFade: .35,
+  fade:      1.0
+};
+const sp = cfg.speed;
+for (const k in TL){ TL[k] *= sp; }
+for (const k in DUR){ DUR[k] *= sp; }
+
+/* ================= helpers ================= */
+const S            = (x)=>(+x.toFixed(3))+'s';
+const lerp         = (a,b,t)=>a+(b-a)*t;
+const rnd          = (i)=>{const x=Math.sin(i*127.1+311.7)*43758.5453;return x-Math.floor(x);};
+const atTime = (t,fn)=>setTimeout(fn, Math.max(0, TL.wordIn*0 + t*1000));
+
+/* ================= lifecycle ================= */
+let ended=false, booted=false, anchor=0;
+const atTimeFromAnchor = (t,fn)=>setTimeout(fn, Math.max(0, anchor + t*1000 - performance.now()));
+
+function end(){
+  if (ended) return; ended = true;
+  splash.classList.add('is-done');
+  document.dispatchEvent(new CustomEvent('matter-splash:end'));
+  setTimeout(()=>splash.remove(), DUR.fade*1000 + 150);
+}
+window.MatterSplash = { finish:end, skip(){ if (cfg.skippable) end(); }, get active(){ return !ended; } };
+splash.style.setProperty('--fade', S(DUR.fade));
+if (cfg.skippable){
+  skipBtn.addEventListener('click', end);
+  addEventListener('keydown', e => { if (e.key === 'Escape') window.MatterSplash.skip(); });
+} else skipBtn.remove();
+
+/* ============================================================
+   THE LETTERFORM — custom flare M (single M typeform).
+   Tapered stems with gaussian flare at terminals, hairline
+   diagonals into the V vertex. This SAME polygon builds the
+   inline SVG M in the lockup → the SVG grows out of perspective
+   → at 80% it's replaced by the Netflix-strip M.
+   ============================================================ */
+const MPOLYS = (()=>{
+  const W=.92, P=[];
+  const flare = y => 1 + .62*(Math.exp(-(y*y)/.022) + Math.exp(-((1-y)*(1-y))/.022));
+  const stem = cx => { const pts=[];
+    for (let i=0;i<=24;i++){ const y=i/24, h=.070*flare(y); pts.push([cx-h,y]); }
+    for (let i=24;i>=0;i--){ const y=i/24, h=.070*flare(y); pts.push([cx+h,y]); }
+    return pts; };
+  P.push(stem(.115), stem(W-.115));
+  const diag=(x1,y1,x2,y2,w1,w2)=>{
+    const dx=x2-x1, dy=y2-y1, L=Math.hypot(dx,dy), px=-dy/L, py=dx/L;
+    return [[x1+px*w1/2,y1+py*w1/2],[x2+px*w2/2,y2+py*w2/2],
+            [x2-px*w2/2,y2-py*w2/2],[x1-px*w1/2,y1-py*w1/2]]; };
+  P.push(diag(.205,0,.46,.645,.070,.046));
+  P.push(diag(W-.205,0,.46,.645,.070,.046));
+  return P;
+})();
+let sx0=1,sx1=0,sy0=1,sy1=0;
+for (const pts of MPOLYS) for (const p of pts){
+  if(p[0]<sx0)sx0=p[0]; if(p[0]>sx1)sx1=p[0];
+  if(p[1]<sy0)sy0=p[1]; if(p[1]>sy1)sy1=p[1];
+}
+const SVG_INKW = sx1-sx0, SVG_INKH = Math.max(.0001, sy1-sy0);
+const M_PATH = MPOLYS.map(pts =>
+  'M'+pts.map(p=>p[0].toFixed(4)+' '+p[1].toFixed(4)).join('L')+'Z').join('');
+
+/* M SVG markup — used INLINE in the lockup so the M typeform is
+   identical from the very first frame. No second M anywhere. */
+const M_SVG_MARKUP =
+  '<svg viewBox="0 0 0.92 1" preserveAspectRatio="xMidYMid meet">'+
+  '<path d="'+M_PATH+'" fill="currentColor"/></svg>';
+
+/* ---------- font ink metrics (cap height + width, in em) ---------- */
+let INK = { h:.70, w:.78 };
+function measureInk(ch){
+  try{
+    const N=256, c=document.createElement('canvas'); c.width=N; c.height=N;
+    const g=c.getContext('2d',{willReadFrequently:true});
+    g.font='400 200px "Marcellus", Georgia, serif';
+    g.textAlign='center'; g.textBaseline='alphabetic'; g.fillStyle='#fff';
+    g.fillText(ch, N/2, 170);
+    const d=g.getImageData(0,0,N,N).data;
+    let t=N,b=-1,l=N,r=-1;
+    for(let y=0;y<N;y++)for(let x=0;x<N;x++)
+      if(d[(y*N+x)*4+3]>120){ if(y<t)t=y; if(y>b)b=y; if(x<l)l=x; if(x>r)r=x; }
+    if (b>t) return { h:(b-t)/200, w:(r-l)/200 };
+  }catch(e){}
+  return { h:.70, w:.78 };
+}
+
+/* ============================================================
+   WORDMARK — spans + per-pair kerning + caret.
+   The M (focus letter) is an inline SVG using the custom flare M.
+   Other letters (A,U,L,I) are Marcellus text. The M is ONE typeform
+   from frame 1 — no morph, no second M.
+   ============================================================ */
+const KERN={'MA':-.045,'AU':-.02,'UL':-.012,'LI':-.02,'RI':-.012,'TU':-.01,'UA':-.012,'AL':-.01,'LS':-.01};
+const spans=[];
+[...cfg.logo].forEach((ch,i)=>{
+  const s=document.createElement('span');
+  if (ch === cfg.letter){
+    s.className = 'ms-m-svg';
+    s.innerHTML = M_SVG_MARKUP;
+  } else {
+    s.textContent = ch;
+  }
+  if(i>0){ const k=KERN[cfg.logo[i-1]+ch]; if(k) s.style.marginLeft=k+'em'; }
+  word.appendChild(s); spans.push(s);
+});
+let focusIdx=cfg.logo.indexOf(cfg.letter); if(focusIdx<0) focusIdx=cfg.logo.length-1;
+const mSvg = spans[focusIdx];
+const caret=document.createElement('span'); caret.className='ms-caret'; word.appendChild(caret);
+if (cfg.sub) sub.textContent=cfg.sub; else sub.style.display='none';
+
+/* ============================================================
+   NETFLIX-STRIP M DATA — fur strips + lamp beams in red+amber.
+   31 strips per helper, 28 lamps total (helper-1 only).
+   Strip widths 1-1.7% → 3-5px on the 300px stage.
+   ============================================================ */
+const FUR_COUNT  = 31;
+const LAMP_COUNT = 28;
+
+/* RED + AMBER PALETTE ONLY — no greens/blues/purples. */
+const RED_AMBER_PALETTE = [
+  '#ff0f1f',  // netflix red
+  '#e40913',  // deep red
+  '#ff3030',  // bright red
+  '#ff5500',  // orange-red
+  '#ff7700',  // orange
+  '#ff9600',  // light orange
+  '#ffaa00',  // amber
+  '#ffae01',  // warm amber
+  '#ffc601',  // yellow-amber
+  '#f30b34',  // red-pink
+  '#ec0014',  // pure red
+  '#ff0036'   // red-pink
+];
+
+function generateFurData(){
+  const data = [];
+  const rawWidths = [];
+  for (let i = 0; i < FUR_COUNT; i++){
+    rawWidths.push(1 + Math.random() * 0.7);   // 1-1.7%
+  }
+  const total = rawWidths.reduce((a,b) => a + b, 0);
+  const scale = 100 / total;
+  let left = 0;
+  for (let i = 0; i < FUR_COUNT; i++){
+    const width = rawWidths[i] * scale;
+    data.push({
+      left:   left.toFixed(2),
+      width:  width.toFixed(2),
+      fillEnd:   Math.floor(10 + Math.random() * 40),
+      fadeStart: Math.floor(60 + Math.random() * 40)
+    });
+    left += width;
+  }
+  return data;
+}
+
+function generateLampData(){
+  const data = [];
+  const seg = 100 / LAMP_COUNT;
+  for (let i = 0; i < LAMP_COUNT; i++){
+    const left  = (i * seg + Math.random() * seg * 0.6).toFixed(2);
+    const width = (1 + Math.random() * 0.7).toFixed(2);
+    const color = RED_AMBER_PALETTE[Math.floor(Math.random() * RED_AMBER_PALETTE.length)];
+    const dir   = i % 2 === 0 ? 'left' : 'right';
+    data.push({ left, width, color, dir });
+  }
+  return data;
+}
+
+function renderFur(containerId, data){
+  const c = document.getElementById(containerId);
+  if (!c) return;
+  const frag = document.createDocumentFragment();
+  data.forEach((s, i) => {
+    const el = document.createElement('span');
+    el.className = 'fur-' + (i + 1);
+    el.style.left   = s.left + '%';
+    el.style.width  = s.width + '%';
+    el.style.background = `linear-gradient(to bottom, var(--netflix-red) 0%, var(--netflix-red) ${s.fillEnd}%, rgba(0,0,0,0) ${s.fadeStart}%, rgba(0,0,0,0) 100%)`;
+    el.style.zIndex = i;
+    frag.appendChild(el);
+  });
+  c.appendChild(frag);
+}
+
+function renderLamps(containerId, data){
+  const c = document.getElementById(containerId);
+  if (!c) return;
+  const frag = document.createDocumentFragment();
+  data.forEach((l, i) => {
+    const el = document.createElement('span');
+    el.className = 'lamp lamp-' + (i + 1) + ' lamp-' + l.dir;
+    el.style.left  = l.left + '%';
+    el.style.width = l.width + '%';
+    el.style.setProperty('--color', l.color);
+    // per-lamp staggered delay
+    el.style.animationDelay = (Math.random() * 2).toFixed(2) + 's';
+    const brightness = 1 + Math.random() * 0.6;
+    el.style.filter = 'brightness(' + brightness.toFixed(2) + ')';
+    frag.appendChild(el);
+  });
+  c.appendChild(frag);
+}
+
+/* ============================================================
+   PHASES — lockup → smooth quick erase → perspective grow →
+   swap to Netflix-strip M → Netflix intro plays → fade → hero.
+   ============================================================ */
+function phaseLockup(){
+  spans.forEach((s,i)=>{
+    s.style.animationDelay = S(i*DUR.stagger);
+    s.classList.add('in');
+  });
+  caret.classList.add('on');
+}
+
+/* ERASE — smooth quick, no pauses. Every non-M letter drops at
+   a FIXED short interval (DUR.eraseStep). The M stays. */
+function phaseErase(){
+  if (cfg.sub) sub.classList.add('out');
+  mSvg.style.color = 'var(--brand)';
+  let deleted = 0;
+  for (let i=spans.length-1; i>focusIdx; i--){
+    const s = spans[i];
+    const dt = deleted * DUR.eraseStep;
+    deleted++;
+    atTimeFromAnchor(TL.delAt + dt, ()=>{
+      s.style.animationDelay = '0s';
+      s.classList.add('del');
+      setTimeout(()=>s.remove(), 140);
+    });
+  }
+  if (cfg.skippable) skipBtn.classList.add('is-on');
+}
+
+/* GROW — SVG M grows toward the viewport from deep perspective.
+   .ms-brand has perspective:1200px; .ms-word has preserve-3d.
+   The CSS keyframe m-perspective-grow drives translateZ from
+   -3800px (24%) to -300px (80%). */
+function phaseGrow(){
+  mSvg.classList.remove('in');
+  mSvg.classList.add('grow');
+}
+
+/* SWAP — at ~80% growth, swap the solid SVG fill for the
+   Netflix-strip M. Read the SVG's current perceived rect (post-
+   perspective), position + scale the Netflix stage to match, then
+   add .is-on to trigger all the Netflix-style animations. */
+function phaseWeave(){
+  halo.classList.add('is-on');
+
+  // read the M's current screen rect (post-perspective, at 80%)
+  const r = mSvg.getBoundingClientRect();
+  const cx = r.left + r.width / 2;
+  const cy = r.top + r.height / 2;
+  // uniform scale so the 300px Netflix stage matches the SVG M's
+  // perceived height at the swap moment
+  const initScale = Math.max(.05, r.height / 300);
+
+  stage.style.left = cx + 'px';
+  stage.style.top  = cy + 'px';
+  stage.style.transform = `translate(-50%, -50%) scale(${initScale})`;
+
+  // compute the zoom-in final scale so the M overflows the viewport
+  // (the Netflix "ta-dum" effect)
+  const zoomFinal = Math.max(15, Math.max(innerWidth, innerHeight) * 1.3 / Math.max(20, r.width));
+  splashAnim.style.setProperty('--zoom-final', zoomFinal);
+
+  // crossfade: show Netflix-strip M, fade out SVG
+  stage.classList.add('is-on');
+  mSvg.classList.add('fading');
+  setTimeout(()=>{ mSvg.style.display='none'; }, DUR.weaveFade*1000 + 60);
+}
+
+/* ============================================================
+   BOOT — one anchor for all DOM phases
+   ============================================================ */
+function boot(){
+  if (booted) return; booted=true;
+  anchor=performance.now();
+
+  // measure Marcellus M ink metrics + size the inline SVG M
+  INK = measureInk(cfg.letter);
+  const boxH = INK.h;
+  const boxW = INK.h * (SVG_INKW/SVG_INKH);
+  mSvg.style.width  = boxW.toFixed(4)+'em';
+  mSvg.style.height = boxH.toFixed(4)+'em';
+
+  // pre-render the fur strips + lamp beams (animations stay
+  // dormant until .is-on is added at swap time)
+  const furData  = generateFurData();
+  const lampData = generateLampData();
+  renderFur('brush-1', furData);
+  renderFur('brush-2', furData);
+  renderFur('brush-3', furData);
+  renderFur('brush-4', furData);
+  renderLamps('lamps-1', lampData);
+
+  atTimeFromAnchor(TL.wordIn,   phaseLockup);
+  atTimeFromAnchor(TL.subAt,    ()=>{ if(cfg.sub) sub.classList.add('in'); });
+  atTimeFromAnchor(TL.delAt,    phaseErase);
+  atTimeFromAnchor(TL.caretOff, ()=>{ caret.classList.remove('on'); caret.classList.add('off'); });
+  atTimeFromAnchor(TL.growAt,   phaseGrow);
+  atTimeFromAnchor(TL.weaveAt,  phaseWeave);
+  atTimeFromAnchor(TL.fadeAt,   ()=>{ fadeEl.classList.add('is-on'); halo.classList.add('dim'); });
+  atTimeFromAnchor(TL.darkAt,   ()=>{ document.dispatchEvent(new CustomEvent('matter-splash:dark')); });
+  atTimeFromAnchor(TL.endAt,    end);
+  atTimeFromAnchor(TL.endAt+4,  end);
+}
+
+/* reduced motion: static lockup, polite exit */
+if (matchMedia('(prefers-reduced-motion: reduce)').matches){
+  splash.classList.add('ms-static');
+  spans.forEach(s=>{ s.style.opacity='1'; });
+  mSvg.style.opacity = '1';
+  if (cfg.sub) sub.style.opacity='1';
+  setTimeout(end, 2400);
+} else {
+  const go=()=>{ if(!booted) boot(); };
+  if (document.fonts && document.fonts.load){
+    document.fonts.load('400 90px "Marcellus"','MAULI').then(go,go);
+    setTimeout(go,1400);
+  } else go();
+}
+
+/* ============================================================
+   HERO PAGE — revealed on splash:end. Has its own Canvas-2D
+   thread background in the same red+amber palette so the splash
+   visual language continues onto the landing experience.
+   ============================================================ */
+const hero       = document.getElementById('hero');
+const heroCanvas = document.getElementById('hero-thread-bg');
+const heroCta    = document.getElementById('hero-cta');
+
+document.addEventListener('matter-splash:end', () => {
+  hero.hidden = false;
+  requestAnimationFrame(()=>hero.classList.add('is-live'));
+  startHeroThreads();
+});
+
+/* ambient Canvas-2D thread background — vertical strands 3-5px
+   wide in red+amber, slow drift. Lightweight, no WebGL. */
+function startHeroThreads(){
+  if (!heroCanvas) return;
+  const ctx = heroCanvas.getContext('2d');
+  if (!ctx) return;
+  const dpr = Math.min(devicePixelRatio || 1, 2);
+
+  function size(){
+    heroCanvas.width  = Math.max(2, Math.round(innerWidth  * dpr));
+    heroCanvas.height = Math.max(2, Math.round(innerHeight * dpr));
+    heroCanvas.style.width  = innerWidth  + 'px';
+    heroCanvas.style.height = innerHeight + 'px';
+  }
+  size();
+  addEventListener('resize', size);
+
+  const N = 110;
+  const threads = Array.from({ length: N }, () => ({
+    x:      Math.random() * innerWidth,
+    w:      2 + Math.random() * 3,                 // 3-5px wide
+    speed:  0.12 + Math.random() * 0.30,
+    phase:  Math.random() * Math.PI * 2,
+    amber:  Math.random() < 0.5,                    // red or amber
+    alpha:  0.08 + Math.random() * 0.18,
+    drift:  (Math.random() - 0.5) * 0.20
+  }));
+
+  let rafHero = 0, visible = true;
+  function draw(){
+    if (!visible){
+      rafHero = requestAnimationFrame(draw);
+      return;
+    }
+    const w = innerWidth, h = innerHeight;
+    ctx.clearRect(0, 0, heroCanvas.width, heroCanvas.height);
+    const t = performance.now() / 1000;
+    threads.forEach(th => {
+      th.x += th.drift;
+      if (th.x < -10) th.x = w + 10;
+      if (th.x >  w + 10) th.x = -10;
+      const sway = Math.sin(t * th.speed + th.phase) * 6;
+      const color = th.amber ? '255,179,64' : '240,74,29';
+      const grad = ctx.createLinearGradient(0, 0, 0, heroCanvas.height);
+      grad.addColorStop(0,    `rgba(${color},0)`);
+      grad.addColorStop(0.22, `rgba(${color},${(th.alpha * 0.4).toFixed(3)})`);
+      grad.addColorStop(0.50, `rgba(${color},${th.alpha.toFixed(3)})`);
+      grad.addColorStop(0.78, `rgba(${color},${(th.alpha * 0.4).toFixed(3)})`);
+      grad.addColorStop(1,    `rgba(${color},0)`);
+      ctx.fillStyle = grad;
+      ctx.fillRect((th.x + sway) * dpr, 0, th.w * dpr, heroCanvas.height);
+    });
+    rafHero = requestAnimationFrame(draw);
+  }
+  draw();
+
+  const io = new IntersectionObserver(entries => {
+    visible = entries[0].isIntersecting;
+  }, { threshold: 0.01 });
+  io.observe(hero);
+
+  if (heroCta){
+    heroCta.addEventListener('click', () => {
+      hero.scrollIntoView({ behavior:'smooth', block:'start' });
+    });
+  }
+}
+})();
+</script>
+</body>
+</html>
