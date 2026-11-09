@@ -1,0 +1,204 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-11-09",
+  "project": {
+    "title": "Mauli Rituals: Future of Commerce",
+    "workingHeadline": "The art of rejuvenating the brand.",
+    "courseCode": "MKT 030305",
+    "summary": "A student advisory project exploring how Mauli Rituals can carry its story and ritual-led experience into changing channels of discovery and commerce. The live entry is Aushada Peti; the case-study narrative lives at /landing.",
+    "status": "in_progress",
+    "course": "Future of Commerce",
+    "institution": "Hult International Business School",
+    "professor": "Nikhil Soi",
+    "professorLinkedIn": "https://www.linkedin.com/in/nikhilsoi2208/",
+    "guestJudge": "Satrupa Ghosh",
+    "guestJudgeLinkedIn": "https://www.linkedin.com/in/satrupaghosh/",
+    "clientName": "Mauli Rituals",
+    "clientLinkedIn": "https://www.linkedin.com/in/anita-kaushal-a59639b/",
+    "attributionBasis": "Project owner and supplied coursework materials",
+    "repositoryUrl": "https://github.com/Kartavya-Jharwal/mauli-future-of-commerce",
+    "siteUrl": "https://kartavya.tech/mauli-future-of-commerce/",
+    "demoUrl": "https://kartavya.tech/mauli-future-of-commerce/",
+    "landingUrl": "https://kartavya.tech/mauli-future-of-commerce/landing/"
+  },
+  "motion": {
+    "splash": {
+      "status": "ready",
+      "entry": "media/splash/mark.png",
+      "poster": "media/splash/mark.png",
+      "threadAccent": "media/splash/thread.png",
+      "skipLabel": "Enter the case study"
+    },
+    "bodyStroke": {
+      "status": "site_thread",
+      "entry": "apps/project-site/app.js#bootThread"
+    },
+    "respectReducedMotion": true,
+    "bypassSplashForDeepLinks": true
+  },
+  "sections": [
+    {
+      "id": "top",
+      "title": "The project",
+      "state": "draft"
+    },
+    {
+      "id": "downloads",
+      "title": "Read the work",
+      "state": "available"
+    },
+    {
+      "id": "problem",
+      "title": "The problem",
+      "state": "draft",
+      "source": "docs/brief/updated-project-brief.md"
+    },
+    {
+      "id": "process",
+      "title": "Our process",
+      "state": "draft"
+    },
+    {
+      "id": "insights",
+      "title": "Marketing insights",
+      "state": "draft",
+      "sources": [
+        "docs/research/channels-and-funnels.md",
+        "docs/research/stp-and-icps.md",
+        "docs/metrics/measurement-plan.md"
+      ]
+    },
+    {
+      "id": "vaidya",
+      "title": "Ask Vaidya",
+      "state": "available",
+      "agentId": "agent_0901m4hnp4ysf5gakwe25ngn2dgh"
+    },
+    {
+      "id": "prototyping",
+      "title": "Prototyping",
+      "state": "draft",
+      "source": "docs/mvp/experience-and-feasibility.md"
+    },
+    {
+      "id": "showcase",
+      "title": "Final showcase",
+      "state": "available",
+      "demoUrl": "/",
+      "landingUrl": "/landing/"
+    },
+    {
+      "id": "recommendations",
+      "title": "Recommendations",
+      "state": "draft",
+      "source": "docs/strategy/execution-roadmap.md"
+    },
+    {
+      "id": "feedback",
+      "title": "Client and professor feedback",
+      "state": "awaiting_feedback",
+      "items": []
+    },
+    {
+      "id": "outcomes",
+      "title": "What's next",
+      "state": "draft",
+      "grade": null
+    },
+    {
+      "id": "team",
+      "title": "The team",
+      "state": "draft"
+    }
+  ],
+  "downloads": [
+    {
+      "id": "presentation",
+      "label": "Presentation deck",
+      "state": "available",
+      "sourcePath": "Mauli_Rituals-Deck_Final-Extended.pdf",
+      "publicUrl": "downloads/mauli-presentation-deck.pdf",
+      "format": "PDF",
+      "version": "Extended presentation, October 2026",
+      "editableUrl": "downloads/mauli-presentation-deck.pptx"
+    },
+    {
+      "id": "report",
+      "label": "Project report",
+      "state": "available",
+      "sourcePath": "Mauli Rituals_Team-3.pdf",
+      "publicUrl": "downloads/mauli-project-report.pdf",
+      "format": "PDF",
+      "version": "Team report, October 2026",
+      "editableUrl": "downloads/mauli-project-report.docx"
+    },
+    {
+      "id": "model",
+      "label": "Financial model",
+      "state": "available",
+      "sourcePath": "NOT-A-Deliverable-Mauli-Rituals-Extended-Excel.xlsx",
+      "publicUrl": "downloads/mauli-financial-model.xlsx",
+      "format": "XLSX",
+      "version": "Supporting workbook, October 2026"
+    },
+    {
+      "id": "client-brief",
+      "label": "Client briefing",
+      "state": "available",
+      "sourcePath": "Mauli Rituals - Client Challenge Brief.pdf",
+      "publicUrl": "downloads/client-brief.pdf",
+      "format": "PDF",
+      "version": "Supplied classroom brief, 12 September 2026"
+    }
+  ],
+  "team": [
+    {
+      "id": "member-1",
+      "name": "Kartavya Jharwal",
+      "role": null,
+      "linkedinUrl": "https://www.linkedin.com/in/kartavyajharwal/"
+    },
+    {
+      "id": "member-2",
+      "name": "Marcella Ibanez",
+      "role": null,
+      "linkedinUrl": "https://www.linkedin.com/search/results/people/?keywords=Marcella%20Ibanez"
+    },
+    {
+      "id": "member-3",
+      "name": "Yasmin Souza",
+      "role": null,
+      "linkedinUrl": "https://www.linkedin.com/search/results/people/?keywords=Yasmin%20Souza"
+    },
+    {
+      "id": "member-4",
+      "name": "Olta Abdyli",
+      "role": null,
+      "linkedinUrl": "https://www.linkedin.com/in/olta-abdyli"
+    },
+    {
+      "id": "member-5",
+      "name": "Adar Aksak",
+      "role": null,
+      "linkedinUrl": "https://www.linkedin.com/in/adar-aksak-3b570b203"
+    },
+    {
+      "id": "member-6",
+      "name": "Ali Sarp Acar",
+      "role": null,
+      "linkedinUrl": "https://www.linkedin.com/search/results/people/?keywords=Ali%20Sarp%20Acar"
+    },
+    {
+      "id": "member-7",
+      "name": "Zuzanna Zalicka",
+      "role": null,
+      "linkedinUrl": "https://www.linkedin.com/search/results/people/?keywords=Zuzanna%20Zalicka"
+    }
+  ],
+  "footer": {
+    "projectAttribution": "Independent pro bono student advisory work developed for the Future of Commerce course at Hult International Business School.",
+    "independence": "This project website is produced by the student team. It is not an official Mauli Rituals or Hult website and does not imply endorsement of the recommendations.",
+    "rights": "Mauli Rituals and other names, marks and supplied materials belong to their respective owners. Project concepts and prototypes are coursework proposals.",
+    "contactEmail": null
+  }
+}

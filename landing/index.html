@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Resolve shared assets from the site root while this page lives at /landing/. -->
+  <base href="../">
+  <title>Mauli / Future of Commerce — an independent student case study</title>
+  <meta name="description" content="Case study landing for the Mauli Rituals Future of Commerce project: research, deliverables, Aushada Peti and the voice guide.">
+  <meta name="theme-color" content="#f6f3eb">
+  <meta property="og:title" content="Mauli / A thread through the future of commerce">
+  <meta property="og:description" content="Independent Future of Commerce coursework. Research, prototypes and recommendations — with Aushada Peti as the live demo entry.">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://kartavya.tech/mauli-future-of-commerce/landing/">
+  <meta property="og:url" content="https://kartavya.tech/mauli-future-of-commerce/landing/">
+  <meta property="og:image" content="https://kartavya.tech/mauli-future-of-commerce/media/og/slide-01.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="675">
+  <meta property="og:image:alt" content="Mauli Rituals — The Art of Rejuvenating the Brand">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://kartavya.tech/mauli-future-of-commerce/media/og/slide-01.jpg">
+  <link rel="icon" href="favicon.png" type="image/png" sizes="512x512">
+  <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" sizes="180x180">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300&family=Inter:wght@400;500;600&family=Marcellus&display=swap">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="splash.css">
+  <!-- Thread boots from app.js; keep GSAP ahead of splash + app. Three.js loads later on idle. -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+  <script src="splash.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body class="is-splash">
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- Preload on mark, then splash v6 intro, then main case study -->
+<div id="splash" role="status" aria-live="polite" aria-busy="true" aria-label="Loading Mauli Rituals"
+     data-logo="MAULI" data-sub="RITUALS" data-letter="M" data-speed="1" data-skippable="true">
+  <div class="splash-preload" id="splash-preload">
+    <div class="splash-preload-inner">
+      <div class="splash-lockup" role="img" aria-label="Mauli Rituals">
+        <div class="ms-word ms-word--static" id="splash-lockup-word"></div>
+        <div class="ms-sub ms-sub--static" id="splash-lockup-sub"></div>
+      </div>
+      <div class="splash-meter" aria-hidden="true">
+        <div class="splash-meter-track"><span id="splash-progress-fill"></span></div>
+        <p class="splash-meter-label"><span id="splash-progress-label">Preparing</span></p>
+      </div>
+    </div>
+    <button type="button" class="splash-skip" id="splash-skip">Enter the case study</button>
+  </div>
+
+  <div class="ms-ember" aria-hidden="true"></div>
+  <div class="ms-halo" aria-hidden="true"></div>
+  <div class="ms-brand" aria-hidden="true">
+    <div class="ms-word"></div>
+    <div class="ms-sub"></div>
+  </div>
+  <div class="netflix-stage" id="netflix-stage" aria-hidden="true">
+    <div class="splash-animation" id="splash-anim" letter="M">
+      <div class="helper helper-1">
+        <div class="effect-brush" id="brush-1"></div>
+        <div class="effect-lumieres" id="lamps-1"></div>
+      </div>
+      <div class="helper helper-2">
+        <div class="effect-brush" id="brush-2"></div>
+      </div>
+      <div class="helper helper-3">
+        <div class="effect-brush" id="brush-3"></div>
+      </div>
+      <div class="helper helper-4">
+        <div class="effect-brush" id="brush-4"></div>
+      </div>
+    </div>
+  </div>
+  <div class="ms-vignette" aria-hidden="true"></div>
+  <div class="ms-grain" aria-hidden="true"></div>
+  <div class="ms-fade" aria-hidden="true"></div>
+  <button type="button" class="ms-skip" id="splash-intro-skip">Skip intro</button>
+</div>
+
+<div class="thread-progress" aria-hidden="true"><span id="thread-progress-fill"></span></div>
+<canvas id="weave-canvas" aria-hidden="true"></canvas>
+
+<!-- Thread, under the content -->
+<div class="thread-layer" aria-hidden="true">
+  <svg id="thread-svg" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="dyeUnder" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="420" y2="560" spreadMethod="reflect">
+        <stop offset="0%" stop-color="#9e0b10"/>
+        <stop offset="30%" stop-color="#c8231b"/>
+        <stop offset="58%" stop-color="#e2561b"/>
+        <stop offset="82%" stop-color="#f08a12"/>
+        <stop offset="100%" stop-color="#f4b223"/>
+      </linearGradient>
+    </defs>
+    <path id="thread-shadow" d="" stroke="#3a1f1a" stroke-opacity="0.08" stroke-linecap="round" stroke-linejoin="round"/>
+    <path id="thread-path" d="" stroke="url(#dyeUnder)" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</div>
+<!-- Same thread, over the content, clipped to the elements it weaves on top of -->
+<div class="thread-layer thread-over" aria-hidden="true">
+  <svg id="thread-svg-over" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="dyeOver" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="420" y2="560" spreadMethod="reflect">
+        <stop offset="0%" stop-color="#9e0b10"/>
+        <stop offset="30%" stop-color="#c8231b"/>
+        <stop offset="58%" stop-color="#e2561b"/>
+        <stop offset="82%" stop-color="#f08a12"/>
+        <stop offset="100%" stop-color="#f4b223"/>
+      </linearGradient>
+      <clipPath id="overClip"></clipPath>
+    </defs>
+    <path id="thread-path-over" d="" stroke="url(#dyeOver)" stroke-linecap="round" stroke-linejoin="round" clip-path="url(#overClip)"/>
+  </svg>
+</div>
+
+<header class="mast wrap">
+  <div class="logo logo-mauli">
+    <img src="media/logos/mauli-rituals.png" alt="Mauli Rituals">
+  </div>
+  <div class="logo logo-hult">
+    <img src="media/logos/hult.png" alt="Hult International Business School">
+  </div>
+</header>
+
+<main id="main">
+  <!-- Cover -->
+  <section class="hero wrap" id="top" data-thread="hero">
+    <p class="hero-client">
+      Client: <a href="https://www.linkedin.com/in/anita-kaushal-a59639b/" target="_blank" rel="noopener">Mauli Rituals</a>
+      <span class="hero-disclaimer">· Independent pro bono student advisory work</span>
+    </p>
+    <h1 id="hero-title">The art of<br><em>rejuvenating</em> the brand.</h1>
+    <p class="hero-line" id="hero-line">The blessed red Mauli thread—a symbol of protection, connection and care—is not decoration. It is the mechanism through which Mauli Rituals evolves.</p>
+    <p class="also"><a href="index.html">Open Aushada Peti, the live botanical demo ↗</a></p>
+    <footer class="hero-credits">
+      <p>
+        Future of Commerce · MKT 030305 ·
+        <a href="https://www.linkedin.com/in/nikhilsoi2208/" target="_blank" rel="noopener">Prof. Nikhil Soi</a>
+        · Guest judge:
+        <a href="https://www.linkedin.com/in/satrupaghosh/" target="_blank" rel="noopener">Prof. Satrupa Ghosh</a>
+      </p>
+    </footer>
+  </section>
+
+  <!-- 01 -->
+  <section class="section wrap" id="problem" data-thread="side" data-side="right">
+    <span class="section-index">01 — The problem</span>
+    <h2>How does a ritual stay personal when the purchase is not?</h2>
+    <p class="lead">Mauli's challenge is to make its rituals clearer, more accessible and more repeatable, while preserving their meaning and operating within the team's capabilities.</p>
+  </section>
+
+  <!-- 02 -->
+  <section class="section wrap" id="approach" data-thread="weave" data-weave="over" data-side="left">
+    <span class="section-index">02 — Approach</span>
+    <h2>Four passes.</h2>
+    <ol class="steps">
+      <li data-thread-pass><span>01</span><h3>Interpret &amp; audit</h3><p>Read the brief, the store and the brand as a shopper would.</p></li>
+      <li data-thread-pass><span>02</span><h3>Customer jobs</h3><p>Map what people are trying to get done at each encounter.</p></li>
+      <li data-thread-pass><span>03</span><h3>Economics</h3><p>Model contribution, cost ceilings and what to measure first.</p></li>
+      <li data-thread-pass><span>04</span><h3>Prototype</h3><p>Sketch one explainable guidance flow worth testing.</p></li>
+    </ol>
+  </section>
+
+  <!-- 03 -->
+  <section class="section wrap" id="deliverables" data-thread="side" data-side="right">
+    <span class="section-index">03 — Deliverables</span>
+    <h2>Read the work.</h2>
+    <div class="cards">
+      <button type="button" class="card" data-modal="modal-deck">
+        <span class="card-no">01</span>
+        <h3>Presentation deck</h3>
+        <span class="card-foot"><span>PDF · PPTX</span><span aria-hidden="true">→</span></span>
+      </button>
+      <button type="button" class="card" data-modal="modal-report">
+        <span class="card-no">02</span>
+        <h3>Project report</h3>
+        <span class="card-foot"><span>PDF · DOCX</span><span aria-hidden="true">→</span></span>
+      </button>
+      <button type="button" class="card" data-modal="modal-model">
+        <span class="card-no">03</span>
+        <h3>Financial model</h3>
+        <span class="card-foot"><span>XLSX</span><span aria-hidden="true">→</span></span>
+      </button>
+    </div>
+    <p class="also">
+      Also: <a href="downloads/client-brief.pdf" target="_blank" rel="noopener">Client briefing (PDF)</a>
+      · <a href="https://github.com/Kartavya-Jharwal/mauli-future-of-commerce" target="_blank" rel="noopener">Current project &amp; source</a>
+    </p>
+  </section>
+
+  <!-- 04 The floating voice widget steps into the centre here -->
+  <section class="section wrap vaidya-stage" id="vaidya" data-thread="side" data-side="right" aria-labelledby="vaidya-title">
+    <span class="section-index">04 — Ask Vaidya</span>
+    <h2 id="vaidya-title">Talk it through first.</h2>
+    <p class="lead">Vaidya, our ElevenLabs voice guide, waits in the corner of every screen. Here it steps into the centre: start a call and ask about a skin concern, a ritual or the botanicals in the demo below.</p>
+    <div class="vaidya-spot" aria-hidden="true"></div>
+  </section>
+
+  <!-- 05 -->
+  <section class="section wrap" id="prototype" data-thread="pile" data-pile-target=".window" data-entry="right" data-exit="left">
+    <span class="section-index">05 — Prototype</span>
+    <h2>Aushada Peti.</h2>
+    <p class="lead">
+      <em>Auṣadha peṭī</em>, Sanskrit for "medicine box". Explore how Mauli's skin and body-care botanicals relate to Ayurvedic gunas (inherent qualities), warming or cooling virya, and dry, reactive or congested skin states. The live demo is the site entry — try it here or <a href="index.html" target="_blank" rel="noopener">open it in its own window ↗</a>.
+    </p>
+    <div class="window">
+      <div class="window-bar">
+        <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="window-title">Aushada Peti — The Guna Wheel for Skin</span>
+        <a href="index.html" target="_blank" rel="noopener">Open ↗</a>
+      </div>
+      <iframe class="artefact-embed" title="Aushada Peti — The Guna Wheel for Skin" src="index.html" loading="lazy" allow="fullscreen"></iframe>
+    </div>
+  </section>
+
+  <!-- 06 -->
+  <section class="section wrap" id="agent" data-thread="pile" data-pile-target=".clips" data-entry="left" data-exit="left">
+    <span class="section-index">06 — Voice agent</span>
+    <h2>Vaidya, the voice guide.</h2>
+    <p class="lead">An ElevenLabs conversational agent that talks a shopper through the ritual. Two short clips; they load when you press play.</p>
+    <div class="clips">
+      <button type="button" class="clip" data-video="media/video/demo.mp4" data-title="Vaidya — first demo">
+        <img src="media/video/demo-thumb.jpg" alt="" loading="lazy" onerror="this.remove()">
+        <span class="clip-text"><b>01</b>First demo<small>Voice guidance walkthrough</small></span>
+        <span class="play" aria-hidden="true"></span>
+      </button>
+      <button type="button" class="clip" data-video="media/video/guardrails.mp4" data-title="Vaidya — prompt injection and guardrails">
+        <img src="media/video/guardrails-thumb.jpg" alt="" loading="lazy" onerror="this.remove()">
+        <span class="clip-text"><b>02</b>Guardrails<small>Prompt-injection prevention highlight</small></span>
+        <span class="play" aria-hidden="true"></span>
+      </button>
+    </div>
+  </section>
+
+  <!-- 07 Sticky horizontal deck gallery -->
+  <section class="deck-gallery" id="deck" data-thread="deck" data-entry="left" data-exit="right" aria-label="Presentation deck slides">
+    <div class="deck-gallery-intro section wrap">
+      <span class="section-index">07 — The deck</span>
+      <h2>In frames.</h2>
+      <p>Keep scrolling down: each scroll moves one slide sideways. Use the scrollbar or arrows to jump.</p>
+    </div>
+    <div class="sticky-parent">
+      <div class="deck-sticky sticky">
+        <div class="horizontal" id="deck-track" tabindex="0" aria-label="Presentation slides. Scroll the page to move sideways through the deck.">
+          <figure class="dim deck-slide" data-slide="01"><div class="deck-frame"><img src="media/deck/01.webp" alt="Presentation slide 01" width="1280" height="720" decoding="async" fetchpriority="high"></div><figcaption>01</figcaption></figure>
+          <figure class="dim deck-slide" data-slide="02"><div class="deck-frame"><img data-src="media/deck/02.webp" alt="Presentation slide 02" width="1280" height="720" decoding="async"></div><figcaption>02</figcaption></figure>
+          <figure class="dim deck-slide" data-slide="03"><div class="deck-frame"><img data-src="media/deck/03.webp" alt="Presentation slide 03" width="1280" height="720" decoding="async"></div><figcaption>03</figcaption></figure>
+          <figure class="dim deck-slide" data-slide="04"><div class="deck-frame"><img data-src="media/deck/04.webp" alt="Presentation slide 04" width="1280" height="720" decoding="async"></div><figcaption>04</figcaption></figure>
+          <figure class="dim deck-slide" data-slide="05"><div class="deck-frame"><img data-src="media/deck/05.webp" alt="Presentation slide 05" width="1280" height="720" decoding="async"></div><figcaption>05</figcaption></figure>
+          <figure class="dim deck-slide" data-slide="06"><div class="deck-frame"><img data-src="media/deck/06.webp" alt="Presentation slide 06" width="1280" height="720" decoding="async"></div><figcaption>06</figcaption></figure>
+          <figure class="dim deck-slide" data-slide="07"><div class="deck-frame"><img data-src="media/deck/07.webp" alt="Presentation slide 07" width="1280" height="720" decoding="async"></div><figcaption>07</figcaption></figure>
+          <figure class="dim deck-slide" data-slide="08"><div class="deck-frame"><img data-src="media/deck/08.webp" alt="Presentation slide 08" width="1280" height="720" decoding="async"></div><figcaption>08</figcaption></figure>
+          <figure class="dim deck-slide" data-slide="09"><div class="deck-frame"><img data-src="media/deck/09.webp" alt="Presentation slide 09" width="1280" height="720" decoding="async"></div><figcaption>09</figcaption></figure>
+          <figure class="dim deck-slide" data-slide="10"><div class="deck-frame"><img data-src="media/deck/10.webp" alt="Presentation slide 10" width="1280" height="720" decoding="async"></div><figcaption>10</figcaption></figure>
+          <figure class="dim deck-slide" data-slide="11"><div class="deck-frame"><img data-src="media/deck/11.webp" alt="Presentation slide 11" width="1280" height="720" decoding="async"></div><figcaption>11</figcaption></figure>
+          <figure class="dim deck-slide" data-slide="12"><div class="deck-frame"><img data-src="media/deck/12.webp" alt="Presentation slide 12" width="1280" height="720" decoding="async"></div><figcaption>12</figcaption></figure>
+          <figure class="dim deck-slide" data-slide="13"><div class="deck-frame"><img data-src="media/deck/13.webp" alt="Presentation slide 13" width="1280" height="720" decoding="async"></div><figcaption>13</figcaption></figure>
+          <figure class="dim deck-slide" data-slide="14"><div class="deck-frame"><img data-src="media/deck/14.webp" alt="Presentation slide 14" width="1280" height="720" decoding="async"></div><figcaption>14</figcaption></figure>
+          <figure class="dim deck-slide" data-slide="15"><div class="deck-frame"><img data-src="media/deck/15.webp" alt="Presentation slide 15" width="1280" height="720" decoding="async"></div><figcaption>15</figcaption></figure>
+          <figure class="dim deck-slide" data-slide="16"><div class="deck-frame"><img data-src="media/deck/16.webp" alt="Presentation slide 16" width="1280" height="720" decoding="async"></div><figcaption>16</figcaption></figure>
+          <figure class="dim deck-slide" data-slide="17"><div class="deck-frame"><img data-src="media/deck/17.webp" alt="Presentation slide 17" width="1280" height="720" decoding="async"></div><figcaption>17</figcaption></figure>
+          <figure class="dim deck-slide" data-slide="18"><div class="deck-frame"><img data-src="media/deck/18.webp" alt="Presentation slide 18" width="1280" height="720" decoding="async"></div><figcaption>18</figcaption></figure>
+          <figure class="dim deck-slide" data-slide="19"><div class="deck-frame"><img data-src="media/deck/19.webp" alt="Presentation slide 19" width="1280" height="720" decoding="async"></div><figcaption>19</figcaption></figure>
+          <figure class="dim deck-slide" data-slide="20"><div class="deck-frame"><img data-src="media/deck/20.webp" alt="Presentation slide 20" width="1280" height="720" decoding="async"></div><figcaption>20</figcaption></figure>
+          <figure class="dim deck-slide" data-slide="21"><div class="deck-frame"><img data-src="media/deck/21.webp" alt="Presentation slide 21" width="1280" height="720" decoding="async"></div><figcaption>21</figcaption></figure>
+          <figure class="dim deck-slide" data-slide="22"><div class="deck-frame"><img data-src="media/deck/22.webp" alt="Presentation slide 22" width="1280" height="720" decoding="async"></div><figcaption>22</figcaption></figure>
+          <figure class="dim deck-slide" data-slide="23"><div class="deck-frame"><img data-src="media/deck/23.webp" alt="Presentation slide 23" width="1280" height="720" decoding="async"></div><figcaption>23</figcaption></figure>
+          <figure class="dim deck-slide" data-slide="24"><div class="deck-frame"><img data-src="media/deck/24.webp" alt="Presentation slide 24" width="1280" height="720" decoding="async"></div><figcaption>24</figcaption></figure>
+          <figure class="dim deck-slide" data-slide="25"><div class="deck-frame"><img data-src="media/deck/25.webp" alt="Presentation slide 25" width="1280" height="720" decoding="async"></div><figcaption>25</figcaption></figure>
+          <figure class="dim deck-slide" data-slide="26"><div class="deck-frame"><img data-src="media/deck/26.webp" alt="Presentation slide 26" width="1280" height="720" decoding="async"></div><figcaption>26</figcaption></figure>
+          <figure class="dim deck-slide" data-slide="27"><div class="deck-frame"><img data-src="media/deck/27.webp" alt="Presentation slide 27" width="1280" height="720" decoding="async"></div><figcaption>27</figcaption></figure>
+          <figure class="dim deck-slide" data-slide="28"><div class="deck-frame"><img data-src="media/deck/28.webp" alt="Presentation slide 28" width="1280" height="720" decoding="async"></div><figcaption>28</figcaption></figure>
+          <figure class="dim deck-slide" data-slide="29"><div class="deck-frame"><img data-src="media/deck/29.webp" alt="Presentation slide 29" width="1280" height="720" decoding="async"></div><figcaption>29</figcaption></figure>
+        </div>
+        <div class="deck-nav" aria-label="Deck navigation">
+          <button type="button" data-slide-prev aria-label="Previous slide">←</button>
+          <div class="deck-scrollbar" role="scrollbar" aria-controls="deck-track" aria-orientation="horizontal" aria-valuemin="1" aria-valuemax="29" aria-valuenow="1" tabindex="0">
+            <div class="deck-scrollbar-track"><div class="deck-scrollbar-thumb"></div></div>
+          </div>
+          <p class="deck-count"><output id="slide-current">01</output><span> / 29</span></p>
+          <button type="button" data-slide-next aria-label="Next slide">→</button>
+        </div>
+      </div>
+    </div>
+    <p class="deck-fallback wrap"><a href="downloads/mauli-presentation-deck.pdf">Open the complete presentation deck (PDF)</a></p>
+  </section>
+
+  <!-- 08 -->
+  <section class="section wrap" id="choices" data-thread="side" data-side="left">
+    <span class="section-index">08 — What we would sharpen</span>
+    <h2>Three horizons.</h2>
+    <ol class="horizon">
+      <li><span>Immediate</span><h3>Make the next step clear.</h3><p>Clarify guidance, define activation events, agree the baseline.</p></li>
+      <li><span>Short term</span><h3>Pilot useful guidance.</h3><p>One explainable discovery flow, within Shopify and a cost ceiling.</p></li>
+      <li><span>Longer term</span><h3>Expand what earns its place.</h3><p>Invest further only when usefulness and economics support it.</p></li>
+    </ol>
+  </section>
+
+  <!-- 09 -->
+  <section class="section wrap" id="team" data-thread="weave" data-weave="under" data-side="left">
+    <span class="section-index">09 — Team</span>
+    <h2>Seven hands, one thread.</h2>
+    <ul class="team">
+      <li data-thread-pass><span class="member-no">01</span><a href="https://www.linkedin.com/in/kartavyajharwal/" target="_blank" rel="noopener"><span class="member-name">Kartavya Jharwal</span><span class="member-link">LinkedIn ↗</span></a></li>
+      <li data-thread-pass><span class="member-no">02</span><a href="https://www.linkedin.com/search/results/people/?keywords=Marcella%20Ibanez" target="_blank" rel="noopener"><span class="member-name">Marcella Ibanez</span><span class="member-link">LinkedIn ↗</span></a></li>
+      <li data-thread-pass><span class="member-no">03</span><a href="https://www.linkedin.com/search/results/people/?keywords=Yasmin%20Souza" target="_blank" rel="noopener"><span class="member-name">Yasmin Souza</span><span class="member-link">LinkedIn ↗</span></a></li>
+      <li data-thread-pass><span class="member-no">04</span><a href="https://www.linkedin.com/in/olta-abdyli" target="_blank" rel="noopener"><span class="member-name">Olta Abdyli</span><span class="member-link">LinkedIn ↗</span></a></li>
+      <li data-thread-pass><span class="member-no">05</span><a href="https://www.linkedin.com/in/adar-aksak-3b570b203" target="_blank" rel="noopener"><span class="member-name">Adar Aksak</span><span class="member-link">LinkedIn ↗</span></a></li>
+      <li data-thread-pass><span class="member-no">06</span><a href="https://www.linkedin.com/search/results/people/?keywords=Ali%20Sarp%20Acar" target="_blank" rel="noopener"><span class="member-name">Ali Sarp Acar</span><span class="member-link">LinkedIn ↗</span></a></li>
+      <li data-thread-pass><span class="member-no">07</span><a href="https://www.linkedin.com/search/results/people/?keywords=Zuzanna%20Zalicka" target="_blank" rel="noopener"><span class="member-name">Zuzanna Zalicka</span><span class="member-link">LinkedIn ↗</span></a></li>
+    </ul>
+  </section>
+
+  <!-- 10 -->
+  <section class="closing wrap" id="closing" data-thread="bow">
+    <p class="eyebrow">Closing mark</p>
+    <h2>Every connection<br>ends in a <em>knot.</em></h2>
+    <div class="knot-line" id="thread-knot"></div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <p>Independent pro bono student advisory work for <a href="https://www.linkedin.com/in/anita-kaushal-a59639b/" target="_blank" rel="noopener">Mauli Rituals</a> in the Future of Commerce course (MKT 030305) at Hult International Business School under <a href="https://www.linkedin.com/in/nikhilsoi2208/" target="_blank" rel="noopener">Prof. Nikhil Soi</a>, with guest judge <a href="https://www.linkedin.com/in/satrupaghosh/" target="_blank" rel="noopener">Prof. Satrupa Ghosh</a>. Produced by the student team; not an official Mauli Rituals or Hult website and no endorsement is implied. Names, marks and supplied materials belong to their respective owners.</p>
+  <div class="footer-bottom">
+    <span>Work in progress · October 2026</span>
+    <a href="#top">Back to the beginning <span aria-hidden="true">↑</span></a>
+  </div>
+</footer>
+
+<dialog id="modal-deck" class="modal" aria-labelledby="modal-deck-title">
+  <form method="dialog" class="modal-inner">
+    <button class="modal-close" value="close" aria-label="Close">×</button>
+    <span class="eyebrow">Deliverable 01</span>
+    <h2 id="modal-deck-title">Presentation deck</h2>
+    <p>The complete team presentation in PDF and editable PowerPoint formats.</p>
+    <ul class="file-links">
+      <li><a href="downloads/mauli-presentation-deck.pdf" target="_blank" rel="noopener">Open PDF</a></li>
+      <li><a href="downloads/mauli-presentation-deck.pptx" download>Download PowerPoint</a></li>
+    </ul>
+  </form>
+</dialog>
+
+<dialog id="modal-report" class="modal" aria-labelledby="modal-report-title">
+  <form method="dialog" class="modal-inner">
+    <button class="modal-close" value="close" aria-label="Close">×</button>
+    <span class="eyebrow">Deliverable 02</span>
+    <h2 id="modal-report-title">Project report</h2>
+    <p>The complete written project report in PDF and editable Word formats.</p>
+    <ul class="file-links">
+      <li><a href="downloads/mauli-project-report.pdf" target="_blank" rel="noopener">Open PDF</a></li>
+      <li><a href="downloads/mauli-project-report.docx" download>Download Word</a></li>
+    </ul>
+  </form>
+</dialog>
+
+<dialog id="modal-model" class="modal" aria-labelledby="modal-model-title">
+  <form method="dialog" class="modal-inner">
+    <button class="modal-close" value="close" aria-label="Close">×</button>
+    <span class="eyebrow">Deliverable 03</span>
+    <h2 id="modal-model-title">Financial model</h2>
+    <p>Customer economics and scenario workbook. Editable Excel.</p>
+    <ul class="file-links">
+      <li><a href="downloads/mauli-financial-model.xlsx" download>Download Excel</a></li>
+    </ul>
+  </form>
+</dialog>
+
+<dialog id="video-modal" class="modal video-modal" aria-label="Video">
+  <div class="video-inner">
+    <button class="modal-close" type="button" aria-label="Close" data-close-video>×</button>
+    <p class="video-title" id="video-title"></p>
+    <div class="video-frame">
+      <div class="video-loading" id="video-loading"><span class="spinner"></span>Loading clip</div>
+      <video id="video-player" controls playsinline preload="none"></video>
+    </div>
+  </div>
+</dialog>
+
+<script>
+  // The agent's terms acceptance is stored by the widget in localStorage under this key
+  // (set in the ElevenLabs agent settings). Mirror it through sessionStorage so it lasts one session.
+  (function () {
+    var KEY = 'terms_accepted';
+    try {
+      var kept = sessionStorage.getItem(KEY);
+      if (kept === null) localStorage.removeItem(KEY);
+      else localStorage.setItem(KEY, kept);
+      window.addEventListener('pagehide', function () {
+        var value = localStorage.getItem(KEY);
+        if (value !== null) sessionStorage.setItem(KEY, value);
+      });
+    } catch (e) {}
+  })();
+</script>
+<div class="vaidya-dock" id="vaidya-dock">
+  <elevenlabs-convai agent-id="agent_0901m4hnp4ysf5gakwe25ngn2dgh"></elevenlabs-convai>
+</div>
+<script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
+</body>
+</html>
