@@ -6,5 +6,10 @@
   "workspaces": [
     "apps/*",
     "packages/*"
-  ]
+  ],
+  "scripts": {
+    "build": "python scripts/build_site.py",
+    "check": "python scripts/check_site.py",
+    "deploy": "bun run build && bun run check && bun run scripts/deploy_pages.ts"
+  }
 }
