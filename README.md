@@ -4,7 +4,7 @@
 
 An independent, pro bono student advisory project for [Mauli Rituals](https://www.maulirituals.com/), developed for the Future of Commerce course under Prof. Nikhil Soi at Hult International Business School.
 
-**[View the live case study →](https://kartavya.tech/mauli-future-of-commerce/)**
+**[Try Aushada Peti →](https://kartavya.tech/mauli-future-of-commerce/)** · **[Case study landing →](https://kartavya.tech/mauli-future-of-commerce/landing/)**
 
 ---
 
@@ -18,8 +18,8 @@ Our working answer: strengthen Mauli’s existing Shopify experience with **expl
 
 | Asset | Where |
 | --- | --- |
-| Case-study microsite | [`apps/project-site/`](apps/project-site/) |
-| **Aushada Peti**, the Sacred Wheel of Botanicals (interactive prototype) | [`apps/project-site/artefact/`](apps/project-site/artefact/) |
+| **Aushada Peti** (site root / first experience) | [`apps/project-site/index.html`](apps/project-site/index.html) |
+| Case-study landing | [`apps/project-site/landing/`](apps/project-site/landing/) |
 | Presentation deck | [`Mauli_Rituals-Deck_Final-Extended.pdf`](Mauli_Rituals-Deck_Final-Extended.pdf) · [`Mauli Rituals.pptx`](Mauli%20Rituals.pptx) |
 | Project report | [`Mauli Rituals_Team-3.pdf`](Mauli%20Rituals_Team-3.pdf) · [`Mauli Rituals_Team-3.docx`](Mauli%20Rituals_Team-3.docx) |
 | Financial model (XLSX) | [`NOT-A-Deliverable-Mauli-Rituals-Extended-Excel.xlsx`](NOT-A-Deliverable-Mauli-Rituals-Extended-Excel.xlsx) |
@@ -32,7 +32,7 @@ A single, skimmable page with no build framework:
 
 - **The thread.** A hand-dyed mauli yarn enters from the top-left corner, loops beside the headline, then follows the reader down the page: meandering along the margins, weaving under and over cards and slides, passing behind every team member's name, and tying a bow at the end. GSAP ScrollTrigger keeps its tip at the reader's eye line.
 - **Deliverables.** Deck, report and financial model, plus the client brief and the repo.
-- **Aushada Peti.** The prototype is embedded live and also available [in its own window](apps/project-site/artefact/index.html).
+- **Aushada Peti.** The botanical demo is the site entry at `/`. The case study lives at [`/landing`](apps/project-site/landing/index.html) and embeds the same demo.
 - **Voice agent.** Two clips of the ElevenLabs guide, loaded only when played.
 - **Accessible by default.** Content reads without JavaScript, and reduced-motion users get the full thread drawn statically.
 
@@ -44,7 +44,7 @@ python scripts/check_site.py      # verify links, assets and release states
 python -m http.server 8000 --directory dist/project-site
 ```
 
-Then open <http://localhost:8000>. Pushes to `main` deploy to GitHub Pages through [`pages.yml`](.github/workflows/pages.yml).
+Then open <http://localhost:8000> for Aushada Peti, or <http://localhost:8000/landing/> for the case study. Pushes to `main` deploy to GitHub Pages through [`pages.yml`](.github/workflows/pages.yml).
 
 ## Branches
 

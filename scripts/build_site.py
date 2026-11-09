@@ -45,6 +45,8 @@ def build():
     (OUT / 'content').mkdir(exist_ok=True)
     shutil.copy2(SOURCE / 'content' / 'project.json', OUT / 'content' / 'project.json')
 
+    # Case-study landing lives under /landing; root index is Aushada Peti.
+    copy_tree(SOURCE / 'landing', OUT / 'landing')
     copy_tree(SOURCE / 'artefact', OUT / 'artefact')
     copy_tree(SOURCE / 'media', OUT / 'media')
 

@@ -2,14 +2,22 @@
 
 The static public showcase for the Mauli / Future of Commerce case study. Plain HTML, CSS and JavaScript; GSAP (ScrollTrigger) and Three.js load from jsDelivr.
 
-## Page flow
+## Routes
 
-1. **Cover:** Mauli Rituals logo top-left, Hult logo top-right, headline, one line
+| Path | Page |
+| --- | --- |
+| `/` (`index.html`) | **Aushada Peti** — the botanical tool; first experience |
+| `/landing/` | Case-study narrative, deliverables, deck, team |
+| `/artefact/` | Legacy redirect to `/` |
+
+## Landing page flow
+
+1. **Cover:** Mauli Rituals logo top-left, Hult logo top-right, headline, one line, link to the live demo
 2. **The problem**
 3. **Approach:** four cards the thread weaves under and over
 4. **Deliverables:** deck, report and financial model, plus small links to the brief and the repo
 5. **Ask Vaidya:** the floating ElevenLabs voice widget (docked bottom-right on every screen) glides into the centre of this screen, then back to the corner
-6. **Aushada Peti:** the prototype, embedded at full viewport height, with an open-in-new-window link
+6. **Aushada Peti:** the root demo, embedded at full viewport height, with an open-in-new-window link
 7. **Voice agent:** two clips that open in a lightbox and load only on click
 8. **The deck:** all 29 slide exports in a sticky horizontal carousel driven by vertical scroll, one slide per scroll gesture
 9. **Three horizons**
@@ -37,8 +45,10 @@ Progress is driven by GSAP ScrollTrigger: the tip of the thread sits at about 82
 
 | Path | Contents |
 | --- | --- |
-| `index.html`, `styles.css`, `app.js` | The page |
-| `artefact/` | Aushada Peti (standalone, also embedded via iframe) |
+| `index.html` | Aushada Peti (site root) |
+| `landing/index.html` | Case-study page (`<base href="../">` for shared assets) |
+| `styles.css`, `splash.css`, `splash.js`, `app.js` | Landing styles and behaviour |
+| `artefact/` | Redirect shim to `/` for old links |
 | `downloads/` | PDF, PPTX, DOCX and XLSX files, copied in by `scripts/build_site.py` |
 | `media/` | Video clips, thumbnails and slide exports; see `media/README.md` |
 | `content/project.json` | Section and deliverable manifest checked by `scripts/check_site.py` |

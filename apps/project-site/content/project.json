@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-11",
+  "updatedAt": "2026-11-09",
   "project": {
     "title": "Mauli Rituals: Future of Commerce",
     "workingHeadline": "The art of rejuvenating the brand.",
     "courseCode": "MKT 030305",
-    "summary": "A student advisory project exploring how Mauli Rituals can carry its story and ritual-led experience into changing channels of discovery and commerce.",
+    "summary": "A student advisory project exploring how Mauli Rituals can carry its story and ritual-led experience into changing channels of discovery and commerce. The live entry is Aushada Peti; the case-study narrative lives at /landing.",
     "status": "in_progress",
     "course": "Future of Commerce",
     "institution": "Hult International Business School",
@@ -17,7 +17,9 @@
     "clientLinkedIn": "https://www.linkedin.com/in/anita-kaushal-a59639b/",
     "attributionBasis": "Project owner and supplied coursework materials",
     "repositoryUrl": "https://github.com/Kartavya-Jharwal/mauli-future-of-commerce",
-    "siteUrl": "https://kartavya.tech/mauli-future-of-commerce/"
+    "siteUrl": "https://kartavya.tech/mauli-future-of-commerce/",
+    "demoUrl": "https://kartavya.tech/mauli-future-of-commerce/",
+    "landingUrl": "https://kartavya.tech/mauli-future-of-commerce/landing/"
   },
   "motion": {
     "splash": {
@@ -81,8 +83,9 @@
     {
       "id": "showcase",
       "title": "Final showcase",
-      "state": "forthcoming",
-      "demoUrl": null
+      "state": "available",
+      "demoUrl": "/",
+      "landingUrl": "/landing/"
     },
     {
       "id": "recommendations",
